@@ -28,6 +28,7 @@ namespace viTestApp
     /// </summary>
     private void InitializeComponent()
     {
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
       this.tabControl1 = new System.Windows.Forms.TabControl();
       this.tabPageGateWay = new System.Windows.Forms.TabPage();
       this.gbStatus = new System.Windows.Forms.GroupBox();
@@ -243,7 +244,6 @@ namespace viTestApp
       this.btnMessageLogClear = new System.Windows.Forms.Button();
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
       this.openMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.tabControl1.SuspendLayout();
       this.tabPageGateWay.SuspendLayout();
@@ -2706,7 +2706,6 @@ namespace viTestApp
       // 
       this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openMenuItem,
-            this.exitToolStripMenuItem,
             this.aboutToolStripMenuItem});
       this.menuStrip1.Location = new System.Drawing.Point(0, 0);
       this.menuStrip1.Name = "menuStrip1";
@@ -2721,13 +2720,6 @@ namespace viTestApp
       this.openMenuItem.Text = "Open Servo Network";
       this.openMenuItem.Click += new System.EventHandler(this.openMenuItem_Click);
       // 
-      // exitToolStripMenuItem
-      // 
-      this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-      this.exitToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-      this.exitToolStripMenuItem.Text = "Exit";
-      this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-      // 
       // aboutToolStripMenuItem
       // 
       this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
@@ -2741,12 +2733,11 @@ namespace viTestApp
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.CancelButton = this.btnTestMotionStop;
       this.ClientSize = new System.Drawing.Size(732, 606);
-      this.ControlBox = false;
       this.Controls.Add(this.tabControl1);
       this.Controls.Add(this.menuStrip1);
+      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.MainMenuStrip = this.menuStrip1;
       this.Name = "MainForm";
-      this.ShowIcon = false;
       this.Text = "viTestApp";
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
       this.tabControl1.ResumeLayout(false);
@@ -3058,7 +3049,6 @@ namespace viTestApp
     private System.Windows.Forms.TextBox tbxEeErr;
     private System.Windows.Forms.Label lblStatPeakAcc;
     private System.Windows.Forms.TextBox tbxStatPeakAcc;
-    private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
   }
 }

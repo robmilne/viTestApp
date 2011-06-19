@@ -499,16 +499,6 @@ namespace viTestApp
     }
 
     /// <summary>
-    /// exitToolStripMenuItem_Click - 'Exit' menu selection under 'File'
-    ///                                 Quit application and cleanup
-    /// </summary>
-    private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-      // This will invode the FormClosing event
-      System.Windows.Forms.Application.Exit();
-    }
-
-    /// <summary>
     /// aboutToolStripMenuItem_Click - 'About' menu selection under 'File'
     /// </summary>
     private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
