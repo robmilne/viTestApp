@@ -137,9 +137,10 @@ namespace viTestApp
       // Current servo position
       SetText(tbxStatCurPos, _active_servo.ServoSlave.CurrentPosition.ToString());
 
-      // Current servo velocity and stored peak velocity
+      // Current servo velocity and stored peak velocity/acceleration
       SetText(tbxStatCurVel, _active_servo.ServoSlave.CurrentVelocity.ToString());
       SetText(tbxStatPeakVel, _active_servo.ServoSlave.PeakVelocity.ToString());
+      SetText(tbxStatPeakAcc, _active_servo.ServoSlave.PeakAcceleration.ToString());
 
       // Limit pin states and values
       SetText(tbxStatLimAVal, (_active_servo.ServoSlave.IsLimitAPinSet ? "0" : "1"));
@@ -516,10 +517,16 @@ namespace viTestApp
           if(rb.Name.Equals("rbTestMotionStartPos") || rb.Name.Equals("rbTestMotionStartTrapezoidal"))
           {
             btnMotionCtlRevPos.Enabled = true;
+            btnMotionCtlDoublePos.Enabled = true;
+            btnMotionCtlHalfPos.Enabled = true;
+            btnRand.Enabled = true;
           }
           else
           {
             btnMotionCtlRevPos.Enabled = false;
+            btnMotionCtlDoublePos.Enabled = false;
+            btnMotionCtlHalfPos.Enabled = false;
+            btnRand.Enabled = false;
           }
         }
       }
