@@ -63,6 +63,8 @@ namespace viTestApp
       this.rbTestMotionStartSoft = new System.Windows.Forms.RadioButton();
       this.rbTestMotionStopHard = new System.Windows.Forms.RadioButton();
       this.gbSetupStatus = new System.Windows.Forms.GroupBox();
+      this.lblStatPeakAcc = new System.Windows.Forms.Label();
+      this.tbxStatPeakAcc = new System.Windows.Forms.TextBox();
       this.cbxLOCKIF = new System.Windows.Forms.CheckBox();
       this.cbxLVRF = new System.Windows.Forms.CheckBox();
       this.cbxPORF = new System.Windows.Forms.CheckBox();
@@ -240,10 +242,9 @@ namespace viTestApp
       this.rtbMessageLog = new System.Windows.Forms.RichTextBox();
       this.btnMessageLogClear = new System.Windows.Forms.Button();
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-      this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuOpenServoNetwork = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuExit = new System.Windows.Forms.ToolStripMenuItem();
-      this.menuAbout = new System.Windows.Forms.ToolStripMenuItem();
+      this.openMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.tabControl1.SuspendLayout();
       this.tabPageGateWay.SuspendLayout();
       this.gbStatus.SuspendLayout();
@@ -497,9 +498,9 @@ namespace viTestApp
       this.gbxSleep.Controls.Add(this.rbIRQWakeup);
       this.gbxSleep.Controls.Add(this.rbCommWakeUp);
       this.gbxSleep.Controls.Add(this.btnSleep);
-      this.gbxSleep.Location = new System.Drawing.Point(460, 425);
+      this.gbxSleep.Location = new System.Drawing.Point(460, 435);
       this.gbxSleep.Name = "gbxSleep";
-      this.gbxSleep.Size = new System.Drawing.Size(226, 62);
+      this.gbxSleep.Size = new System.Drawing.Size(226, 52);
       this.gbxSleep.TabIndex = 21;
       this.gbxSleep.TabStop = false;
       this.gbxSleep.Text = "Network Suspend";
@@ -508,7 +509,7 @@ namespace viTestApp
       // 
       this.rbIRQWakeup.AutoSize = true;
       this.rbIRQWakeup.Checked = true;
-      this.rbIRQWakeup.Location = new System.Drawing.Point(117, 19);
+      this.rbIRQWakeup.Location = new System.Drawing.Point(117, 9);
       this.rbIRQWakeup.Name = "rbIRQWakeup";
       this.rbIRQWakeup.Size = new System.Drawing.Size(88, 17);
       this.rbIRQWakeup.TabIndex = 5;
@@ -519,7 +520,7 @@ namespace viTestApp
       // rbCommWakeUp
       // 
       this.rbCommWakeUp.AutoSize = true;
-      this.rbCommWakeUp.Location = new System.Drawing.Point(117, 39);
+      this.rbCommWakeUp.Location = new System.Drawing.Point(117, 25);
       this.rbCommWakeUp.Name = "rbCommWakeUp";
       this.rbCommWakeUp.Size = new System.Drawing.Size(103, 17);
       this.rbCommWakeUp.TabIndex = 4;
@@ -528,7 +529,7 @@ namespace viTestApp
       // 
       // btnSleep
       // 
-      this.btnSleep.Location = new System.Drawing.Point(6, 28);
+      this.btnSleep.Location = new System.Drawing.Point(6, 19);
       this.btnSleep.Name = "btnSleep";
       this.btnSleep.Size = new System.Drawing.Size(100, 23);
       this.btnSleep.TabIndex = 0;
@@ -670,6 +671,8 @@ namespace viTestApp
       // 
       // gbSetupStatus
       // 
+      this.gbSetupStatus.Controls.Add(this.lblStatPeakAcc);
+      this.gbSetupStatus.Controls.Add(this.tbxStatPeakAcc);
       this.gbSetupStatus.Controls.Add(this.cbxLOCKIF);
       this.gbSetupStatus.Controls.Add(this.cbxLVRF);
       this.gbSetupStatus.Controls.Add(this.cbxPORF);
@@ -690,10 +693,29 @@ namespace viTestApp
       this.gbSetupStatus.Controls.Add(this.tbxStatCurPos);
       this.gbSetupStatus.Location = new System.Drawing.Point(460, 6);
       this.gbSetupStatus.Name = "gbSetupStatus";
-      this.gbSetupStatus.Size = new System.Drawing.Size(227, 413);
+      this.gbSetupStatus.Size = new System.Drawing.Size(227, 427);
       this.gbSetupStatus.TabIndex = 16;
       this.gbSetupStatus.TabStop = false;
       this.gbSetupStatus.Text = "Status";
+      // 
+      // lblStatPeakAcc
+      // 
+      this.lblStatPeakAcc.AutoSize = true;
+      this.lblStatPeakAcc.Location = new System.Drawing.Point(89, 83);
+      this.lblStatPeakAcc.Name = "lblStatPeakAcc";
+      this.lblStatPeakAcc.Size = new System.Drawing.Size(112, 13);
+      this.lblStatPeakAcc.TabIndex = 33;
+      this.lblStatPeakAcc.Text = "Peak Change Change";
+      // 
+      // tbxStatPeakAcc
+      // 
+      this.tbxStatPeakAcc.BackColor = System.Drawing.SystemColors.Info;
+      this.tbxStatPeakAcc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.tbxStatPeakAcc.Location = new System.Drawing.Point(6, 80);
+      this.tbxStatPeakAcc.Name = "tbxStatPeakAcc";
+      this.tbxStatPeakAcc.ReadOnly = true;
+      this.tbxStatPeakAcc.Size = new System.Drawing.Size(80, 20);
+      this.tbxStatPeakAcc.TabIndex = 32;
       // 
       // cbxLOCKIF
       // 
@@ -702,7 +724,7 @@ namespace viTestApp
       this.cbxLOCKIF.Enabled = false;
       this.cbxLOCKIF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.cbxLOCKIF.ForeColor = System.Drawing.SystemColors.ControlText;
-      this.cbxLOCKIF.Location = new System.Drawing.Point(123, 132);
+      this.cbxLOCKIF.Location = new System.Drawing.Point(124, 147);
       this.cbxLOCKIF.Name = "cbxLOCKIF";
       this.cbxLOCKIF.Size = new System.Drawing.Size(102, 17);
       this.cbxLOCKIF.TabIndex = 31;
@@ -716,7 +738,7 @@ namespace viTestApp
       this.cbxLVRF.Enabled = false;
       this.cbxLVRF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.cbxLVRF.ForeColor = System.Drawing.SystemColors.ControlText;
-      this.cbxLVRF.Location = new System.Drawing.Point(5, 151);
+      this.cbxLVRF.Location = new System.Drawing.Point(6, 166);
       this.cbxLVRF.Name = "cbxLVRF";
       this.cbxLVRF.Size = new System.Drawing.Size(113, 17);
       this.cbxLVRF.TabIndex = 30;
@@ -730,7 +752,7 @@ namespace viTestApp
       this.cbxPORF.Enabled = false;
       this.cbxPORF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.cbxPORF.ForeColor = System.Drawing.SystemColors.ControlText;
-      this.cbxPORF.Location = new System.Drawing.Point(5, 132);
+      this.cbxPORF.Location = new System.Drawing.Point(6, 147);
       this.cbxPORF.Name = "cbxPORF";
       this.cbxPORF.Size = new System.Drawing.Size(101, 17);
       this.cbxPORF.TabIndex = 29;
@@ -740,7 +762,7 @@ namespace viTestApp
       // lblStatErrCode
       // 
       this.lblStatErrCode.AutoSize = true;
-      this.lblStatErrCode.Location = new System.Drawing.Point(89, 109);
+      this.lblStatErrCode.Location = new System.Drawing.Point(89, 126);
       this.lblStatErrCode.Name = "lblStatErrCode";
       this.lblStatErrCode.Size = new System.Drawing.Size(94, 13);
       this.lblStatErrCode.TabIndex = 28;
@@ -750,7 +772,7 @@ namespace viTestApp
       // 
       this.tbxStatErrCode.BackColor = System.Drawing.SystemColors.Info;
       this.tbxStatErrCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.tbxStatErrCode.Location = new System.Drawing.Point(6, 106);
+      this.tbxStatErrCode.Location = new System.Drawing.Point(6, 123);
       this.tbxStatErrCode.Name = "tbxStatErrCode";
       this.tbxStatErrCode.ReadOnly = true;
       this.tbxStatErrCode.Size = new System.Drawing.Size(80, 20);
@@ -759,7 +781,7 @@ namespace viTestApp
       // lblStatServoState
       // 
       this.lblStatServoState.AutoSize = true;
-      this.lblStatServoState.Location = new System.Drawing.Point(89, 89);
+      this.lblStatServoState.Location = new System.Drawing.Point(89, 106);
       this.lblStatServoState.Name = "lblStatServoState";
       this.lblStatServoState.Size = new System.Drawing.Size(63, 13);
       this.lblStatServoState.TabIndex = 26;
@@ -769,7 +791,7 @@ namespace viTestApp
       // 
       this.tbxStatServoState.BackColor = System.Drawing.SystemColors.Info;
       this.tbxStatServoState.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.tbxStatServoState.Location = new System.Drawing.Point(6, 86);
+      this.tbxStatServoState.Location = new System.Drawing.Point(6, 103);
       this.tbxStatServoState.Name = "tbxStatServoState";
       this.tbxStatServoState.ReadOnly = true;
       this.tbxStatServoState.Size = new System.Drawing.Size(80, 20);
@@ -784,7 +806,7 @@ namespace viTestApp
       this.gbStatErrFlag.Controls.Add(this.cbxStatCANErr);
       this.gbStatErrFlag.Controls.Add(this.cbxStatSysErr);
       this.gbStatErrFlag.Controls.Add(this.cbxStatLimErr);
-      this.gbStatErrFlag.Location = new System.Drawing.Point(6, 289);
+      this.gbStatErrFlag.Location = new System.Drawing.Point(6, 302);
       this.gbStatErrFlag.Name = "gbStatErrFlag";
       this.gbStatErrFlag.Size = new System.Drawing.Size(215, 91);
       this.gbStatErrFlag.TabIndex = 24;
@@ -884,7 +906,7 @@ namespace viTestApp
       // 
       // btnStatusWrite
       // 
-      this.btnStatusWrite.Location = new System.Drawing.Point(121, 386);
+      this.btnStatusWrite.Location = new System.Drawing.Point(121, 399);
       this.btnStatusWrite.Name = "btnStatusWrite";
       this.btnStatusWrite.Size = new System.Drawing.Size(100, 21);
       this.btnStatusWrite.TabIndex = 20;
@@ -894,7 +916,7 @@ namespace viTestApp
       // 
       // btnStatusRead
       // 
-      this.btnStatusRead.Location = new System.Drawing.Point(6, 386);
+      this.btnStatusRead.Location = new System.Drawing.Point(7, 400);
       this.btnStatusRead.Name = "btnStatusRead";
       this.btnStatusRead.Size = new System.Drawing.Size(100, 21);
       this.btnStatusRead.TabIndex = 21;
@@ -915,7 +937,7 @@ namespace viTestApp
       this.gbStatLim.Controls.Add(this.lblStatLimAVal);
       this.gbStatLim.Controls.Add(this.lblStatLimBVal);
       this.gbStatLim.Controls.Add(this.tbxStatLimBVal);
-      this.gbStatLim.Location = new System.Drawing.Point(6, 176);
+      this.gbStatLim.Location = new System.Drawing.Point(6, 189);
       this.gbStatLim.Name = "gbStatLim";
       this.gbStatLim.Size = new System.Drawing.Size(215, 107);
       this.gbStatLim.TabIndex = 19;
@@ -1800,18 +1822,18 @@ namespace viTestApp
       this.lblSetAcc.AutoSize = true;
       this.lblSetAcc.Location = new System.Drawing.Point(6, 100);
       this.lblSetAcc.Name = "lblSetAcc";
-      this.lblSetAcc.Size = new System.Drawing.Size(66, 13);
+      this.lblSetAcc.Size = new System.Drawing.Size(92, 13);
       this.lblSetAcc.TabIndex = 11;
-      this.lblSetAcc.Text = "Acceleration";
+      this.lblSetAcc.Text = "Acc (enc/secsec)";
       // 
       // lblSetVel
       // 
       this.lblSetVel.AutoSize = true;
       this.lblSetVel.Location = new System.Drawing.Point(6, 60);
       this.lblSetVel.Name = "lblSetVel";
-      this.lblSetVel.Size = new System.Drawing.Size(44, 13);
+      this.lblSetVel.Size = new System.Drawing.Size(71, 13);
       this.lblSetVel.TabIndex = 10;
-      this.lblSetVel.Text = "Velocity";
+      this.lblSetVel.Text = "Vel (enc/sec)";
       // 
       // lblSetPos
       // 
@@ -2683,43 +2705,35 @@ namespace viTestApp
       // menuStrip1
       // 
       this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.openMenuItem,
+            this.exitToolStripMenuItem,
+            this.aboutToolStripMenuItem});
       this.menuStrip1.Location = new System.Drawing.Point(0, 0);
       this.menuStrip1.Name = "menuStrip1";
       this.menuStrip1.Size = new System.Drawing.Size(732, 24);
       this.menuStrip1.TabIndex = 45;
       this.menuStrip1.Text = "menuStrip1";
       // 
-      // fileToolStripMenuItem
+      // openMenuItem
       // 
-      this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuOpenServoNetwork,
-            this.menuExit,
-            this.menuAbout});
-      this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-      this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
-      this.fileToolStripMenuItem.Text = "File";
+      this.openMenuItem.Name = "openMenuItem";
+      this.openMenuItem.Size = new System.Drawing.Size(119, 20);
+      this.openMenuItem.Text = "Open Servo Network";
+      this.openMenuItem.Click += new System.EventHandler(this.openMenuItem_Click);
       // 
-      // menuOpenServoNetwork
+      // exitToolStripMenuItem
       // 
-      this.menuOpenServoNetwork.Name = "menuOpenServoNetwork";
-      this.menuOpenServoNetwork.Size = new System.Drawing.Size(185, 22);
-      this.menuOpenServoNetwork.Text = "Open Servo Network";
-      this.menuOpenServoNetwork.Click += new System.EventHandler(this.menuOpenServoNetwork_Click);
+      this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+      this.exitToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+      this.exitToolStripMenuItem.Text = "Exit";
+      this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
       // 
-      // menuExit
+      // aboutToolStripMenuItem
       // 
-      this.menuExit.Name = "menuExit";
-      this.menuExit.Size = new System.Drawing.Size(185, 22);
-      this.menuExit.Text = "Exit";
-      this.menuExit.Click += new System.EventHandler(this.menuExit_Click);
-      // 
-      // menuAbout
-      // 
-      this.menuAbout.Name = "menuAbout";
-      this.menuAbout.Size = new System.Drawing.Size(185, 22);
-      this.menuAbout.Text = "About";
-      this.menuAbout.Click += new System.EventHandler(this.menuAbout_Click);
+      this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+      this.aboutToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+      this.aboutToolStripMenuItem.Text = "About";
+      this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
       // 
       // MainForm
       // 
@@ -2831,11 +2845,10 @@ namespace viTestApp
 
     private System.Windows.Forms.TabControl tabControl1;
     private System.Windows.Forms.MenuStrip menuStrip1;
-    private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem openMenuItem;
     private System.Windows.Forms.TabPage tabPageLog;
     private System.Windows.Forms.RichTextBox rtbMessageLog;
     private System.Windows.Forms.Button btnMessageLogClear;
-    private System.Windows.Forms.ToolStripMenuItem menuOpenServoNetwork;
     private System.Windows.Forms.TabPage tabPageSetup;
     private System.Windows.Forms.Button btnServoCtlSave;
     private System.Windows.Forms.Button btnServoCtlLoad;
@@ -3043,8 +3056,10 @@ namespace viTestApp
     private System.Windows.Forms.CheckBox cbxPORF;
     private System.Windows.Forms.CheckBox cbxEeErr;
     private System.Windows.Forms.TextBox tbxEeErr;
-    private System.Windows.Forms.ToolStripMenuItem menuExit;
-    private System.Windows.Forms.ToolStripMenuItem menuAbout;
+    private System.Windows.Forms.Label lblStatPeakAcc;
+    private System.Windows.Forms.TextBox tbxStatPeakAcc;
+    private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
   }
 }
 
