@@ -442,13 +442,12 @@ namespace viTestApp
     }
 
     /// <summary>
-    /// menuOpenServoNetwork_Click - 'Open Servo Network' menu selection under 'File'
+    /// openMenuItem_Click - 'Open Servo Network' menu selection under 'File'
     /// </summary>
-    private void menuOpenServoNetwork_Click(object sender, EventArgs e)
+    private void openMenuItem_Click(object sender, EventArgs e)
     {
       // Build slave network (hashtable) in start form if
       // selected comport opens and detects servo network
-      menuOpenServoNetwork.Text = "Open Servo Network";
       if(_port == string.Empty)
       {
         // Port Dialog to select Serial Port
@@ -483,8 +482,7 @@ namespace viTestApp
               tabControl1.Show();
               tabControl1.SelectedTab = tabPageSetup;
 
-              //menuOpenServoNetwork.Text = "Close Servo Network";
-              menuOpenServoNetwork.Enabled = false;
+              openMenuItem.Enabled = false;
             }
           }
           else
@@ -501,21 +499,20 @@ namespace viTestApp
     }
 
     /// <summary>
-    /// menuExit_Click - 'Exit' menu selection under 'File'
+    /// exitToolStripMenuItem_Click - 'Exit' menu selection under 'File'
     ///                                 Quit application and cleanup
     /// </summary>
-    private void menuExit_Click(object sender, EventArgs e)
+    private void exitToolStripMenuItem_Click(object sender, EventArgs e)
     {
       // This will invode the FormClosing event
       System.Windows.Forms.Application.Exit();
     }
 
     /// <summary>
-    /// menuAbout_Click - 'About' menu selection under 'File'
+    /// aboutToolStripMenuItem_Click - 'About' menu selection under 'File'
     /// </summary>
-    private void menuAbout_Click(object sender, EventArgs e)
+    private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      //String.Format("{0} does not connect to a slave network\n", _port)
       MsgBox.Show(this, String.Format("Created by Rob Milne\nVera Ikona Ltd\nhttp://vera-ikona.com\nVer: {0}\nCopyright © 2011", Assembly.GetExecutingAssembly().GetName().Version.ToString()), "About viTestApp", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
