@@ -31,7 +31,7 @@ Installation and Operation:
 3/Attach the USB to CAN Gateway to the computer and let the driver recognize
   the device.
 
-4/Start the application and select 'File'->'Open Servo Network' to open the
+4/Start the application and select 'Open Servo Network' to open the
   'Select Gateway' form.  The serial number of the FTDI FIFO chip should appear
   in the combobox.
 
