@@ -1329,6 +1329,7 @@ namespace viTestApp
       // 
       // nudSetAtdLimDwell
       // 
+      this.nudSetAtdLimDwell.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.nudSetAtdLimDwell.Increment = new decimal(new int[] {
             10,
             0,
@@ -1346,6 +1347,7 @@ namespace viTestApp
       // 
       // nudSetAtdLimVal
       // 
+      this.nudSetAtdLimVal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.nudSetAtdLimVal.Location = new System.Drawing.Point(6, 16);
       this.nudSetAtdLimVal.Maximum = new decimal(new int[] {
             255,
@@ -1775,6 +1777,7 @@ namespace viTestApp
       // 
       // nudSetPWM
       // 
+      this.nudSetPWM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.nudSetPWM.Increment = new decimal(new int[] {
             10,
             0,
@@ -1846,8 +1849,9 @@ namespace viTestApp
       // 
       // nudSetVel
       // 
+      this.nudSetVel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.nudSetVel.Increment = new decimal(new int[] {
-            1024,
+            1000,
             0,
             0,
             0});
@@ -1868,8 +1872,9 @@ namespace viTestApp
       // 
       // nudSetPos
       // 
+      this.nudSetPos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.nudSetPos.Increment = new decimal(new int[] {
-            1024,
+            1000,
             0,
             0,
             0});
@@ -1890,8 +1895,9 @@ namespace viTestApp
       // 
       // nudSetAcc
       // 
+      this.nudSetAcc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.nudSetAcc.Increment = new decimal(new int[] {
-            1024,
+            1000,
             0,
             0,
             0});
