@@ -28,9 +28,120 @@ namespace viTestApp
     private EventWaitHandle _statistics_ev;
 
     private bool suppress_stored_plot_checkbox;
+    private bool suppress_plot_event;
     #endregion
 
     #region Helper Methods
+    /******************************************************************************/
+    /// <summary>
+    /// plotData - Display statistics
+    /// </summary>
+    private void plotData(Servo servo)
+    {
+      if(cbxShowStatsPrev.Checked)
+      {
+        plot(servo.StatsPrev, Slave.STATS_SIZE);
+        setCtlPts(servo.CtlPtsPrev);
+      }
+      else
+      {
+        plot(servo.StatsCur, Slave.STATS_SIZE);
+        setCtlPts(servo.CtlPtsCur);
+      }
+    }
+    private void plot(List<StatStruct> stats, int size)
+    {
+      if(stats.Count == 0)
+      {
+        return;
+      }
+
+      Graphics g;
+      // Make height sizeof byte + 2 to see curves at satuaration
+      picbxStats.Size = new Size(size, 257);
+      int width = picbxStats.Size.Width > pnlStats.Size.Width ? picbxStats.Size.Width : pnlStats.Size.Width;
+      pnlStats.AutoScrollMinSize = new Size(width, picbxStats.Size.Height);
+      g = picbxStats.CreateGraphics();
+      g.Clear(System.Drawing.Color.White);
+
+      // draw a horizontal line at 0x80 (signed zero)
+      Pen p = new Pen(Color.LightGray);
+      g.DrawLine(p, 0, 128, size, 128);
+      // dashed lines at 0xC0 and 0x40
+      float[] dashValues = { 5, 5 };
+      Pen dashPen = new Pen(Color.LightGray, 1);
+      dashPen.DashPattern = dashValues;
+      g.DrawLine(dashPen, 0, 64, size, 64);
+      g.DrawLine(dashPen, 0, 192, size, 192);
+
+      int pt1, pt2;
+      if(cbxStatInfoDuty.Checked)
+      {
+        for(int i = 0; i < stats.Count - 1; i++)
+        {
+          p = new Pen(Color.DimGray);
+          pt1 = Convert.ToInt32(stats[i].duty);
+          pt2 = Convert.ToInt32(stats[i + 1].duty);
+          g.DrawLine(p, i, pt1, i + 1, pt2);
+        }
+      }
+      if(cbxStatInfoChange.Checked)
+      {
+        for(int i = 0; i < stats.Count - 1; i++)
+        {
+          p = new Pen(Color.Blue);
+          pt1 = Convert.ToInt32(stats[i].change);
+          pt2 = Convert.ToInt32(stats[i + 1].change);
+          g.DrawLine(p, i, pt1, i + 1, pt2);
+        }
+      }
+      if(cbxStatInfoErr.Checked)
+      {
+        for(int i = 0; i < stats.Count - 1; i++)
+        {
+          p = new Pen(Color.Red);
+          pt1 = Convert.ToInt32(stats[i].err);
+          pt2 = Convert.ToInt32(stats[i + 1].err);
+          g.DrawLine(p, i, pt1, i + 1, pt2);
+        }
+      }
+
+      g.TranslateTransform(pnlStats.AutoScrollPosition.X, pnlStats.AutoScrollPosition.Y);
+      picbxStats.Update();
+
+      g.Dispose();
+      p.Dispose();
+      dashPen.Dispose();
+    }
+
+    private void setCtlPts(List<byte> pts)
+    {
+      // Display control points only if checked in "Fuzzy Tuning" tab
+      if(cbxMemFuncCtlPts.Checked && pts.Count == (int)Servo.ControlPoints.MAX_CTL_PTS)
+      {
+        gbStatCtlPts.Enabled = true;
+        SetText(tbxStatPosCtlPtA, pts[(int)Servo.ControlPoints.A_ERROR].ToString("X2"));
+        SetText(tbxStatPosCtlPtB, pts[(int)Servo.ControlPoints.B_ERROR].ToString("X2"));
+        SetText(tbxStatSpdCtlPtA, pts[(int)Servo.ControlPoints.A_CHANGE].ToString("X2"));
+        SetText(tbxStatSpdCtlPtB, pts[(int)Servo.ControlPoints.B_CHANGE].ToString("X2"));
+        SetText(tbxStatOutCtlPtA, pts[(int)Servo.ControlPoints.A_OUTPUT].ToString("X2"));
+        SetText(tbxStatOutCtlPtB, pts[(int)Servo.ControlPoints.B_OUTPUT].ToString("X2"));
+      }
+      else
+      {
+        gbStatCtlPts.Enabled = false;
+        ClrText(tbxStatPosCtlPtA);
+        ClrText(tbxStatPosCtlPtB);
+        ClrText(tbxStatSpdCtlPtA);
+        ClrText(tbxStatSpdCtlPtB);
+        ClrText(tbxStatOutCtlPtA);
+        ClrText(tbxStatOutCtlPtB);
+      }
+    }
+
+    #endregion
+
+    #region Statistics Events
     /******************************************************************************/
     /// <summary>
     /// pnlStats_Paint - Paint stats if available
@@ -44,90 +155,9 @@ namespace viTestApp
       byte node = (byte)Convert.ToByte(cboSlaveNode.SelectedValue);
       if(_servo_ht.ContainsKey(node))
       {
-        Slave slave = _servo_ht[node].ServoSlave;
-        plotData(slave);
+        Servo servo = _servo_ht[node];
+        plotData(servo);
       }
-    }
-
-    /// <summary>
-    /// plotData - Display statistics
-    /// </summary>
-    private void plotData(Slave slave)
-    {
-      if(cbxShowStatsPrev.Checked)
-      {
-        if(slave.StatsPrev.Count > 0)
-        {
-          plot(slave.StatsPrev);
-        }
-      }
-      else if(slave.StatsCur.Count > 0)
-      {
-        plot(slave.StatsCur);
-      }
-    }
-    private void plot(List<StatStruct> stats)
-    {
-      StringBuilder sb = new StringBuilder();
-      foreach(StatStruct stat in stats)
-      {
-        sb.Append(stat.err.ToString("X2") + " ");
-        sb.Append(stat.change.ToString("X2") + " ");
-        sb.Append(stat.duty.ToString("X2") + "\r\n");
-      }
-      SetText(tbxStats, sb.ToString());
-
-      // ready to draw
-      System.Drawing.Pen myPen = new System.Drawing.Pen(System.Drawing.Color.Black);
-      Graphics formGraphics;
-      picbxStats.Size = new Size(stats.Count, 257);
-      int width = picbxStats.Size.Width > pnlStats.Size.Width ? picbxStats.Size.Width : pnlStats.Size.Width;
-      pnlStats.AutoScrollMinSize = new Size(width, picbxStats.Size.Height);
-      formGraphics = picbxStats.CreateGraphics();
-      formGraphics.Clear(System.Drawing.Color.White);
-
-      // draw a horizontal line at zero
-      myPen = new System.Drawing.Pen(System.Drawing.Color.LightGray);
-      formGraphics.DrawLine(myPen, 0, 128, stats.Count, 128);
-
-      int pt1, pt2;
-      if(cbxStatInfoDuty.Checked)
-      {
-        for(int i = 0; i < stats.Count - 1; i++)
-        {
-          myPen = new System.Drawing.Pen(System.Drawing.Color.DimGray);
-          pt1 = Convert.ToInt32(stats[i].duty);
-          pt2 = Convert.ToInt32(stats[i + 1].duty);
-          formGraphics.DrawLine(myPen, i, pt1, i + 1, pt2);
-        }
-      }
-      if(cbxStatInfoChange.Checked)
-      {
-        for(int i = 0; i < stats.Count - 1; i++)
-        {
-          myPen = new System.Drawing.Pen(System.Drawing.Color.Blue);
-          pt1 = Convert.ToInt32(stats[i].change);
-          pt2 = Convert.ToInt32(stats[i + 1].change);
-          formGraphics.DrawLine(myPen, i, pt1, i + 1, pt2);
-        }
-      }
-      if(cbxStatInfoErr.Checked)
-      {
-        for(int i = 0; i < stats.Count - 1; i++)
-        {
-          myPen = new System.Drawing.Pen(System.Drawing.Color.Red);
-          pt1 = Convert.ToInt32(stats[i].err);
-          pt2 = Convert.ToInt32(stats[i + 1].err);
-          formGraphics.DrawLine(myPen, i, pt1, i + 1, pt2);
-        }
-      }
-
-      formGraphics.TranslateTransform(pnlStats.AutoScrollPosition.X, pnlStats.AutoScrollPosition.Y);
-      picbxStats.Update();
-
-      // clean up
-      myPen.Dispose();
-      formGraphics.Dispose();
     }
     private void StatsHandleScroll(object sender, ScrollEventArgs e)
     {
@@ -140,10 +170,6 @@ namespace viTestApp
       }
     }
 
-    #endregion
-
-    #region Statistics Events
-    /******************************************************************************/
     private void btnGetStats_Click(object sender, EventArgs e)
     {
       if(_active_servo == null)
@@ -156,30 +182,20 @@ namespace viTestApp
       suppress_stored_plot_checkbox = true;
       cbxShowStatsPrev.Checked = false;
       suppress_stored_plot_checkbox = false;
-      Graphics formGraphics;
-      formGraphics = picbxStats.CreateGraphics();
-      formGraphics.Clear(System.Drawing.Color.White);
-      formGraphics.DrawString("Wait for Statistics", new Font("Verdana", 14),
-      new SolidBrush(Color.Black), 10, 10);
-
-      Log(LogMsgType.Normal, "Wait for statistics\n");
       _statistics_ev = new AutoResetEvent(false);
 
+      Graphics g = picbxStats.CreateGraphics();
       try
       {
-        string err;
-        if(!_active_servo.ServoSlave.GetStats(GetStatistics_callback))
-        {
-          err = "Statistics flushed - start new move to fill stats buffer";
-          MsgBox.Show(this, err);
-          Log(LogMsgType.Error, err.ToString() + "\n");
-        }
-        else
-        {
+        if(_active_servo.ServoSlave.GetStats(GetStatistics_callback))
+        {       
+          g.Clear(System.Drawing.Color.White);
+          g.DrawString("Wait for Statistics", new Font("Verdana", 14),
+          new SolidBrush(Color.Black), 10, 10);
           if(_statistics_ev.WaitOne(30000, false) == false)
           {
             MsgBox.Show(this, "Stats timeout\n");
-            formGraphics.Clear(System.Drawing.Color.White);
+            g.Clear(System.Drawing.Color.White);
             _statistics_ev.Close();
             _statistics_ev = null;
             return;
@@ -194,22 +210,51 @@ namespace viTestApp
 
       _statistics_ev.Close();
       _statistics_ev = null;
+      ClrText(tbxStats);
 
       if(_active_servo.ServoSlave.StatBuf != null && _active_servo.ServoSlave.StatBuf.Count > 0)
       {
-        _active_servo.ServoSlave.StatsCur = _active_servo.ServoSlave.StatBuf;
-        formGraphics.Dispose();
-        ClrText(tbxStats);
+        // We've got valid stats data - copy stats buffer to StatsCur
+        _active_servo.StatsCur = _active_servo.ServoSlave.StatBuf;
 
-        plotData(_active_servo.ServoSlave);
+        // Build control points from mem funcs
+        _active_servo.CtlPtsCur.Clear();
+        // Derive PosErr Ctl points from bytes 4 and 1 of PosMembershipFunctionArray
+        _active_servo.CtlPtsCur.Add(_active_servo.ServoSlave.PosMemFuncArray[4]);
+        _active_servo.CtlPtsCur.Add(_active_servo.ServoSlave.PosMemFuncArray[1]);
+
+        // Derive Change Ctl points from bytes 4 and 1 of SpdMembershipFunctionArray
+        _active_servo.CtlPtsCur.Add(_active_servo.ServoSlave.SpdMemFuncArray[4]);
+        _active_servo.CtlPtsCur.Add(_active_servo.ServoSlave.SpdMemFuncArray[1]);
+
+        // Derive Output Ctl points from bytes 0 and 1 of OutSingletonArray
+        _active_servo.CtlPtsCur.Add(_active_servo.ServoSlave.OutSingletonArray[0]);
+        _active_servo.CtlPtsCur.Add(_active_servo.ServoSlave.OutSingletonArray[1]);
       }
       else
       {
-        formGraphics.Clear(System.Drawing.Color.White);
-        formGraphics.Dispose();
-        Log(LogMsgType.Warning, "Statistics Buffer empty - initiate a new move to fill\n");
-        MsgBox.Show(this, "Statistics Buffer empty - initiate a new move to fill");
+        if(_active_servo.StatsCur.Count == 0)
+        {
+          g.Clear(System.Drawing.Color.White);
+          Log(LogMsgType.Warning, "Statistics Buffer empty - initiate a move to fill\n");
+          MsgBox.Show(this, "Statistics Buffer empty - initiate a move to fill");
+          return;
+        }
       }
+
+      // Build text box output     
+      StringBuilder sb = new StringBuilder();
+      foreach(StatStruct stat in _active_servo.StatsCur)
+      {
+        sb.Append(stat.err.ToString("X2") + " ");
+        sb.Append(stat.change.ToString("X2") + " ");
+        sb.Append(stat.duty.ToString("X2") + "\r\n");
+      }
+      SetText(tbxStats, sb.ToString());
+
+      plotData(_active_servo);
+
+      g.Dispose();
     }
 
     private void GetStatistics_callback(bool ok)
@@ -235,10 +280,20 @@ namespace viTestApp
         return;
       }
 
-      if(_active_servo.ServoSlave.StatsCur.Count > 0)
+      if(_active_servo.StatsCur.Count > 0)
       {
-        _active_servo.ServoSlave.StatsPrev = _active_servo.ServoSlave.StatsCur;
-        cbxShowStatsPrev.Enabled = true;
+        _active_servo.StatsPrev = _active_servo.StatsCur;
+
+        byte[] arr = _active_servo.CtlPtsCur.ToArray();
+        if(arr.Length == (int)Servo.ControlPoints.MAX_CTL_PTS)
+        {
+          _active_servo.CtlPtsPrev.Clear();
+          for(int i = 0; i < (int)Servo.ControlPoints.MAX_CTL_PTS; i++)
+          {
+            _active_servo.CtlPtsPrev.Add(arr[i]);
+          }
+        }
+        cbxShowStatsPrev.Visible = true;
       }
       else
       {
@@ -256,30 +311,77 @@ namespace viTestApp
           return;
         }
 
+        List<StatStruct> stats = null;
         if(cbxShowStatsPrev.Checked)
         {
-          if(_active_servo.ServoSlave.StatsPrev.Count == 0)
+          if(_active_servo.StatsPrev.Count == 0)
           {
             cbxShowStatsPrev.Checked = false;
+            MsgBox.Show(this, "No previous motion stats stored");
+            return;
+          }
+          else
+          {
+            stats = _active_servo.StatsPrev;
+          }
+        }
+        else
+        {
+          if(_active_servo.StatsCur.Count == 0)
+          {
             MsgBox.Show(this, "No motion stats stored");
             return;
           }
+          else
+          {
+            stats = _active_servo.StatsCur;
+          }
         }
-        plotData(_active_servo.ServoSlave);
+
+        if(stats != null)
+        {
+          // Build text box output
+          ClrText(tbxStats);
+          StringBuilder sb = new StringBuilder();
+          foreach(StatStruct stat in stats)
+          {
+            sb.Append(stat.err.ToString("X2") + " ");
+            sb.Append(stat.change.ToString("X2") + " ");
+            sb.Append(stat.duty.ToString("X2") + "\r\n");
+          }
+          SetText(tbxStats, sb.ToString());
+
+          plotData(_active_servo);
+        }
       }
     }
 
     private void cbxStatInfoErr_CheckedChanged(object sender, EventArgs e)
     {
-      UpdatePlot();
+      if(!suppress_plot_event)
+      {
+        suppress_plot_event = true;
+        UpdatePlot();
+        suppress_plot_event = false;
+      }
     }
     private void cbxStatInfoChange_CheckedChanged(object sender, EventArgs e)
     {
-      UpdatePlot();
+      if(!suppress_plot_event)
+      {
+        suppress_plot_event = true;
+        UpdatePlot();
+        suppress_plot_event = false;
+      }
     }
     private void cbxStatInfoDuty_CheckedChanged(object sender, EventArgs e)
     {
-      UpdatePlot();
+      if(!suppress_plot_event)
+      {
+        suppress_plot_event = true;
+        UpdatePlot();
+        suppress_plot_event = false;
+      }
     }
     private void UpdatePlot()
     {
@@ -288,7 +390,7 @@ namespace viTestApp
         MsgBox.Show(this, "Select a Node");
         return;
       }
-      plotData(_active_servo.ServoSlave);
+      plotData(_active_servo);
     }
     #endregion
   }
