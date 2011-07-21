@@ -47,6 +47,10 @@ namespace viTestApp
       this.cboSlaveNode = new System.Windows.Forms.ComboBox();
       this.tabServoSettings = new System.Windows.Forms.TabControl();
       this.tabPageSetupControl = new System.Windows.Forms.TabPage();
+      this.gbRand = new System.Windows.Forms.GroupBox();
+      this.btnRand = new System.Windows.Forms.Button();
+      this.gbZero = new System.Windows.Forms.GroupBox();
+      this.btnSetEncZero = new System.Windows.Forms.Button();
       this.gbxSleep = new System.Windows.Forms.GroupBox();
       this.rbIRQWakeup = new System.Windows.Forms.RadioButton();
       this.rbCommWakeUp = new System.Windows.Forms.RadioButton();
@@ -64,16 +68,15 @@ namespace viTestApp
       this.rbTestMotionStartSoft = new System.Windows.Forms.RadioButton();
       this.rbTestMotionStopHard = new System.Windows.Forms.RadioButton();
       this.gbSetupStatus = new System.Windows.Forms.GroupBox();
+      this.btnStatusRead = new System.Windows.Forms.Button();
       this.lblStatPeakAcc = new System.Windows.Forms.Label();
       this.tbxStatPeakAcc = new System.Windows.Forms.TextBox();
-      this.cbxLOCKIF = new System.Windows.Forms.CheckBox();
-      this.cbxLVRF = new System.Windows.Forms.CheckBox();
-      this.cbxPORF = new System.Windows.Forms.CheckBox();
       this.lblStatErrCode = new System.Windows.Forms.Label();
       this.tbxStatErrCode = new System.Windows.Forms.TextBox();
       this.lblStatServoState = new System.Windows.Forms.Label();
       this.tbxStatServoState = new System.Windows.Forms.TextBox();
       this.gbStatErrFlag = new System.Windows.Forms.GroupBox();
+      this.btnStatusWrite = new System.Windows.Forms.Button();
       this.cbxStatIrqErr = new System.Windows.Forms.CheckBox();
       this.cbxStatATDErr = new System.Windows.Forms.CheckBox();
       this.cbxStatFuzzyErr = new System.Windows.Forms.CheckBox();
@@ -81,8 +84,6 @@ namespace viTestApp
       this.cbxStatCANErr = new System.Windows.Forms.CheckBox();
       this.cbxStatSysErr = new System.Windows.Forms.CheckBox();
       this.cbxStatLimErr = new System.Windows.Forms.CheckBox();
-      this.btnStatusWrite = new System.Windows.Forms.Button();
-      this.btnStatusRead = new System.Windows.Forms.Button();
       this.gbStatLim = new System.Windows.Forms.GroupBox();
       this.lblStatATDVal = new System.Windows.Forms.Label();
       this.tbxStatATDVal = new System.Windows.Forms.TextBox();
@@ -95,7 +96,6 @@ namespace viTestApp
       this.lblStatLimAVal = new System.Windows.Forms.Label();
       this.lblStatLimBVal = new System.Windows.Forms.Label();
       this.tbxStatLimBVal = new System.Windows.Forms.TextBox();
-      this.btnSetEncZero = new System.Windows.Forms.Button();
       this.lblStatPeakVel = new System.Windows.Forms.Label();
       this.tbxStatPeakVel = new System.Windows.Forms.TextBox();
       this.lblStatCurVel = new System.Windows.Forms.Label();
@@ -103,7 +103,6 @@ namespace viTestApp
       this.lblStatCurPos = new System.Windows.Forms.Label();
       this.tbxStatCurPos = new System.Windows.Forms.TextBox();
       this.gbTestMotionStart = new System.Windows.Forms.GroupBox();
-      this.btnRand = new System.Windows.Forms.Button();
       this.btnMotionCtlHalfPos = new System.Windows.Forms.Button();
       this.btnMotionCtlDoublePos = new System.Windows.Forms.Button();
       this.btnMotionCtlRevPos = new System.Windows.Forms.Button();
@@ -203,17 +202,17 @@ namespace viTestApp
       this.cbxFuzzyRule2 = new System.Windows.Forms.ComboBox();
       this.cbxFuzzyRule1 = new System.Windows.Forms.ComboBox();
       this.cbxFuzzyRule0 = new System.Windows.Forms.ComboBox();
-      this.btnGetPosRules = new System.Windows.Forms.Button();
-      this.btnSetPosRules = new System.Windows.Forms.Button();
+      this.btnGetRules = new System.Windows.Forms.Button();
+      this.btnSetRules = new System.Windows.Forms.Button();
       this.lblUnfocus = new System.Windows.Forms.Label();
       this.gbSetFuzzyMF = new System.Windows.Forms.GroupBox();
       this.cbxMemFuncCtlPts = new System.Windows.Forms.CheckBox();
       this.lblMemPos0 = new System.Windows.Forms.Label();
       this.tbxPosMem_0_0 = new System.Windows.Forms.TextBox();
       this.lblPosErrMF = new System.Windows.Forms.Label();
-      this.btnGetPosMF = new System.Windows.Forms.Button();
+      this.btnGetMF = new System.Windows.Forms.Button();
       this.lblSpdMF = new System.Windows.Forms.Label();
-      this.btnSetPosMF = new System.Windows.Forms.Button();
+      this.btnSetMF = new System.Windows.Forms.Button();
       this.lblPosOutSing = new System.Windows.Forms.Label();
       this.gbPosCtlPts = new System.Windows.Forms.GroupBox();
       this.lblPosOutCtlPtB = new System.Windows.Forms.Label();
@@ -229,6 +228,22 @@ namespace viTestApp
       this.lblPosErrCtlPtA = new System.Windows.Forms.Label();
       this.tbxPosErrCtlPtA = new System.Windows.Forms.TextBox();
       this.tabPageServoStats = new System.Windows.Forms.TabPage();
+      this.gbStatCtlPts = new System.Windows.Forms.GroupBox();
+      this.label8 = new System.Windows.Forms.Label();
+      this.label7 = new System.Windows.Forms.Label();
+      this.lblStatPosCtlPt = new System.Windows.Forms.Label();
+      this.label3 = new System.Windows.Forms.Label();
+      this.tbxStatOutCtlPtB = new System.Windows.Forms.TextBox();
+      this.label4 = new System.Windows.Forms.Label();
+      this.tbxStatOutCtlPtA = new System.Windows.Forms.TextBox();
+      this.label1 = new System.Windows.Forms.Label();
+      this.tbxStatSpdCtlPtB = new System.Windows.Forms.TextBox();
+      this.label2 = new System.Windows.Forms.Label();
+      this.tbxStatSpdCtlPtA = new System.Windows.Forms.TextBox();
+      this.label5 = new System.Windows.Forms.Label();
+      this.tbxStatPosCtlPtB = new System.Windows.Forms.TextBox();
+      this.label6 = new System.Windows.Forms.Label();
+      this.tbxStatPosCtlPtA = new System.Windows.Forms.TextBox();
       this.gbStatTypes = new System.Windows.Forms.GroupBox();
       this.cbxStatInfoDuty = new System.Windows.Forms.CheckBox();
       this.cbxStatInfoChange = new System.Windows.Forms.CheckBox();
@@ -253,6 +268,8 @@ namespace viTestApp
       this.tabPageSetup.SuspendLayout();
       this.tabServoSettings.SuspendLayout();
       this.tabPageSetupControl.SuspendLayout();
+      this.gbRand.SuspendLayout();
+      this.gbZero.SuspendLayout();
       this.gbxSleep.SuspendLayout();
       this.gbxGroup.SuspendLayout();
       this.gbxCfg.SuspendLayout();
@@ -291,6 +308,7 @@ namespace viTestApp
       this.gbSetFuzzyMF.SuspendLayout();
       this.gbPosCtlPts.SuspendLayout();
       this.tabPageServoStats.SuspendLayout();
+      this.gbStatCtlPts.SuspendLayout();
       this.gbStatTypes.SuspendLayout();
       this.pnlStats.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.picbxStats)).BeginInit();
@@ -476,6 +494,8 @@ namespace viTestApp
       // 
       // tabPageSetupControl
       // 
+      this.tabPageSetupControl.Controls.Add(this.gbRand);
+      this.tabPageSetupControl.Controls.Add(this.gbZero);
       this.tabPageSetupControl.Controls.Add(this.gbxSleep);
       this.tabPageSetupControl.Controls.Add(this.gbxGroup);
       this.tabPageSetupControl.Controls.Add(this.gbxCfg);
@@ -492,6 +512,46 @@ namespace viTestApp
       this.tabPageSetupControl.TabIndex = 0;
       this.tabPageSetupControl.Text = "Servo Control";
       this.tabPageSetupControl.UseVisualStyleBackColor = true;
+      // 
+      // gbRand
+      // 
+      this.gbRand.Controls.Add(this.btnRand);
+      this.gbRand.Location = new System.Drawing.Point(577, 6);
+      this.gbRand.Name = "gbRand";
+      this.gbRand.Size = new System.Drawing.Size(110, 52);
+      this.gbRand.TabIndex = 23;
+      this.gbRand.TabStop = false;
+      this.gbRand.Text = "Random Test";
+      // 
+      // btnRand
+      // 
+      this.btnRand.Location = new System.Drawing.Point(7, 20);
+      this.btnRand.Name = "btnRand";
+      this.btnRand.Size = new System.Drawing.Size(96, 22);
+      this.btnRand.TabIndex = 22;
+      this.btnRand.Text = "Random Motion";
+      this.btnRand.UseVisualStyleBackColor = true;
+      this.btnRand.Click += new System.EventHandler(this.btnRand_Click);
+      // 
+      // gbZero
+      // 
+      this.gbZero.Controls.Add(this.btnSetEncZero);
+      this.gbZero.Location = new System.Drawing.Point(461, 6);
+      this.gbZero.Name = "gbZero";
+      this.gbZero.Size = new System.Drawing.Size(110, 52);
+      this.gbZero.TabIndex = 22;
+      this.gbZero.TabStop = false;
+      this.gbZero.Text = "Zero";
+      // 
+      // btnSetEncZero
+      // 
+      this.btnSetEncZero.Location = new System.Drawing.Point(7, 20);
+      this.btnSetEncZero.Name = "btnSetEncZero";
+      this.btnSetEncZero.Size = new System.Drawing.Size(96, 22);
+      this.btnSetEncZero.TabIndex = 4;
+      this.btnSetEncZero.Text = "Zero Encoder";
+      this.btnSetEncZero.UseVisualStyleBackColor = true;
+      this.btnSetEncZero.Click += new System.EventHandler(this.btnSetEncZero_Click);
       // 
       // gbxSleep
       // 
@@ -540,9 +600,9 @@ namespace viTestApp
       // gbxGroup
       // 
       this.gbxGroup.Controls.Add(this.cbxGroup);
-      this.gbxGroup.Location = new System.Drawing.Point(394, 7);
+      this.gbxGroup.Location = new System.Drawing.Point(394, 6);
       this.gbxGroup.Name = "gbxGroup";
-      this.gbxGroup.Size = new System.Drawing.Size(60, 55);
+      this.gbxGroup.Size = new System.Drawing.Size(60, 52);
       this.gbxGroup.TabIndex = 20;
       this.gbxGroup.TabStop = false;
       this.gbxGroup.Text = "Group";
@@ -550,7 +610,7 @@ namespace viTestApp
       // cbxGroup
       // 
       this.cbxGroup.AutoSize = true;
-      this.cbxGroup.Location = new System.Drawing.Point(20, 25);
+      this.cbxGroup.Location = new System.Drawing.Point(24, 23);
       this.cbxGroup.Name = "cbxGroup";
       this.cbxGroup.Size = new System.Drawing.Size(15, 14);
       this.cbxGroup.TabIndex = 18;
@@ -563,9 +623,9 @@ namespace viTestApp
       this.gbxCfg.Controls.Add(this.btnRebuildFs);
       this.gbxCfg.Controls.Add(this.btnLoadCfg);
       this.gbxCfg.Controls.Add(this.btnStoreCfg);
-      this.gbxCfg.Location = new System.Drawing.Point(127, 333);
+      this.gbxCfg.Location = new System.Drawing.Point(127, 357);
       this.gbxCfg.Name = "gbxCfg";
-      this.gbxCfg.Size = new System.Drawing.Size(118, 154);
+      this.gbxCfg.Size = new System.Drawing.Size(118, 130);
       this.gbxCfg.TabIndex = 19;
       this.gbxCfg.TabStop = false;
       this.gbxCfg.Text = "Servo EEPROM Configuration";
@@ -575,20 +635,21 @@ namespace viTestApp
       this.cbxEeErr.AutoSize = true;
       this.cbxEeErr.Location = new System.Drawing.Point(9, 109);
       this.cbxEeErr.Name = "cbxEeErr";
-      this.cbxEeErr.Size = new System.Drawing.Size(107, 17);
+      this.cbxEeErr.Size = new System.Drawing.Size(39, 17);
       this.cbxEeErr.TabIndex = 27;
-      this.cbxEeErr.Text = "Async File Op Err";
+      this.cbxEeErr.Text = "Err";
       this.cbxEeErr.UseVisualStyleBackColor = true;
+      this.cbxEeErr.Visible = false;
       this.cbxEeErr.CheckedChanged += new System.EventHandler(this.cbxEeErr_CheckedChanged);
       // 
       // tbxEeErr
       // 
       this.tbxEeErr.BackColor = System.Drawing.SystemColors.Info;
       this.tbxEeErr.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.tbxEeErr.Location = new System.Drawing.Point(6, 128);
+      this.tbxEeErr.Location = new System.Drawing.Point(50, 106);
       this.tbxEeErr.Name = "tbxEeErr";
       this.tbxEeErr.ReadOnly = true;
-      this.tbxEeErr.Size = new System.Drawing.Size(66, 20);
+      this.tbxEeErr.Size = new System.Drawing.Size(62, 20);
       this.tbxEeErr.TabIndex = 26;
       this.tbxEeErr.Visible = false;
       // 
@@ -629,7 +690,7 @@ namespace viTestApp
       this.gbTestMotionStop.Controls.Add(this.rbTestMotionStopHard);
       this.gbTestMotionStop.Location = new System.Drawing.Point(251, 6);
       this.gbTestMotionStop.Name = "gbTestMotionStop";
-      this.gbTestMotionStop.Size = new System.Drawing.Size(137, 56);
+      this.gbTestMotionStop.Size = new System.Drawing.Size(137, 52);
       this.gbTestMotionStop.TabIndex = 2;
       this.gbTestMotionStop.TabStop = false;
       this.gbTestMotionStop.Text = "Stop Motion";
@@ -641,7 +702,7 @@ namespace viTestApp
       this.btnTestMotionStop.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
       this.btnTestMotionStop.Location = new System.Drawing.Point(6, 19);
       this.btnTestMotionStop.Name = "btnTestMotionStop";
-      this.btnTestMotionStop.Size = new System.Drawing.Size(76, 31);
+      this.btnTestMotionStop.Size = new System.Drawing.Size(76, 26);
       this.btnTestMotionStop.TabIndex = 19;
       this.btnTestMotionStop.Text = "Stop (Esc)";
       this.btnTestMotionStop.UseVisualStyleBackColor = true;
@@ -651,7 +712,7 @@ namespace viTestApp
       // 
       this.rbTestMotionStartSoft.AutoSize = true;
       this.rbTestMotionStartSoft.Checked = true;
-      this.rbTestMotionStartSoft.Location = new System.Drawing.Point(89, 35);
+      this.rbTestMotionStartSoft.Location = new System.Drawing.Point(89, 28);
       this.rbTestMotionStartSoft.Name = "rbTestMotionStartSoft";
       this.rbTestMotionStartSoft.Size = new System.Drawing.Size(44, 17);
       this.rbTestMotionStartSoft.TabIndex = 3;
@@ -662,7 +723,7 @@ namespace viTestApp
       // rbTestMotionStopHard
       // 
       this.rbTestMotionStopHard.AutoSize = true;
-      this.rbTestMotionStopHard.Location = new System.Drawing.Point(89, 16);
+      this.rbTestMotionStopHard.Location = new System.Drawing.Point(89, 12);
       this.rbTestMotionStopHard.Name = "rbTestMotionStopHard";
       this.rbTestMotionStopHard.Size = new System.Drawing.Size(48, 17);
       this.rbTestMotionStopHard.TabIndex = 2;
@@ -671,32 +732,37 @@ namespace viTestApp
       // 
       // gbSetupStatus
       // 
+      this.gbSetupStatus.Controls.Add(this.btnStatusRead);
       this.gbSetupStatus.Controls.Add(this.lblStatPeakAcc);
       this.gbSetupStatus.Controls.Add(this.tbxStatPeakAcc);
-      this.gbSetupStatus.Controls.Add(this.cbxLOCKIF);
-      this.gbSetupStatus.Controls.Add(this.cbxLVRF);
-      this.gbSetupStatus.Controls.Add(this.cbxPORF);
       this.gbSetupStatus.Controls.Add(this.lblStatErrCode);
       this.gbSetupStatus.Controls.Add(this.tbxStatErrCode);
       this.gbSetupStatus.Controls.Add(this.lblStatServoState);
       this.gbSetupStatus.Controls.Add(this.tbxStatServoState);
       this.gbSetupStatus.Controls.Add(this.gbStatErrFlag);
-      this.gbSetupStatus.Controls.Add(this.btnStatusWrite);
-      this.gbSetupStatus.Controls.Add(this.btnStatusRead);
       this.gbSetupStatus.Controls.Add(this.gbStatLim);
-      this.gbSetupStatus.Controls.Add(this.btnSetEncZero);
       this.gbSetupStatus.Controls.Add(this.lblStatPeakVel);
       this.gbSetupStatus.Controls.Add(this.tbxStatPeakVel);
       this.gbSetupStatus.Controls.Add(this.lblStatCurVel);
       this.gbSetupStatus.Controls.Add(this.tbxStatCurVel);
       this.gbSetupStatus.Controls.Add(this.lblStatCurPos);
       this.gbSetupStatus.Controls.Add(this.tbxStatCurPos);
-      this.gbSetupStatus.Location = new System.Drawing.Point(460, 6);
+      this.gbSetupStatus.Location = new System.Drawing.Point(461, 64);
       this.gbSetupStatus.Name = "gbSetupStatus";
-      this.gbSetupStatus.Size = new System.Drawing.Size(227, 427);
+      this.gbSetupStatus.Size = new System.Drawing.Size(227, 365);
       this.gbSetupStatus.TabIndex = 16;
       this.gbSetupStatus.TabStop = false;
       this.gbSetupStatus.Text = "Status";
+      // 
+      // btnStatusRead
+      // 
+      this.btnStatusRead.Location = new System.Drawing.Point(176, 19);
+      this.btnStatusRead.Name = "btnStatusRead";
+      this.btnStatusRead.Size = new System.Drawing.Size(45, 21);
+      this.btnStatusRead.TabIndex = 34;
+      this.btnStatusRead.Text = "Read";
+      this.btnStatusRead.UseVisualStyleBackColor = true;
+      this.btnStatusRead.Click += new System.EventHandler(this.btnStatusRead_Click);
       // 
       // lblStatPeakAcc
       // 
@@ -716,48 +782,6 @@ namespace viTestApp
       this.tbxStatPeakAcc.ReadOnly = true;
       this.tbxStatPeakAcc.Size = new System.Drawing.Size(80, 20);
       this.tbxStatPeakAcc.TabIndex = 32;
-      // 
-      // cbxLOCKIF
-      // 
-      this.cbxLOCKIF.AutoSize = true;
-      this.cbxLOCKIF.BackColor = System.Drawing.Color.Transparent;
-      this.cbxLOCKIF.Enabled = false;
-      this.cbxLOCKIF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.cbxLOCKIF.ForeColor = System.Drawing.SystemColors.ControlText;
-      this.cbxLOCKIF.Location = new System.Drawing.Point(124, 147);
-      this.cbxLOCKIF.Name = "cbxLOCKIF";
-      this.cbxLOCKIF.Size = new System.Drawing.Size(102, 17);
-      this.cbxLOCKIF.TabIndex = 31;
-      this.cbxLOCKIF.Text = "Loss of PLL lock";
-      this.cbxLOCKIF.UseVisualStyleBackColor = false;
-      // 
-      // cbxLVRF
-      // 
-      this.cbxLVRF.AutoSize = true;
-      this.cbxLVRF.BackColor = System.Drawing.Color.Transparent;
-      this.cbxLVRF.Enabled = false;
-      this.cbxLVRF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.cbxLVRF.ForeColor = System.Drawing.SystemColors.ControlText;
-      this.cbxLVRF.Location = new System.Drawing.Point(6, 166);
-      this.cbxLVRF.Name = "cbxLVRF";
-      this.cbxLVRF.Size = new System.Drawing.Size(113, 17);
-      this.cbxLVRF.TabIndex = 30;
-      this.cbxLVRF.Text = "Low Voltage Reset";
-      this.cbxLVRF.UseVisualStyleBackColor = false;
-      // 
-      // cbxPORF
-      // 
-      this.cbxPORF.AutoSize = true;
-      this.cbxPORF.BackColor = System.Drawing.Color.Transparent;
-      this.cbxPORF.Enabled = false;
-      this.cbxPORF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.cbxPORF.ForeColor = System.Drawing.SystemColors.ControlText;
-      this.cbxPORF.Location = new System.Drawing.Point(6, 147);
-      this.cbxPORF.Name = "cbxPORF";
-      this.cbxPORF.Size = new System.Drawing.Size(101, 17);
-      this.cbxPORF.TabIndex = 29;
-      this.cbxPORF.Text = "Power On Reset";
-      this.cbxPORF.UseVisualStyleBackColor = false;
       // 
       // lblStatErrCode
       // 
@@ -799,6 +823,7 @@ namespace viTestApp
       // 
       // gbStatErrFlag
       // 
+      this.gbStatErrFlag.Controls.Add(this.btnStatusWrite);
       this.gbStatErrFlag.Controls.Add(this.cbxStatIrqErr);
       this.gbStatErrFlag.Controls.Add(this.cbxStatATDErr);
       this.gbStatErrFlag.Controls.Add(this.cbxStatFuzzyErr);
@@ -806,19 +831,29 @@ namespace viTestApp
       this.gbStatErrFlag.Controls.Add(this.cbxStatCANErr);
       this.gbStatErrFlag.Controls.Add(this.cbxStatSysErr);
       this.gbStatErrFlag.Controls.Add(this.cbxStatLimErr);
-      this.gbStatErrFlag.Location = new System.Drawing.Point(6, 302);
+      this.gbStatErrFlag.Location = new System.Drawing.Point(6, 261);
       this.gbStatErrFlag.Name = "gbStatErrFlag";
-      this.gbStatErrFlag.Size = new System.Drawing.Size(215, 91);
+      this.gbStatErrFlag.Size = new System.Drawing.Size(215, 98);
       this.gbStatErrFlag.TabIndex = 24;
       this.gbStatErrFlag.TabStop = false;
       this.gbStatErrFlag.Text = "Sticky Error Flags";
+      // 
+      // btnStatusWrite
+      // 
+      this.btnStatusWrite.Location = new System.Drawing.Point(111, 71);
+      this.btnStatusWrite.Name = "btnStatusWrite";
+      this.btnStatusWrite.Size = new System.Drawing.Size(98, 21);
+      this.btnStatusWrite.TabIndex = 35;
+      this.btnStatusWrite.Text = "Clear Error Flags";
+      this.btnStatusWrite.UseVisualStyleBackColor = true;
+      this.btnStatusWrite.Click += new System.EventHandler(this.btnStatusWrite_Click);
       // 
       // cbxStatIrqErr
       // 
       this.cbxStatIrqErr.AutoSize = true;
       this.cbxStatIrqErr.Enabled = false;
       this.cbxStatIrqErr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.cbxStatIrqErr.Location = new System.Drawing.Point(6, 19);
+      this.cbxStatIrqErr.Location = new System.Drawing.Point(6, 18);
       this.cbxStatIrqErr.Margin = new System.Windows.Forms.Padding(2);
       this.cbxStatIrqErr.Name = "cbxStatIrqErr";
       this.cbxStatIrqErr.Size = new System.Drawing.Size(67, 17);
@@ -831,7 +866,7 @@ namespace viTestApp
       this.cbxStatATDErr.AutoSize = true;
       this.cbxStatATDErr.Enabled = false;
       this.cbxStatATDErr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.cbxStatATDErr.Location = new System.Drawing.Point(116, 70);
+      this.cbxStatATDErr.Location = new System.Drawing.Point(117, 51);
       this.cbxStatATDErr.Margin = new System.Windows.Forms.Padding(2);
       this.cbxStatATDErr.Name = "cbxStatATDErr";
       this.cbxStatATDErr.Size = new System.Drawing.Size(70, 17);
@@ -844,7 +879,7 @@ namespace viTestApp
       this.cbxStatFuzzyErr.AutoSize = true;
       this.cbxStatFuzzyErr.Enabled = false;
       this.cbxStatFuzzyErr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.cbxStatFuzzyErr.Location = new System.Drawing.Point(116, 53);
+      this.cbxStatFuzzyErr.Location = new System.Drawing.Point(117, 34);
       this.cbxStatFuzzyErr.Margin = new System.Windows.Forms.Padding(2);
       this.cbxStatFuzzyErr.Name = "cbxStatFuzzyErr";
       this.cbxStatFuzzyErr.Size = new System.Drawing.Size(91, 17);
@@ -857,7 +892,7 @@ namespace viTestApp
       this.cbxStatPosErr.AutoSize = true;
       this.cbxStatPosErr.Enabled = false;
       this.cbxStatPosErr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.cbxStatPosErr.Location = new System.Drawing.Point(116, 36);
+      this.cbxStatPosErr.Location = new System.Drawing.Point(117, 17);
       this.cbxStatPosErr.Margin = new System.Windows.Forms.Padding(2);
       this.cbxStatPosErr.Name = "cbxStatPosErr";
       this.cbxStatPosErr.Size = new System.Drawing.Size(85, 17);
@@ -870,7 +905,7 @@ namespace viTestApp
       this.cbxStatCANErr.AutoSize = true;
       this.cbxStatCANErr.Enabled = false;
       this.cbxStatCANErr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.cbxStatCANErr.Location = new System.Drawing.Point(6, 70);
+      this.cbxStatCANErr.Location = new System.Drawing.Point(6, 69);
       this.cbxStatCANErr.Margin = new System.Windows.Forms.Padding(2);
       this.cbxStatCANErr.Name = "cbxStatCANErr";
       this.cbxStatCANErr.Size = new System.Drawing.Size(70, 17);
@@ -883,7 +918,7 @@ namespace viTestApp
       this.cbxStatSysErr.AutoSize = true;
       this.cbxStatSysErr.Enabled = false;
       this.cbxStatSysErr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.cbxStatSysErr.Location = new System.Drawing.Point(6, 53);
+      this.cbxStatSysErr.Location = new System.Drawing.Point(6, 52);
       this.cbxStatSysErr.Margin = new System.Windows.Forms.Padding(2);
       this.cbxStatSysErr.Name = "cbxStatSysErr";
       this.cbxStatSysErr.Size = new System.Drawing.Size(82, 17);
@@ -896,33 +931,13 @@ namespace viTestApp
       this.cbxStatLimErr.AutoSize = true;
       this.cbxStatLimErr.Enabled = false;
       this.cbxStatLimErr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.cbxStatLimErr.Location = new System.Drawing.Point(6, 36);
+      this.cbxStatLimErr.Location = new System.Drawing.Point(6, 35);
       this.cbxStatLimErr.Margin = new System.Windows.Forms.Padding(2);
       this.cbxStatLimErr.Name = "cbxStatLimErr";
       this.cbxStatLimErr.Size = new System.Drawing.Size(69, 17);
       this.cbxStatLimErr.TabIndex = 0;
       this.cbxStatLimErr.Text = "Limit Error";
       this.cbxStatLimErr.UseVisualStyleBackColor = true;
-      // 
-      // btnStatusWrite
-      // 
-      this.btnStatusWrite.Location = new System.Drawing.Point(121, 399);
-      this.btnStatusWrite.Name = "btnStatusWrite";
-      this.btnStatusWrite.Size = new System.Drawing.Size(100, 21);
-      this.btnStatusWrite.TabIndex = 20;
-      this.btnStatusWrite.Text = "Clear Error Flags";
-      this.btnStatusWrite.UseVisualStyleBackColor = true;
-      this.btnStatusWrite.Click += new System.EventHandler(this.btnStatusWrite_Click);
-      // 
-      // btnStatusRead
-      // 
-      this.btnStatusRead.Location = new System.Drawing.Point(7, 400);
-      this.btnStatusRead.Name = "btnStatusRead";
-      this.btnStatusRead.Size = new System.Drawing.Size(100, 21);
-      this.btnStatusRead.TabIndex = 21;
-      this.btnStatusRead.Text = "Read";
-      this.btnStatusRead.UseVisualStyleBackColor = true;
-      this.btnStatusRead.Click += new System.EventHandler(this.btnStatusRead_Click);
       // 
       // gbStatLim
       // 
@@ -937,9 +952,9 @@ namespace viTestApp
       this.gbStatLim.Controls.Add(this.lblStatLimAVal);
       this.gbStatLim.Controls.Add(this.lblStatLimBVal);
       this.gbStatLim.Controls.Add(this.tbxStatLimBVal);
-      this.gbStatLim.Location = new System.Drawing.Point(6, 189);
+      this.gbStatLim.Location = new System.Drawing.Point(6, 149);
       this.gbStatLim.Name = "gbStatLim";
-      this.gbStatLim.Size = new System.Drawing.Size(215, 107);
+      this.gbStatLim.Size = new System.Drawing.Size(215, 106);
       this.gbStatLim.TabIndex = 19;
       this.gbStatLim.TabStop = false;
       this.gbStatLim.Text = "Limit";
@@ -1058,16 +1073,6 @@ namespace viTestApp
       this.tbxStatLimBVal.Size = new System.Drawing.Size(30, 20);
       this.tbxStatLimBVal.TabIndex = 17;
       // 
-      // btnSetEncZero
-      // 
-      this.btnSetEncZero.Location = new System.Drawing.Point(175, 20);
-      this.btnSetEncZero.Name = "btnSetEncZero";
-      this.btnSetEncZero.Size = new System.Drawing.Size(42, 20);
-      this.btnSetEncZero.TabIndex = 3;
-      this.btnSetEncZero.Text = "Zero";
-      this.btnSetEncZero.UseVisualStyleBackColor = true;
-      this.btnSetEncZero.Click += new System.EventHandler(this.btnSetEncZero_Click);
-      // 
       // lblStatPeakVel
       // 
       this.lblStatPeakVel.AutoSize = true;
@@ -1128,7 +1133,6 @@ namespace viTestApp
       // 
       // gbTestMotionStart
       // 
-      this.gbTestMotionStart.Controls.Add(this.btnRand);
       this.gbTestMotionStart.Controls.Add(this.btnMotionCtlHalfPos);
       this.gbTestMotionStart.Controls.Add(this.btnMotionCtlDoublePos);
       this.gbTestMotionStart.Controls.Add(this.btnMotionCtlRevPos);
@@ -1138,22 +1142,12 @@ namespace viTestApp
       this.gbTestMotionStart.Controls.Add(this.rbTestMotionStartTrapezoidal);
       this.gbTestMotionStart.Controls.Add(this.rbTestMotionStartVel);
       this.gbTestMotionStart.Controls.Add(this.rbTestMotionStartPos);
-      this.gbTestMotionStart.Location = new System.Drawing.Point(251, 66);
+      this.gbTestMotionStart.Location = new System.Drawing.Point(251, 64);
       this.gbTestMotionStart.Name = "gbTestMotionStart";
       this.gbTestMotionStart.Size = new System.Drawing.Size(203, 96);
       this.gbTestMotionStart.TabIndex = 1;
       this.gbTestMotionStart.TabStop = false;
       this.gbTestMotionStart.Text = "Start Motion";
-      // 
-      // btnRand
-      // 
-      this.btnRand.Location = new System.Drawing.Point(98, 38);
-      this.btnRand.Name = "btnRand";
-      this.btnRand.Size = new System.Drawing.Size(102, 22);
-      this.btnRand.TabIndex = 21;
-      this.btnRand.Text = "Random Test";
-      this.btnRand.UseVisualStyleBackColor = true;
-      this.btnRand.Click += new System.EventHandler(this.btnRand_Click);
       // 
       // btnMotionCtlHalfPos
       // 
@@ -1199,7 +1193,7 @@ namespace viTestApp
       // rbTestMotionStartPwm
       // 
       this.rbTestMotionStartPwm.AutoSize = true;
-      this.rbTestMotionStartPwm.Location = new System.Drawing.Point(90, 59);
+      this.rbTestMotionStartPwm.Location = new System.Drawing.Point(89, 43);
       this.rbTestMotionStartPwm.Name = "rbTestMotionStartPwm";
       this.rbTestMotionStartPwm.Size = new System.Drawing.Size(52, 17);
       this.rbTestMotionStartPwm.TabIndex = 4;
@@ -1210,7 +1204,7 @@ namespace viTestApp
       // rbTestMotionStartPwmLim
       // 
       this.rbTestMotionStartPwmLim.AutoSize = true;
-      this.rbTestMotionStartPwmLim.Location = new System.Drawing.Point(90, 75);
+      this.rbTestMotionStartPwmLim.Location = new System.Drawing.Point(89, 59);
       this.rbTestMotionStartPwmLim.Name = "rbTestMotionStartPwmLim";
       this.rbTestMotionStartPwmLim.Size = new System.Drawing.Size(110, 17);
       this.rbTestMotionStartPwmLim.TabIndex = 3;
@@ -1263,9 +1257,9 @@ namespace viTestApp
       this.gbSetLimit.Controls.Add(this.gbSetLimB);
       this.gbSetLimit.Controls.Add(this.gbSetLimA);
       this.gbSetLimit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.gbSetLimit.Location = new System.Drawing.Point(251, 172);
+      this.gbSetLimit.Location = new System.Drawing.Point(251, 169);
       this.gbSetLimit.Name = "gbSetLimit";
-      this.gbSetLimit.Size = new System.Drawing.Size(203, 315);
+      this.gbSetLimit.Size = new System.Drawing.Size(203, 318);
       this.gbSetLimit.TabIndex = 14;
       this.gbSetLimit.TabStop = false;
       this.gbSetLimit.Text = "Limit Control";
@@ -1275,7 +1269,7 @@ namespace viTestApp
       this.gbxIRQEnable.Controls.Add(this.rbIRQsoft);
       this.gbxIRQEnable.Controls.Add(this.rbIRQhard);
       this.gbxIRQEnable.Controls.Add(this.cbxIRQEn);
-      this.gbxIRQEnable.Location = new System.Drawing.Point(6, 263);
+      this.gbxIRQEnable.Location = new System.Drawing.Point(6, 265);
       this.gbxIRQEnable.Name = "gbxIRQEnable";
       this.gbxIRQEnable.Size = new System.Drawing.Size(131, 46);
       this.gbxIRQEnable.TabIndex = 17;
@@ -1307,7 +1301,7 @@ namespace viTestApp
       // cbxIRQEn
       // 
       this.cbxIRQEn.AutoSize = true;
-      this.cbxIRQEn.Location = new System.Drawing.Point(10, 24);
+      this.cbxIRQEn.Location = new System.Drawing.Point(7, 19);
       this.cbxIRQEn.Name = "cbxIRQEn";
       this.cbxIRQEn.Size = new System.Drawing.Size(59, 17);
       this.cbxIRQEn.TabIndex = 16;
@@ -1320,7 +1314,7 @@ namespace viTestApp
       this.gbxSetATDLim.Controls.Add(this.nudSetAtdLimVal);
       this.gbxSetATDLim.Controls.Add(this.lblSetATDLimDwell);
       this.gbxSetATDLim.Controls.Add(this.lblSetATDLimVal);
-      this.gbxSetATDLim.Location = new System.Drawing.Point(6, 196);
+      this.gbxSetATDLim.Location = new System.Drawing.Point(6, 198);
       this.gbxSetATDLim.Name = "gbxSetATDLim";
       this.gbxSetATDLim.Size = new System.Drawing.Size(190, 65);
       this.gbxSetATDLim.TabIndex = 16;
@@ -1378,9 +1372,9 @@ namespace viTestApp
       // 
       // btnLimitCtlLoad
       // 
-      this.btnLimitCtlLoad.Location = new System.Drawing.Point(150, 288);
+      this.btnLimitCtlLoad.Location = new System.Drawing.Point(143, 290);
       this.btnLimitCtlLoad.Name = "btnLimitCtlLoad";
-      this.btnLimitCtlLoad.Size = new System.Drawing.Size(46, 21);
+      this.btnLimitCtlLoad.Size = new System.Drawing.Size(53, 21);
       this.btnLimitCtlLoad.TabIndex = 12;
       this.btnLimitCtlLoad.Text = "Get";
       this.btnLimitCtlLoad.UseVisualStyleBackColor = true;
@@ -1388,9 +1382,9 @@ namespace viTestApp
       // 
       // btnLimitCtlSave
       // 
-      this.btnLimitCtlSave.Location = new System.Drawing.Point(150, 264);
+      this.btnLimitCtlSave.Location = new System.Drawing.Point(143, 266);
       this.btnLimitCtlSave.Name = "btnLimitCtlSave";
-      this.btnLimitCtlSave.Size = new System.Drawing.Size(46, 21);
+      this.btnLimitCtlSave.Size = new System.Drawing.Size(53, 21);
       this.btnLimitCtlSave.TabIndex = 13;
       this.btnLimitCtlSave.Text = "Set";
       this.btnLimitCtlSave.UseVisualStyleBackColor = true;
@@ -1707,7 +1701,7 @@ namespace viTestApp
       this.gbSetMotionControl.Controls.Add(this.nudSetAcc);
       this.gbSetMotionControl.Location = new System.Drawing.Point(127, 6);
       this.gbSetMotionControl.Name = "gbSetMotionControl";
-      this.gbSetMotionControl.Size = new System.Drawing.Size(118, 321);
+      this.gbSetMotionControl.Size = new System.Drawing.Size(118, 308);
       this.gbSetMotionControl.TabIndex = 13;
       this.gbSetMotionControl.TabStop = false;
       this.gbSetMotionControl.Text = "Motion Control";
@@ -1715,16 +1709,16 @@ namespace viTestApp
       // cbxMoveCtlGo
       // 
       this.cbxMoveCtlGo.AutoSize = true;
-      this.cbxMoveCtlGo.Location = new System.Drawing.Point(20, 252);
+      this.cbxMoveCtlGo.Location = new System.Drawing.Point(6, 231);
       this.cbxMoveCtlGo.Name = "cbxMoveCtlGo";
-      this.cbxMoveCtlGo.Size = new System.Drawing.Size(40, 17);
+      this.cbxMoveCtlGo.Size = new System.Drawing.Size(78, 17);
       this.cbxMoveCtlGo.TabIndex = 18;
-      this.cbxMoveCtlGo.Text = "Go";
+      this.cbxMoveCtlGo.Text = "Go on \'Set\'";
       this.cbxMoveCtlGo.UseVisualStyleBackColor = true;
       // 
       // btnMotionCtlLoad
       // 
-      this.btnMotionCtlLoad.Location = new System.Drawing.Point(6, 296);
+      this.btnMotionCtlLoad.Location = new System.Drawing.Point(6, 278);
       this.btnMotionCtlLoad.Name = "btnMotionCtlLoad";
       this.btnMotionCtlLoad.Size = new System.Drawing.Size(106, 21);
       this.btnMotionCtlLoad.TabIndex = 14;
@@ -1734,7 +1728,7 @@ namespace viTestApp
       // 
       // btnMotionCtlSave
       // 
-      this.btnMotionCtlSave.Location = new System.Drawing.Point(6, 272);
+      this.btnMotionCtlSave.Location = new System.Drawing.Point(6, 254);
       this.btnMotionCtlSave.Name = "btnMotionCtlSave";
       this.btnMotionCtlSave.Size = new System.Drawing.Size(106, 21);
       this.btnMotionCtlSave.TabIndex = 15;
@@ -1752,7 +1746,7 @@ namespace viTestApp
       this.gbSetPwmDir.Controls.Add(this.rbSetPwmOff);
       this.gbSetPwmDir.Location = new System.Drawing.Point(6, 140);
       this.gbSetPwmDir.Name = "gbSetPwmDir";
-      this.gbSetPwmDir.Size = new System.Drawing.Size(106, 106);
+      this.gbSetPwmDir.Size = new System.Drawing.Size(106, 85);
       this.gbSetPwmDir.TabIndex = 13;
       this.gbSetPwmDir.TabStop = false;
       this.gbSetPwmDir.Text = "PWM";
@@ -1760,7 +1754,7 @@ namespace viTestApp
       // lblSetPwmDir
       // 
       this.lblSetPwmDir.AutoSize = true;
-      this.lblSetPwmDir.Location = new System.Drawing.Point(11, 55);
+      this.lblSetPwmDir.Location = new System.Drawing.Point(11, 14);
       this.lblSetPwmDir.Name = "lblSetPwmDir";
       this.lblSetPwmDir.Size = new System.Drawing.Size(23, 13);
       this.lblSetPwmDir.TabIndex = 15;
@@ -1769,11 +1763,11 @@ namespace viTestApp
       // lblSetPwmDuty
       // 
       this.lblSetPwmDuty.AutoSize = true;
-      this.lblSetPwmDuty.Location = new System.Drawing.Point(20, 15);
+      this.lblSetPwmDuty.Location = new System.Drawing.Point(60, 14);
       this.lblSetPwmDuty.Name = "lblSetPwmDuty";
-      this.lblSetPwmDuty.Size = new System.Drawing.Size(58, 13);
+      this.lblSetPwmDuty.Size = new System.Drawing.Size(32, 13);
       this.lblSetPwmDuty.TabIndex = 14;
-      this.lblSetPwmDuty.Text = "Duty Cycle";
+      this.lblSetPwmDuty.Text = "Duty:";
       // 
       // nudSetPWM
       // 
@@ -1783,15 +1777,15 @@ namespace viTestApp
             0,
             0,
             0});
-      this.nudSetPWM.Location = new System.Drawing.Point(20, 30);
+      this.nudSetPWM.Location = new System.Drawing.Point(55, 30);
       this.nudSetPWM.Name = "nudSetPWM";
-      this.nudSetPWM.Size = new System.Drawing.Size(60, 20);
+      this.nudSetPWM.Size = new System.Drawing.Size(45, 20);
       this.nudSetPWM.TabIndex = 13;
       // 
       // rbSetPwmCCW
       // 
       this.rbSetPwmCCW.AutoSize = true;
-      this.rbSetPwmCCW.Location = new System.Drawing.Point(45, 85);
+      this.rbSetPwmCCW.Location = new System.Drawing.Point(6, 62);
       this.rbSetPwmCCW.Name = "rbSetPwmCCW";
       this.rbSetPwmCCW.Size = new System.Drawing.Size(47, 17);
       this.rbSetPwmCCW.TabIndex = 2;
@@ -1801,7 +1795,7 @@ namespace viTestApp
       // rbSetPwmCW
       // 
       this.rbSetPwmCW.AutoSize = true;
-      this.rbSetPwmCW.Location = new System.Drawing.Point(45, 69);
+      this.rbSetPwmCW.Location = new System.Drawing.Point(6, 46);
       this.rbSetPwmCW.Name = "rbSetPwmCW";
       this.rbSetPwmCW.Size = new System.Drawing.Size(43, 17);
       this.rbSetPwmCW.TabIndex = 1;
@@ -1812,7 +1806,7 @@ namespace viTestApp
       // 
       this.rbSetPwmOff.AutoSize = true;
       this.rbSetPwmOff.Checked = true;
-      this.rbSetPwmOff.Location = new System.Drawing.Point(45, 53);
+      this.rbSetPwmOff.Location = new System.Drawing.Point(6, 30);
       this.rbSetPwmOff.Name = "rbSetPwmOff";
       this.rbSetPwmOff.Size = new System.Drawing.Size(39, 17);
       this.rbSetPwmOff.TabIndex = 0;
@@ -1843,9 +1837,9 @@ namespace viTestApp
       this.lblSetPos.AutoSize = true;
       this.lblSetPos.Location = new System.Drawing.Point(6, 20);
       this.lblSetPos.Name = "lblSetPos";
-      this.lblSetPos.Size = new System.Drawing.Size(44, 13);
+      this.lblSetPos.Size = new System.Drawing.Size(89, 13);
       this.lblSetPos.TabIndex = 9;
-      this.lblSetPos.Text = "Position";
+      this.lblSetPos.Text = "Position (enc cnt)";
       // 
       // nudSetVel
       // 
@@ -2163,8 +2157,8 @@ namespace viTestApp
       // gbSetFuzzyRules
       // 
       this.gbSetFuzzyRules.Controls.Add(this.pnlFuzzyRules);
-      this.gbSetFuzzyRules.Controls.Add(this.btnGetPosRules);
-      this.gbSetFuzzyRules.Controls.Add(this.btnSetPosRules);
+      this.gbSetFuzzyRules.Controls.Add(this.btnGetRules);
+      this.gbSetFuzzyRules.Controls.Add(this.btnSetRules);
       this.gbSetFuzzyRules.Controls.Add(this.lblUnfocus);
       this.gbSetFuzzyRules.Location = new System.Drawing.Point(226, 3);
       this.gbSetFuzzyRules.Margin = new System.Windows.Forms.Padding(0);
@@ -2289,25 +2283,25 @@ namespace viTestApp
       this.cbxFuzzyRule0.TabIndex = 19;
       this.cbxFuzzyRule0.Visible = false;
       // 
-      // btnGetPosRules
+      // btnGetRules
       // 
-      this.btnGetPosRules.Location = new System.Drawing.Point(392, 98);
-      this.btnGetPosRules.Name = "btnGetPosRules";
-      this.btnGetPosRules.Size = new System.Drawing.Size(62, 70);
-      this.btnGetPosRules.TabIndex = 2;
-      this.btnGetPosRules.Text = "Load Rules from Target";
-      this.btnGetPosRules.UseVisualStyleBackColor = true;
-      this.btnGetPosRules.Click += new System.EventHandler(this.btnGetPosRules_Click);
+      this.btnGetRules.Location = new System.Drawing.Point(392, 98);
+      this.btnGetRules.Name = "btnGetRules";
+      this.btnGetRules.Size = new System.Drawing.Size(62, 70);
+      this.btnGetRules.TabIndex = 2;
+      this.btnGetRules.Text = "Load Rules from Target";
+      this.btnGetRules.UseVisualStyleBackColor = true;
+      this.btnGetRules.Click += new System.EventHandler(this.btnGetRules_Click);
       // 
-      // btnSetPosRules
+      // btnSetRules
       // 
-      this.btnSetPosRules.Location = new System.Drawing.Point(392, 20);
-      this.btnSetPosRules.Name = "btnSetPosRules";
-      this.btnSetPosRules.Size = new System.Drawing.Size(62, 70);
-      this.btnSetPosRules.TabIndex = 1;
-      this.btnSetPosRules.Text = "Store Rules to Target";
-      this.btnSetPosRules.UseVisualStyleBackColor = true;
-      this.btnSetPosRules.Click += new System.EventHandler(this.btnSetPosRules_Click);
+      this.btnSetRules.Location = new System.Drawing.Point(392, 20);
+      this.btnSetRules.Name = "btnSetRules";
+      this.btnSetRules.Size = new System.Drawing.Size(62, 70);
+      this.btnSetRules.TabIndex = 1;
+      this.btnSetRules.Text = "Store Rules to Target";
+      this.btnSetRules.UseVisualStyleBackColor = true;
+      this.btnSetRules.Click += new System.EventHandler(this.btnSetRules_Click);
       // 
       // lblUnfocus
       // 
@@ -2324,9 +2318,9 @@ namespace viTestApp
       this.gbSetFuzzyMF.Controls.Add(this.lblMemPos0);
       this.gbSetFuzzyMF.Controls.Add(this.tbxPosMem_0_0);
       this.gbSetFuzzyMF.Controls.Add(this.lblPosErrMF);
-      this.gbSetFuzzyMF.Controls.Add(this.btnGetPosMF);
+      this.gbSetFuzzyMF.Controls.Add(this.btnGetMF);
       this.gbSetFuzzyMF.Controls.Add(this.lblSpdMF);
-      this.gbSetFuzzyMF.Controls.Add(this.btnSetPosMF);
+      this.gbSetFuzzyMF.Controls.Add(this.btnSetMF);
       this.gbSetFuzzyMF.Controls.Add(this.lblPosOutSing);
       this.gbSetFuzzyMF.Controls.Add(this.gbPosCtlPts);
       this.gbSetFuzzyMF.Location = new System.Drawing.Point(6, 3);
@@ -2377,15 +2371,15 @@ namespace viTestApp
       this.lblPosErrMF.TabIndex = 3;
       this.lblPosErrMF.Text = "POSITION FUNCTIONS";
       // 
-      // btnGetPosMF
+      // btnGetMF
       // 
-      this.btnGetPosMF.Location = new System.Drawing.Point(5, 454);
-      this.btnGetPosMF.Name = "btnGetPosMF";
-      this.btnGetPosMF.Size = new System.Drawing.Size(206, 22);
-      this.btnGetPosMF.TabIndex = 8;
-      this.btnGetPosMF.Text = "Load Functions from Target";
-      this.btnGetPosMF.UseVisualStyleBackColor = true;
-      this.btnGetPosMF.Click += new System.EventHandler(this.btnGetPosMF_Click);
+      this.btnGetMF.Location = new System.Drawing.Point(5, 454);
+      this.btnGetMF.Name = "btnGetMF";
+      this.btnGetMF.Size = new System.Drawing.Size(206, 22);
+      this.btnGetMF.TabIndex = 8;
+      this.btnGetMF.Text = "Load Functions from Target";
+      this.btnGetMF.UseVisualStyleBackColor = true;
+      this.btnGetMF.Click += new System.EventHandler(this.btnGetMF_Click);
       // 
       // lblSpdMF
       // 
@@ -2397,15 +2391,15 @@ namespace viTestApp
       this.lblSpdMF.TabIndex = 4;
       this.lblSpdMF.Text = "SPEED FUNCTIONS";
       // 
-      // btnSetPosMF
+      // btnSetMF
       // 
-      this.btnSetPosMF.Location = new System.Drawing.Point(6, 426);
-      this.btnSetPosMF.Name = "btnSetPosMF";
-      this.btnSetPosMF.Size = new System.Drawing.Size(205, 22);
-      this.btnSetPosMF.TabIndex = 7;
-      this.btnSetPosMF.Text = "Store Functions to Target ";
-      this.btnSetPosMF.UseVisualStyleBackColor = true;
-      this.btnSetPosMF.Click += new System.EventHandler(this.btnSetPosMF_Click);
+      this.btnSetMF.Location = new System.Drawing.Point(6, 426);
+      this.btnSetMF.Name = "btnSetMF";
+      this.btnSetMF.Size = new System.Drawing.Size(205, 22);
+      this.btnSetMF.TabIndex = 7;
+      this.btnSetMF.Text = "Store Functions to Target ";
+      this.btnSetMF.UseVisualStyleBackColor = true;
+      this.btnSetMF.Click += new System.EventHandler(this.btnSetMF_Click);
       // 
       // lblPosOutSing
       // 
@@ -2554,6 +2548,7 @@ namespace viTestApp
       // 
       // tabPageServoStats
       // 
+      this.tabPageServoStats.Controls.Add(this.gbStatCtlPts);
       this.tabPageServoStats.Controls.Add(this.gbStatTypes);
       this.tabPageServoStats.Controls.Add(this.cbxShowStatsPrev);
       this.tabPageServoStats.Controls.Add(this.btnStoreStats);
@@ -2568,37 +2563,197 @@ namespace viTestApp
       this.tabPageServoStats.Text = "Statistics";
       this.tabPageServoStats.UseVisualStyleBackColor = true;
       // 
+      // gbStatCtlPts
+      // 
+      this.gbStatCtlPts.Controls.Add(this.label8);
+      this.gbStatCtlPts.Controls.Add(this.label7);
+      this.gbStatCtlPts.Controls.Add(this.lblStatPosCtlPt);
+      this.gbStatCtlPts.Controls.Add(this.label3);
+      this.gbStatCtlPts.Controls.Add(this.tbxStatOutCtlPtB);
+      this.gbStatCtlPts.Controls.Add(this.label4);
+      this.gbStatCtlPts.Controls.Add(this.tbxStatOutCtlPtA);
+      this.gbStatCtlPts.Controls.Add(this.label1);
+      this.gbStatCtlPts.Controls.Add(this.tbxStatSpdCtlPtB);
+      this.gbStatCtlPts.Controls.Add(this.label2);
+      this.gbStatCtlPts.Controls.Add(this.tbxStatSpdCtlPtA);
+      this.gbStatCtlPts.Controls.Add(this.label5);
+      this.gbStatCtlPts.Controls.Add(this.tbxStatPosCtlPtB);
+      this.gbStatCtlPts.Controls.Add(this.label6);
+      this.gbStatCtlPts.Controls.Add(this.tbxStatPosCtlPtA);
+      this.gbStatCtlPts.Location = new System.Drawing.Point(248, 328);
+      this.gbStatCtlPts.Name = "gbStatCtlPts";
+      this.gbStatCtlPts.Size = new System.Drawing.Size(107, 151);
+      this.gbStatCtlPts.TabIndex = 8;
+      this.gbStatCtlPts.TabStop = false;
+      this.gbStatCtlPts.Text = "Symmetric Ctl Pts";
+      this.gbStatCtlPts.Visible = false;
+      // 
+      // label8
+      // 
+      this.label8.AutoSize = true;
+      this.label8.Location = new System.Drawing.Point(50, 114);
+      this.label8.Name = "label8";
+      this.label8.Size = new System.Drawing.Size(39, 13);
+      this.label8.TabIndex = 14;
+      this.label8.Text = "Output";
+      // 
+      // label7
+      // 
+      this.label7.AutoSize = true;
+      this.label7.Location = new System.Drawing.Point(50, 72);
+      this.label7.Name = "label7";
+      this.label7.Size = new System.Drawing.Size(38, 13);
+      this.label7.TabIndex = 13;
+      this.label7.Text = "Speed";
+      // 
+      // lblStatPosCtlPt
+      // 
+      this.lblStatPosCtlPt.AutoSize = true;
+      this.lblStatPosCtlPt.Location = new System.Drawing.Point(50, 30);
+      this.lblStatPosCtlPt.Name = "lblStatPosCtlPt";
+      this.lblStatPosCtlPt.Size = new System.Drawing.Size(44, 13);
+      this.lblStatPosCtlPt.TabIndex = 12;
+      this.lblStatPosCtlPt.Text = "Position";
+      // 
+      // label3
+      // 
+      this.label3.AutoSize = true;
+      this.label3.Location = new System.Drawing.Point(28, 124);
+      this.label3.Name = "label3";
+      this.label3.Size = new System.Drawing.Size(14, 13);
+      this.label3.TabIndex = 11;
+      this.label3.Text = "B";
+      // 
+      // tbxStatOutCtlPtB
+      // 
+      this.tbxStatOutCtlPtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbxStatOutCtlPtB.Location = new System.Drawing.Point(6, 122);
+      this.tbxStatOutCtlPtB.Name = "tbxStatOutCtlPtB";
+      this.tbxStatOutCtlPtB.ReadOnly = true;
+      this.tbxStatOutCtlPtB.Size = new System.Drawing.Size(20, 18);
+      this.tbxStatOutCtlPtB.TabIndex = 10;
+      // 
+      // label4
+      // 
+      this.label4.AutoSize = true;
+      this.label4.Location = new System.Drawing.Point(28, 109);
+      this.label4.Name = "label4";
+      this.label4.Size = new System.Drawing.Size(14, 13);
+      this.label4.TabIndex = 9;
+      this.label4.Text = "A";
+      // 
+      // tbxStatOutCtlPtA
+      // 
+      this.tbxStatOutCtlPtA.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbxStatOutCtlPtA.Location = new System.Drawing.Point(6, 104);
+      this.tbxStatOutCtlPtA.Name = "tbxStatOutCtlPtA";
+      this.tbxStatOutCtlPtA.ReadOnly = true;
+      this.tbxStatOutCtlPtA.Size = new System.Drawing.Size(20, 18);
+      this.tbxStatOutCtlPtA.TabIndex = 8;
+      // 
+      // label1
+      // 
+      this.label1.AutoSize = true;
+      this.label1.Location = new System.Drawing.Point(28, 82);
+      this.label1.Name = "label1";
+      this.label1.Size = new System.Drawing.Size(14, 13);
+      this.label1.TabIndex = 7;
+      this.label1.Text = "B";
+      // 
+      // tbxStatSpdCtlPtB
+      // 
+      this.tbxStatSpdCtlPtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbxStatSpdCtlPtB.Location = new System.Drawing.Point(6, 80);
+      this.tbxStatSpdCtlPtB.Name = "tbxStatSpdCtlPtB";
+      this.tbxStatSpdCtlPtB.ReadOnly = true;
+      this.tbxStatSpdCtlPtB.Size = new System.Drawing.Size(20, 18);
+      this.tbxStatSpdCtlPtB.TabIndex = 6;
+      // 
+      // label2
+      // 
+      this.label2.AutoSize = true;
+      this.label2.Location = new System.Drawing.Point(28, 67);
+      this.label2.Name = "label2";
+      this.label2.Size = new System.Drawing.Size(14, 13);
+      this.label2.TabIndex = 5;
+      this.label2.Text = "A";
+      // 
+      // tbxStatSpdCtlPtA
+      // 
+      this.tbxStatSpdCtlPtA.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbxStatSpdCtlPtA.Location = new System.Drawing.Point(6, 62);
+      this.tbxStatSpdCtlPtA.Name = "tbxStatSpdCtlPtA";
+      this.tbxStatSpdCtlPtA.ReadOnly = true;
+      this.tbxStatSpdCtlPtA.Size = new System.Drawing.Size(20, 18);
+      this.tbxStatSpdCtlPtA.TabIndex = 4;
+      // 
+      // label5
+      // 
+      this.label5.AutoSize = true;
+      this.label5.Location = new System.Drawing.Point(28, 40);
+      this.label5.Name = "label5";
+      this.label5.Size = new System.Drawing.Size(14, 13);
+      this.label5.TabIndex = 3;
+      this.label5.Text = "B";
+      // 
+      // tbxStatPosCtlPtB
+      // 
+      this.tbxStatPosCtlPtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbxStatPosCtlPtB.Location = new System.Drawing.Point(6, 38);
+      this.tbxStatPosCtlPtB.Name = "tbxStatPosCtlPtB";
+      this.tbxStatPosCtlPtB.ReadOnly = true;
+      this.tbxStatPosCtlPtB.Size = new System.Drawing.Size(20, 18);
+      this.tbxStatPosCtlPtB.TabIndex = 2;
+      // 
+      // label6
+      // 
+      this.label6.AutoSize = true;
+      this.label6.Location = new System.Drawing.Point(28, 25);
+      this.label6.Name = "label6";
+      this.label6.Size = new System.Drawing.Size(14, 13);
+      this.label6.TabIndex = 1;
+      this.label6.Text = "A";
+      // 
+      // tbxStatPosCtlPtA
+      // 
+      this.tbxStatPosCtlPtA.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.tbxStatPosCtlPtA.Location = new System.Drawing.Point(6, 20);
+      this.tbxStatPosCtlPtA.Name = "tbxStatPosCtlPtA";
+      this.tbxStatPosCtlPtA.ReadOnly = true;
+      this.tbxStatPosCtlPtA.Size = new System.Drawing.Size(20, 18);
+      this.tbxStatPosCtlPtA.TabIndex = 0;
+      // 
       // gbStatTypes
       // 
       this.gbStatTypes.Controls.Add(this.cbxStatInfoDuty);
       this.gbStatTypes.Controls.Add(this.cbxStatInfoChange);
       this.gbStatTypes.Controls.Add(this.cbxStatInfoErr);
-      this.gbStatTypes.Location = new System.Drawing.Point(113, 328);
+      this.gbStatTypes.Location = new System.Drawing.Point(92, 328);
       this.gbStatTypes.Name = "gbStatTypes";
-      this.gbStatTypes.Size = new System.Drawing.Size(99, 100);
+      this.gbStatTypes.Size = new System.Drawing.Size(150, 151);
       this.gbStatTypes.TabIndex = 7;
       this.gbStatTypes.TabStop = false;
-      this.gbStatTypes.Text = "Stat Info Select";
+      this.gbStatTypes.Text = "Statistic Fields";
       // 
       // cbxStatInfoDuty
       // 
       this.cbxStatInfoDuty.AutoSize = true;
-      this.cbxStatInfoDuty.Location = new System.Drawing.Point(7, 66);
+      this.cbxStatInfoDuty.Location = new System.Drawing.Point(7, 104);
       this.cbxStatInfoDuty.Name = "cbxStatInfoDuty";
-      this.cbxStatInfoDuty.Size = new System.Drawing.Size(48, 17);
+      this.cbxStatInfoDuty.Size = new System.Drawing.Size(93, 17);
       this.cbxStatInfoDuty.TabIndex = 2;
-      this.cbxStatInfoDuty.Text = "Duty";
+      this.cbxStatInfoDuty.Text = "Output (black)";
       this.cbxStatInfoDuty.UseVisualStyleBackColor = true;
       this.cbxStatInfoDuty.CheckedChanged += new System.EventHandler(this.cbxStatInfoDuty_CheckedChanged);
       // 
       // cbxStatInfoChange
       // 
       this.cbxStatInfoChange.AutoSize = true;
-      this.cbxStatInfoChange.Location = new System.Drawing.Point(7, 43);
+      this.cbxStatInfoChange.Location = new System.Drawing.Point(7, 62);
       this.cbxStatInfoChange.Name = "cbxStatInfoChange";
-      this.cbxStatInfoChange.Size = new System.Drawing.Size(63, 17);
+      this.cbxStatInfoChange.Size = new System.Drawing.Size(86, 17);
       this.cbxStatInfoChange.TabIndex = 1;
-      this.cbxStatInfoChange.Text = "Change";
+      this.cbxStatInfoChange.Text = "Speed (blue)";
       this.cbxStatInfoChange.UseVisualStyleBackColor = true;
       this.cbxStatInfoChange.CheckedChanged += new System.EventHandler(this.cbxStatInfoChange_CheckedChanged);
       // 
@@ -2607,33 +2762,33 @@ namespace viTestApp
       this.cbxStatInfoErr.AutoSize = true;
       this.cbxStatInfoErr.Checked = true;
       this.cbxStatInfoErr.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.cbxStatInfoErr.Location = new System.Drawing.Point(7, 20);
+      this.cbxStatInfoErr.Location = new System.Drawing.Point(6, 20);
       this.cbxStatInfoErr.Name = "cbxStatInfoErr";
-      this.cbxStatInfoErr.Size = new System.Drawing.Size(48, 17);
+      this.cbxStatInfoErr.Size = new System.Drawing.Size(112, 17);
       this.cbxStatInfoErr.TabIndex = 0;
-      this.cbxStatInfoErr.Text = "Error";
+      this.cbxStatInfoErr.Text = "Position Error (red)";
       this.cbxStatInfoErr.UseVisualStyleBackColor = true;
       this.cbxStatInfoErr.CheckedChanged += new System.EventHandler(this.cbxStatInfoErr_CheckedChanged);
       // 
       // cbxShowStatsPrev
       // 
       this.cbxShowStatsPrev.AutoSize = true;
-      this.cbxShowStatsPrev.Enabled = false;
-      this.cbxShowStatsPrev.Location = new System.Drawing.Point(324, 299);
+      this.cbxShowStatsPrev.Location = new System.Drawing.Point(340, 303);
       this.cbxShowStatsPrev.Name = "cbxShowStatsPrev";
       this.cbxShowStatsPrev.Size = new System.Drawing.Size(132, 17);
       this.cbxShowStatsPrev.TabIndex = 6;
       this.cbxShowStatsPrev.Text = "Show Stored Statistics";
       this.cbxShowStatsPrev.UseVisualStyleBackColor = true;
+      this.cbxShowStatsPrev.Visible = false;
       this.cbxShowStatsPrev.CheckedChanged += new System.EventHandler(this.cbxShowStatsPrev_CheckedChanged);
       // 
       // btnStoreStats
       // 
-      this.btnStoreStats.Location = new System.Drawing.Point(218, 299);
+      this.btnStoreStats.Location = new System.Drawing.Point(216, 299);
       this.btnStoreStats.Name = "btnStoreStats";
-      this.btnStoreStats.Size = new System.Drawing.Size(100, 23);
+      this.btnStoreStats.Size = new System.Drawing.Size(118, 23);
       this.btnStoreStats.TabIndex = 5;
-      this.btnStoreStats.Text = "Store";
+      this.btnStoreStats.Text = "Store Current Stats";
       this.btnStoreStats.UseVisualStyleBackColor = true;
       this.btnStoreStats.Click += new System.EventHandler(this.btnStoreStats_Click);
       // 
@@ -2642,9 +2797,9 @@ namespace viTestApp
       this.pnlStats.AutoScroll = true;
       this.pnlStats.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.pnlStats.Controls.Add(this.picbxStats);
-      this.pnlStats.Location = new System.Drawing.Point(112, 6);
+      this.pnlStats.Location = new System.Drawing.Point(92, 6);
       this.pnlStats.Name = "pnlStats";
-      this.pnlStats.Size = new System.Drawing.Size(579, 277);
+      this.pnlStats.Size = new System.Drawing.Size(599, 277);
       this.pnlStats.TabIndex = 2;
       this.pnlStats.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlStats_Paint);
       this.pnlStats.Scroll += new System.Windows.Forms.ScrollEventHandler(this.StatsHandleScroll);
@@ -2653,16 +2808,16 @@ namespace viTestApp
       // 
       this.picbxStats.Location = new System.Drawing.Point(-1, 0);
       this.picbxStats.Name = "picbxStats";
-      this.picbxStats.Size = new System.Drawing.Size(578, 257);
+      this.picbxStats.Size = new System.Drawing.Size(598, 257);
       this.picbxStats.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.picbxStats.TabIndex = 0;
       this.picbxStats.TabStop = false;
       // 
       // btnGetStats
       // 
-      this.btnGetStats.Location = new System.Drawing.Point(112, 299);
+      this.btnGetStats.Location = new System.Drawing.Point(92, 299);
       this.btnGetStats.Name = "btnGetStats";
-      this.btnGetStats.Size = new System.Drawing.Size(100, 23);
+      this.btnGetStats.Size = new System.Drawing.Size(118, 23);
       this.btnGetStats.TabIndex = 1;
       this.btnGetStats.Text = "Get Statistics";
       this.btnGetStats.UseVisualStyleBackColor = true;
@@ -2674,7 +2829,7 @@ namespace viTestApp
       this.tbxStats.Multiline = true;
       this.tbxStats.Name = "tbxStats";
       this.tbxStats.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-      this.tbxStats.Size = new System.Drawing.Size(100, 481);
+      this.tbxStats.Size = new System.Drawing.Size(80, 481);
       this.tbxStats.TabIndex = 0;
       this.tbxStats.Text = "tbxStats";
       // 
@@ -2757,6 +2912,8 @@ namespace viTestApp
       this.tabPageSetup.PerformLayout();
       this.tabServoSettings.ResumeLayout(false);
       this.tabPageSetupControl.ResumeLayout(false);
+      this.gbRand.ResumeLayout(false);
+      this.gbZero.ResumeLayout(false);
       this.gbxSleep.ResumeLayout(false);
       this.gbxSleep.PerformLayout();
       this.gbxGroup.ResumeLayout(false);
@@ -2825,6 +2982,8 @@ namespace viTestApp
       this.gbPosCtlPts.PerformLayout();
       this.tabPageServoStats.ResumeLayout(false);
       this.tabPageServoStats.PerformLayout();
+      this.gbStatCtlPts.ResumeLayout(false);
+      this.gbStatCtlPts.PerformLayout();
       this.gbStatTypes.ResumeLayout(false);
       this.gbStatTypes.PerformLayout();
       this.pnlStats.ResumeLayout(false);
@@ -2936,12 +3095,11 @@ namespace viTestApp
     private System.Windows.Forms.Button btnMotionCtlLoad;
     private System.Windows.Forms.Button btnMotionCtlSave;
     private System.Windows.Forms.Button btnMotionCtlRevPos;
-    private System.Windows.Forms.Button btnSetEncZero;
     private System.Windows.Forms.GroupBox gbSetupStatus;
-    private System.Windows.Forms.Button btnGetPosMF;
-    private System.Windows.Forms.Button btnSetPosMF;
-    private System.Windows.Forms.Button btnGetPosRules;
-    private System.Windows.Forms.Button btnSetPosRules;
+    private System.Windows.Forms.Button btnGetMF;
+    private System.Windows.Forms.Button btnSetMF;
+    private System.Windows.Forms.Button btnGetRules;
+    private System.Windows.Forms.Button btnSetRules;
     private System.Windows.Forms.TextBox tbxStatCurPos;
     private System.Windows.Forms.Label lblStatCurPos;
     private System.Windows.Forms.Label lblStatLimBVal;
@@ -2953,8 +3111,6 @@ namespace viTestApp
     private System.Windows.Forms.Label lblStatCurVel;
     private System.Windows.Forms.TextBox tbxStatCurVel;
     private System.Windows.Forms.GroupBox gbStatLim;
-    private System.Windows.Forms.Button btnStatusWrite;
-    private System.Windows.Forms.Button btnStatusRead;
     private System.Windows.Forms.GroupBox gbStatErrFlag;
     private System.Windows.Forms.CheckBox cbxStatFuzzyErr;
     private System.Windows.Forms.CheckBox cbxStatPosErr;
@@ -2999,7 +3155,6 @@ namespace viTestApp
     private System.Windows.Forms.RadioButton rbTestMotionStartSoft;
     private System.Windows.Forms.RadioButton rbTestMotionStopHard;
     private System.Windows.Forms.CheckBox cbxStatIrqErr;
-    private System.Windows.Forms.PictureBox picbxStats;
     private System.Windows.Forms.GroupBox gbxIRQEnable;
     private System.Windows.Forms.CheckBox cbxIRQEn;
     private System.Windows.Forms.GroupBox gbxCfg;
@@ -3042,20 +3197,39 @@ namespace viTestApp
     private System.Windows.Forms.Button btnRebuildFs;
     private System.Windows.Forms.Label lbl_turnaround;
     private System.Windows.Forms.TextBox tbxGatewayTurnaround;
-    private System.Windows.Forms.Button btnRand;
     private System.Windows.Forms.Label lblEncDiv;
     private System.Windows.Forms.ComboBox cboSetEncDiv;
     private System.Windows.Forms.Label lblHBridge;
     private System.Windows.Forms.RadioButton rbIRQhard;
     private System.Windows.Forms.RadioButton rbIRQsoft;
-    private System.Windows.Forms.CheckBox cbxLOCKIF;
-    private System.Windows.Forms.CheckBox cbxLVRF;
-    private System.Windows.Forms.CheckBox cbxPORF;
     private System.Windows.Forms.CheckBox cbxEeErr;
     private System.Windows.Forms.TextBox tbxEeErr;
     private System.Windows.Forms.Label lblStatPeakAcc;
     private System.Windows.Forms.TextBox tbxStatPeakAcc;
     private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+    private System.Windows.Forms.GroupBox gbStatCtlPts;
+    private System.Windows.Forms.Label label5;
+    private System.Windows.Forms.TextBox tbxStatPosCtlPtB;
+    private System.Windows.Forms.Label label6;
+    private System.Windows.Forms.TextBox tbxStatPosCtlPtA;
+    private System.Windows.Forms.Label label3;
+    private System.Windows.Forms.TextBox tbxStatOutCtlPtB;
+    private System.Windows.Forms.Label label4;
+    private System.Windows.Forms.TextBox tbxStatOutCtlPtA;
+    private System.Windows.Forms.Label label1;
+    private System.Windows.Forms.TextBox tbxStatSpdCtlPtB;
+    private System.Windows.Forms.Label label2;
+    private System.Windows.Forms.TextBox tbxStatSpdCtlPtA;
+    private System.Windows.Forms.Label label8;
+    private System.Windows.Forms.Label label7;
+    private System.Windows.Forms.Label lblStatPosCtlPt;
+    private System.Windows.Forms.PictureBox picbxStats;
+    private System.Windows.Forms.GroupBox gbZero;
+    private System.Windows.Forms.Button btnSetEncZero;
+    private System.Windows.Forms.Button btnStatusWrite;
+    private System.Windows.Forms.Button btnStatusRead;
+    private System.Windows.Forms.GroupBox gbRand;
+    private System.Windows.Forms.Button btnRand;
   }
 }
 

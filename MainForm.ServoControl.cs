@@ -104,11 +104,6 @@ namespace viTestApp
       // Servo state
       SetText(tbxStatServoState, viServoMaster.Strings.ServoStateStrings[(int)_active_servo.ServoSlave.ServoState]);
 
-      // CRGFLG
-      SetCheckbox(cbxPORF, _active_servo.ServoSlave.IsPORFSet);
-      SetCheckbox(cbxLVRF, _active_servo.ServoSlave.IsLVRFSet);
-      SetCheckbox(cbxLOCKIF, _active_servo.ServoSlave.IsLOCKIFSet);
-
       // Sticky error flags (cleared by write to status cmd)
       SetCheckbox(cbxStatIrqErr, _active_servo.ServoSlave.FlagIRQErr);
       SetCheckbox(cbxStatLimErr, _active_servo.ServoSlave.FlagLimErr);
@@ -198,21 +193,11 @@ namespace viTestApp
         return;
       }
 
-      int pos;
       string err;
       if(!_active_servo.ServoSlave.ZeroNode(out err))
       {
         MsgBox.Show(this, err);
         return;
-      }
-      if(!_active_servo.ServoSlave.getCurrentPosition(out pos, out err))
-      {
-        MsgBox.Show(this, err);
-      }
-      else
-      {
-        // Current servo position
-        SetText(tbxStatCurPos, pos.ToString());
       }
     }
     #endregion
@@ -729,70 +714,63 @@ namespace viTestApp
       uint acc_max, new_acc;
       string err;
 
-      if(cbxGroup.Checked == false)
+      cbxGroup.Checked = false;
+
+      if(_active_servo == null)
       {
-        if(_active_servo == null)
-        {
-          MsgBox.Show(this, "Select a Node");
-          return;
-        }
+        MsgBox.Show(this, "Select a Node");
+        return;
+      }
 
-        // Get current pos, vel, acc settings - use as envelope
-        if(!_active_servo.ServoSlave.ReadMoveControl(out err))
-        {
-          MsgBox.Show(this, err);
-          return;
-        }
-        if(_active_servo.ServoSlave.Position != 0)
-        {
-          pos_max = _active_servo.ServoSlave.Position;
-          if(pos_max < 0)
-            pos_max = -pos_max;
-        }
-        else
-        {
-          MsgBox.Show(this, "Max position not set");
-          return;
-        }
-        if(_active_servo.ServoSlave.Velocity != 0)
-        {
-          vel_max = _active_servo.ServoSlave.Velocity;
-          if(vel_max < 0)
-            vel_max = -vel_max;
-        }
-        else
-        {
-          MsgBox.Show(this, "Max velocity not set");
-          return;
-        }
-        if(_active_servo.ServoSlave.Acceleration != 0)
-        {
-          acc_max = _active_servo.ServoSlave.Acceleration;
-        }
-        else
-        {
-          MsgBox.Show(this, "Max acceleration not set");
-          return;
-        }
+      // Get current pos, vel, acc settings - use as envelope
+      if(!_active_servo.ServoSlave.ReadMoveControl(out err))
+      {
+        MsgBox.Show(this, err);
+        return;
+      }
+      if(_active_servo.ServoSlave.Position != 0)
+      {
+        pos_max = _active_servo.ServoSlave.Position;
+        if(pos_max < 0)
+          pos_max = -pos_max;
+      }
+      else
+      {
+        MsgBox.Show(this, "Max position not set");
+        return;
+      }
+      if(_active_servo.ServoSlave.Velocity != 0)
+      {
+        vel_max = _active_servo.ServoSlave.Velocity;
+        if(vel_max < 0)
+          vel_max = -vel_max;
+      }
+      else
+      {
+        MsgBox.Show(this, "Max velocity not set");
+        return;
+      }
+      if(_active_servo.ServoSlave.Acceleration != 0)
+      {
+        acc_max = _active_servo.ServoSlave.Acceleration;
+      }
+      else
+      {
+        MsgBox.Show(this, "Max acceleration not set");
+        return;
+      }
 
-        Random rnd = new Random();
-        int tim;
-        for(int i = 0; i < 30; i++)
+      Random rnd = new Random();
+      int tim;
+      for(int i = 0; i < 100; i++)
+      {
+        // Position range between original set position and negative of set position
+        new_pos = rnd.Next(0 - pos_max, pos_max);
+        new_vel = rnd.Next(0, vel_max);
+        new_acc = (uint)(rnd.Next(0, (int)acc_max));
+
+        if(_active_servo.ServoSlave.SetPosVelAcc(new_pos, new_vel, new_acc, true, Slave.MoveModes.SRV_TRAPEZOIDAL_MODE, out err))
         {
-          // Position range between original set position and negative of set position
-          new_pos = rnd.Next(0 - pos_max, pos_max);
-          new_vel = rnd.Next(0, vel_max);
-          new_acc = (uint)(rnd.Next(0, (int)acc_max));
-
-          if(!_active_servo.ServoSlave.SetPosVelAcc(new_pos, new_vel, new_acc, true, Slave.MoveModes.SRV_TRAPEZOIDAL_MODE, out err))
-          {
-            if(!err.Contains("ACC_LO") && !err.Contains("ACC_HI"))
-            {
-              MsgBox.Show(this, err);
-              return;
-            }
-          }
-
           // Wait between .5 and 2 seconds before next move
           tim = rnd.Next(500, 2000);
           Thread.Sleep(tim);

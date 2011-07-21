@@ -141,7 +141,7 @@ namespace viTestApp
       // ..4bytes -> point_1, point_2, slope_1, slope_2
       // ..Based on 0xFF x 0xFF x-y plot where point_1 and 2 are the x positions
       // ..slope_1 = (0xFF/(x-position-of-saturation - point_1))
-      // ..slope_2 = (0xFF/(point_2 -x-position-of-saturation))
+      // ..slope_2 = (0xFF/(point_2 - x-position-of-saturation))
       // ..zero slope at point_1 means starts at grade of 0xFF
       // ..zero slope at point_2 means ends at grade of 0xFF
       int ctlPointA, ctlPointB = 0;
@@ -334,9 +334,68 @@ namespace viTestApp
     #region Fuzzy Tuning Events
     /******************************************************************************/
     /// <summary>
-    /// btnSetPosMF_Click - Set/Get membership functions 
+    /// btnSetRules_Click - Set/Get fuzzy rules to/from slave
     /// </summary>
-    private void btnSetPosMF_Click(object sender, EventArgs e)
+    private void btnSetRules_Click(object sender, EventArgs e)
+    {
+      if(_active_servo == null)
+      {
+        MsgBox.Show(this, "Select a Node");
+        return;
+      }
+
+      if(_fuzzy_rules_obj != null) // Need this since IDisposable
+      {
+        if(_fuzzy_rules_obj.FuzzyPositionRules != null)
+        {
+          // confirmation dialog
+          if(MsgBox.Show(this, "Write Fuzzy Rules?", "Confirm Fuzzy Rule Write", MessageBoxButtons.YesNo) == DialogResult.Yes)
+          {
+            _active_servo.ServoSlave.Rules = _fuzzy_rules_obj.FuzzyPositionRules;
+            string err;
+            if(!_active_servo.ServoSlave.SetFuzzyRules(out err))
+            {
+              MsgBox.Show(this, err);
+            }
+          }
+        }
+        else
+        {
+          MsgBox.Show(this, "Fuzzy Rules Not Set");
+        }
+      }
+
+    }
+    private void btnGetRules_Click(object sender, EventArgs e)
+    {
+      if(_active_servo == null)
+      {
+        MsgBox.Show(this, "Select a Node");
+        return;
+      }
+
+      if(_fuzzy_rules_obj != null) // Need this since IDisposable
+      {
+        string err;
+        if(_active_servo.ServoSlave.GetFuzzyRules(out err))
+        {
+          // Build rules
+          {
+            _fuzzy_rules_obj.FuzzyPositionRules = _active_servo.ServoSlave.Rules;
+            _fuzzy_rules_obj.Build();
+          }
+        }
+        else
+        {
+          MsgBox.Show(this, err);
+        }
+      }
+    }
+
+    /// <summary>
+    /// btnSetMF_Click - Set/Get membership functions to/from slave
+    /// </summary>
+    private void btnSetMF_Click(object sender, EventArgs e)
     {
       if(_fuzzy_mem_funcs_obj != null)
       {
@@ -357,7 +416,7 @@ namespace viTestApp
         }
       }
     }
-    private void btnGetPosMF_Click(object sender, EventArgs e)
+    private void btnGetMF_Click(object sender, EventArgs e)
     {
       //FillMemFuncTextBoxes(_active_servo); // Old method
       if(_fuzzy_mem_funcs_obj != null)
@@ -393,6 +452,8 @@ namespace viTestApp
     private void cbxMemFuncCtlPts_CheckedChanged(object sender, EventArgs e)
     {
       this.CtlPtsActive(cbxMemFuncCtlPts.Checked);
+      // Hide ctl pts display on stats page if not used
+      gbStatCtlPts.Visible = cbxMemFuncCtlPts.Checked;
     }
 
     private void tbxPosErrCtlPtA_TextChanged(object sender, EventArgs e)
@@ -570,84 +631,6 @@ namespace viTestApp
           _fuzzy_mem_funcs_obj.Build();
         }
       }
-    }
-
-    /// <summary>
-    /// btnPosCtlSet_Click - Modify the membership functions in the with the control points
-    /// </summary>
-    private void btnPosCtlSet_Click(object sender, EventArgs e)
-    {
-      if(_fuzzy_mem_funcs_obj != null)
-      {
-        if(_active_servo == null)
-        {
-          MsgBox.Show(this, "Select a Node");
-          return;
-        }
-      }
-    }
-
-    /// <summary>
-    /// btnGetFuzzyRules_Click - Read fuzzy rules from slave
-    /// </summary>
-    private void btnGetPosRules_Click(object sender, EventArgs e)
-    {
-      if(_active_servo == null)
-      {
-        MsgBox.Show(this, "Select a Node");
-        return;
-      }
-
-      if(_fuzzy_rules_obj != null) // Need this since IDisposable
-      {
-        string err;
-        if(_active_servo.ServoSlave.GetFuzzyRules(out err))
-        {
-          // Build rules
-          {
-            _fuzzy_rules_obj.FuzzyPositionRules = _active_servo.ServoSlave.Rules;
-            _fuzzy_rules_obj.Build();
-          }
-        }
-        else
-        {
-          MsgBox.Show(this, err);
-        }
-      }
-    }
-
-    /// <summary>
-    /// btnSetFuzzyRules_Click - Set new fuzzy rules
-    /// </summary>
-    private void btnSetPosRules_Click(object sender, EventArgs e)
-    {
-      if(_active_servo == null)
-      {
-        MsgBox.Show(this, "Select a Node");
-        return;
-      }
-
-      if(_fuzzy_rules_obj != null) // Need this since IDisposable
-      {
-        if(_fuzzy_rules_obj.FuzzyPositionRules != null)
-        {
-          // confirmation dialog
-          if(MsgBox.Show(this, "Write Fuzzy Rules?", "Confirm Fuzzy Rule Write", MessageBoxButtons.YesNo) == DialogResult.Yes)
-          {
-            _active_servo.ServoSlave.Rules = _fuzzy_rules_obj.FuzzyPositionRules;
-            string err;
-            if(!_active_servo.ServoSlave.SetFuzzyRules(out err))
-            {
-              MsgBox.Show(this, err);
-            }
-          }
-        }
-        else
-        {
-          MsgBox.Show(this, "Fuzzy Rules Not Set");
-        }
-      }
-
     }
     #endregion
   }

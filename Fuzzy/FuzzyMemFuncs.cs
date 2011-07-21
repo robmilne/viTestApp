@@ -307,7 +307,7 @@ namespace viTestApp
     {
       if(_pos_mf_array != null && _spd_mf_array != null && _out_singleton_array != null)
       {
-        // pos has 5 trapezoidal functions of consisting of 4 bytes
+        // pos has 5 trapezoidal functions consisting of 4 bytes
         for(int i = 0; i < (_pos_mf_array.Length / 4); i++)
         {
           FuzzyMemFunc pos_mem_func;
@@ -326,12 +326,12 @@ namespace viTestApp
           TrapezoidalFunc pos_trap_func = new TrapezoidalFunc(_pos_mf_array, 4 * i);
           pos_mem_func.TrapezoidalFunc = pos_trap_func;
         }
-        // spd has 5 trapezoidal functions of consisting of 4 bytes
+        // spd has 5 trapezoidal functions consisting of 4 bytes
         for(int i = 0; i < (_spd_mf_array.Length / 4); i++)
         {
           FuzzyMemFunc spd_mem_func;
 
-          // Programmatically create FuzzyMemFunc objects if not already existent
+          // Programmatically create FuzzyMemFunc objects if not extant
           if(_spd_funcs_ht.ContainsKey(i))
           {
             spd_mem_func = _spd_funcs_ht[i];

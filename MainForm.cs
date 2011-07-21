@@ -554,8 +554,8 @@ namespace viTestApp
           this.InvokeOnClick(btnLimitCtlLoad, EventArgs.Empty);
 
           // Automatically populate fuzzy vars
-          this.InvokeOnClick(btnGetPosMF, EventArgs.Empty);
-          this.InvokeOnClick(btnGetPosRules, EventArgs.Empty);
+          this.InvokeOnClick(btnGetMF, EventArgs.Empty);
+          this.InvokeOnClick(btnGetRules, EventArgs.Empty);
         }
         else
         {
