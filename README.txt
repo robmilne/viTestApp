@@ -37,11 +37,11 @@ Installation and Operation:
 
 5/Click the 'Open FTDI Device' button to begin communication with the gateway
   and the servo network.  Initial detection of the servo network will take
-  approximately 6 seconds.
+  approximately 6 seconds if the small network (ids less than 5) is not selected.
 
-6/An error will be displayed if any servo modules are uninitialized.  After
-  setting the servo hw configuration the controller is ready to accept motion
-  control commands.
+6/An error will be displayed if any servo modules are uninitialized (no hardware
+  configuration stored in their respective eeproms).  After setting the servo hw
+  configuration the controller is ready to accept motion control commands.
 
 
 Kind regards,
