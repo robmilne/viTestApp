@@ -30,6 +30,7 @@ namespace viTestApp
     {
       this.cboPorts = new System.Windows.Forms.ComboBox();
       this.btnPort = new System.Windows.Forms.Button();
+      this.cbxStartSmallNetwork = new System.Windows.Forms.CheckBox();
       this.SuspendLayout();
       // 
       // cboPorts
@@ -50,11 +51,24 @@ namespace viTestApp
       this.btnPort.UseVisualStyleBackColor = true;
       this.btnPort.Click += new System.EventHandler(this.btnPort_Click);
       // 
+      // cbxStartSmallNetwork
+      // 
+      this.cbxStartSmallNetwork.AutoSize = true;
+      this.cbxStartSmallNetwork.Checked = true;
+      this.cbxStartSmallNetwork.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.cbxStartSmallNetwork.Location = new System.Drawing.Point(28, 67);
+      this.cbxStartSmallNetwork.Name = "cbxStartSmallNetwork";
+      this.cbxStartSmallNetwork.Size = new System.Drawing.Size(123, 17);
+      this.cbxStartSmallNetwork.TabIndex = 15;
+      this.cbxStartSmallNetwork.Text = "Small Network (id<5)";
+      this.cbxStartSmallNetwork.UseVisualStyleBackColor = true;
+      // 
       // StartForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(174, 69);
+      this.ClientSize = new System.Drawing.Size(174, 92);
+      this.Controls.Add(this.cbxStartSmallNetwork);
       this.Controls.Add(this.cboPorts);
       this.Controls.Add(this.btnPort);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -62,6 +76,7 @@ namespace viTestApp
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "Select Gateway";
       this.ResumeLayout(false);
+      this.PerformLayout();
 
     }
 
@@ -69,6 +84,7 @@ namespace viTestApp
 
     private System.Windows.Forms.ComboBox cboPorts;
     private System.Windows.Forms.Button btnPort;
+    private System.Windows.Forms.CheckBox cbxStartSmallNetwork;
 
   }
 }

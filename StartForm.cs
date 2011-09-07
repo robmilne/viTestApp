@@ -25,6 +25,7 @@ namespace viTestApp
     /******************************************************************************/
     private string[] portNames;
     private string portName = string.Empty;
+    private bool small_network = true;
     #endregion
 
     #region Constructors
@@ -41,6 +42,10 @@ namespace viTestApp
     public string Port
     {
       get { return portName; }
+    }
+    public bool SmallNetwork
+    {
+      get { return small_network; }
     }
     #endregion
 
@@ -59,7 +64,7 @@ namespace viTestApp
         try
         {
           string err_str;
-          Master.OpenCloseComPort(portName, false, out err_str);
+          Master.OpenCloseComPort(portName, false, out err_str, cbxStartSmallNetwork.Checked);
         }
         catch(Exception ex)
         {
@@ -95,7 +100,7 @@ namespace viTestApp
         {
           string err_str;
 
-          if(Master.OpenCloseComPort(port, false, out err_str))
+          if(Master.OpenCloseComPort(port, false, out err_str, cbxStartSmallNetwork.Checked))
           {
             // Get open COM port name - null if closed
             portName = (string)Master.PortName;
@@ -109,6 +114,7 @@ namespace viTestApp
             else
             {
               this.DialogResult = DialogResult.OK;
+              small_network = cbxStartSmallNetwork.Checked;
             }
           }
           else
