@@ -53,6 +53,7 @@ namespace viTestApp
       if(!_group.StartMotion(GetMotionMode(), out err))
       {
         MsgBox.Show(this, err);
+        Log(LogMsgType.Error, err + "\n");
       }
     }
     public void HaltGroup()
@@ -61,6 +62,7 @@ namespace viTestApp
       if(!_group.HaltMotion(rbTestMotionStopHard.Checked, out err))
       {
         MsgBox.Show(this, err);
+        Log(LogMsgType.Error, err + "\n");
       }
     }
     public void HaltSlave(Slave slave, bool hard_stop)
@@ -77,6 +79,7 @@ namespace viTestApp
       if(!slave.HaltMotion(hs, out err))
       {
         MsgBox.Show(this, err);
+        Log(LogMsgType.Error, err + "\n");
       }
     }
 
@@ -99,6 +102,7 @@ namespace viTestApp
       if(!_active_servo.ServoSlave.Status(write, out err))
       {
         MsgBox.Show(this, err);
+        Log(LogMsgType.Error, err + "\n");
       }
 
       // Servo state
@@ -197,6 +201,7 @@ namespace viTestApp
       if(!_active_servo.ServoSlave.ZeroNode(out err))
       {
         MsgBox.Show(this, err);
+        Log(LogMsgType.Error, err + "\n");
         return;
       }
     }
@@ -230,8 +235,8 @@ namespace viTestApp
       }
       else
       {
-        // Add 2 for first two uninitialized vals
-        rate = (Slave.ServoRates)cboSetServoRate.SelectedIndex + 2;
+        // Add 4 for uninitialized vals
+        rate = (Slave.ServoRates)cboSetServoRate.SelectedIndex + 4;
       }
 
       if(cboSetHBridge.SelectedIndex == -1)
@@ -401,6 +406,7 @@ namespace viTestApp
       else
       {
         MsgBox.Show(this, err);
+        Log(LogMsgType.Error, err + "\n");
       }
     }
 
@@ -457,6 +463,7 @@ namespace viTestApp
                                         out err))
       {
         MsgBox.Show(this, err);
+        Log(LogMsgType.Error, err + "\n");
       }
     }
 
@@ -474,7 +481,7 @@ namespace viTestApp
       if(!_active_servo.ServoSlave.ReadMoveControl(out err))
       {
         MsgBox.Show(this, err);
-        Log(LogMsgType.Error, err);
+        Log(LogMsgType.Error, err + "\n");
       }
       else
       {
@@ -535,6 +542,7 @@ namespace viTestApp
       if(!_active_servo.ServoSlave.StartMotion(GetMotionMode(), out err))
       {
         MsgBox.Show(this, err);
+        Log(LogMsgType.Error, err + "\n");
       }
     }
 
@@ -559,12 +567,14 @@ namespace viTestApp
         if(!_active_servo.ServoSlave.GetSetPos(out pos, out err))
         {
           MsgBox.Show(this, err);
+          Log(LogMsgType.Error, err + "\n");
           return;
         }
         // Negate position and write back
         if(!_active_servo.ServoSlave.SetPos(-pos, mode, true, out err))
         {
           MsgBox.Show(this, err);
+          Log(LogMsgType.Error, err + "\n");
           return;
         }
         else
@@ -580,12 +590,14 @@ namespace viTestApp
           if(!slave.ServoSlave.GetSetPos(out pos, out err))
           {
             MsgBox.Show(this, err);
+            Log(LogMsgType.Error, err + "\n");
             continue;
           }
           // Negate position and write back
           if(!slave.ServoSlave.SetPos(-pos, mode, false, out err))
           {
             MsgBox.Show(this, err);
+            Log(LogMsgType.Error, err + "\n");
             continue;
           }
         }
@@ -614,12 +626,14 @@ namespace viTestApp
         if(!_active_servo.ServoSlave.GetSetPos(out pos, out err))
         {
           MsgBox.Show(this, err);
+          Log(LogMsgType.Error, err + "\n");
           return;
         }
         // Negate position and write back
         if(!_active_servo.ServoSlave.SetPos(pos * 2, mode, true, out err))
         {
           MsgBox.Show(this, err);
+          Log(LogMsgType.Error, err + "\n");
           return;
         }
         else
@@ -635,12 +649,14 @@ namespace viTestApp
           if(!slave.ServoSlave.GetSetPos(out pos, out err))
           {
             MsgBox.Show(this, err);
+            Log(LogMsgType.Error, err + "\n");
             continue;
           }
           // Negate position and write back
           if(!slave.ServoSlave.SetPos(pos * 2, mode, false, out err))
           {
             MsgBox.Show(this, err);
+            Log(LogMsgType.Error, err + "\n");
             continue;
           }
         }
@@ -669,12 +685,14 @@ namespace viTestApp
         if(!_active_servo.ServoSlave.GetSetPos(out pos, out err))
         {
           MsgBox.Show(this, err);
+          Log(LogMsgType.Error, err + "\n");
           return;
         }
         // Negate position and write back
         if(!_active_servo.ServoSlave.SetPos(pos / 2, mode, true, out err))
         {
           MsgBox.Show(this, err);
+          Log(LogMsgType.Error, err + "\n");
           return;
         }
         else
@@ -690,12 +708,14 @@ namespace viTestApp
           if(!slave.ServoSlave.GetSetPos(out pos, out err))
           {
             MsgBox.Show(this, err);
+            Log(LogMsgType.Error, err + "\n");
             continue;
           }
           // Negate position and write back
           if(!slave.ServoSlave.SetPos(pos / 2, mode, false, out err))
           {
             MsgBox.Show(this, err);
+            Log(LogMsgType.Error, err + "\n");
             continue;
           }
         }
@@ -705,13 +725,10 @@ namespace viTestApp
 
     /// <summary>
     /// btnRand_Click - Test that uses the current pos, vel and acc settings as an envelope for 
-    ///                 30 random trapezoidal moves that execute for between .5 and 2 seconds
+    ///                 random trapezoidal moves that execute for between .5 and user set seconds
     /// </summary>
     private void btnRand_Click(object sender, EventArgs e)
     {
-      int pos_max, new_pos;
-      int vel_max, new_vel;
-      uint acc_max, new_acc;
       string err;
 
       cbxGroup.Checked = false;
@@ -722,60 +739,35 @@ namespace viTestApp
         return;
       }
 
+      // Soft stop
+      _active_servo.ServoSlave.HaltMotion(false, out err);
+
       // Get current pos, vel, acc settings - use as envelope
       if(!_active_servo.ServoSlave.ReadMoveControl(out err))
       {
         MsgBox.Show(this, err);
+        Log(LogMsgType.Error, err + "\n");
         return;
       }
-      if(_active_servo.ServoSlave.Position != 0)
+
+      if(_active_servo.ServoSlave.Position == 0)
       {
-        pos_max = _active_servo.ServoSlave.Position;
-        if(pos_max < 0)
-          pos_max = -pos_max;
-      }
-      else
-      {
-        MsgBox.Show(this, "Max position not set");
+        MsgBox.Show(this, "Max position not set - travel is between set position and its negative value");
         return;
       }
-      if(_active_servo.ServoSlave.Velocity != 0)
-      {
-        vel_max = _active_servo.ServoSlave.Velocity;
-        if(vel_max < 0)
-          vel_max = -vel_max;
-      }
-      else
+      if(_active_servo.ServoSlave.Velocity == 0)
       {
         MsgBox.Show(this, "Max velocity not set");
         return;
       }
-      if(_active_servo.ServoSlave.Acceleration != 0)
-      {
-        acc_max = _active_servo.ServoSlave.Acceleration;
-      }
-      else
+      if(_active_servo.ServoSlave.Acceleration == 0)
       {
         MsgBox.Show(this, "Max acceleration not set");
         return;
       }
 
-      Random rnd = new Random();
-      int tim;
-      for(int i = 0; i < 100; i++)
-      {
-        // Position range between original set position and negative of set position
-        new_pos = rnd.Next(0 - pos_max, pos_max);
-        new_vel = rnd.Next(0, vel_max);
-        new_acc = (uint)(rnd.Next(0, (int)acc_max));
-
-        if(_active_servo.ServoSlave.SetPosVelAcc(new_pos, new_vel, new_acc, true, Slave.MoveModes.SRV_TRAPEZOIDAL_MODE, out err))
-        {
-          // Wait between .5 and 2 seconds before next move
-          tim = rnd.Next(500, 2000);
-          Thread.Sleep(tim);
-        }
-      }
+      RndForm rndForm = new RndForm(_active_servo);
+      rndForm.ShowDialog(Form.ActiveForm);
     }
     #endregion
 
@@ -892,6 +884,7 @@ namespace viTestApp
         {
           ClrText(tbxEeErr);
           MsgBox.Show(this, err);
+          Log(LogMsgType.Error, err + "\n");
         }
         else
         {
@@ -918,6 +911,7 @@ namespace viTestApp
         //if(!_active_servo.ServoSlave.WriteFile(Slave.FileType.FILE_MEM_FUNCS_CTL, 1, out err))
         {
           MsgBox.Show(this, err);
+          Log(LogMsgType.Error, err + "\n");
         }
       }
     }
@@ -936,6 +930,7 @@ namespace viTestApp
         {
           ClrText(tbxEeErr);
           MsgBox.Show(this, err);
+          Log(LogMsgType.Error, err + "\n");
         }
         else
         {
@@ -962,6 +957,7 @@ namespace viTestApp
         //if(!_active_servo.ServoSlave.ReadFile(Slave.FileType.FILE_MEM_FUNCS_CTL, 1, out err))
         {
           MsgBox.Show(this, err);
+          Log(LogMsgType.Error, err + "\n");
         }
       }
     }
@@ -980,6 +976,7 @@ namespace viTestApp
         {
           ClrText(tbxEeErr);
           MsgBox.Show(this, err);
+          Log(LogMsgType.Error, err + "\n");
         }
         else
         {
@@ -1004,6 +1001,7 @@ namespace viTestApp
         if(!_active_servo.ServoSlave.DeleteFs(out err))
         {
           MsgBox.Show(this, err);
+          Log(LogMsgType.Error, err + "\n");
         }
       }
     }
@@ -1040,6 +1038,7 @@ namespace viTestApp
       if(!_group.NetworkSleep(wu_type, out err))
       {
         MsgBox.Show(this, err);
+        Log(LogMsgType.Error, err + "\n");
       }
     }
     #endregion
