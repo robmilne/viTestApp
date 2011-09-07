@@ -752,17 +752,17 @@ namespace viTestApp
 
       if(_active_servo.ServoSlave.Position == 0)
       {
-        MsgBox.Show(this, "Max position not set - travel is between set position and its negative value");
+        MsgBox.Show(this, "Position not set - travel is between set position and its negative value");
         return;
       }
       if(_active_servo.ServoSlave.Velocity == 0)
       {
-        MsgBox.Show(this, "Max velocity not set");
+        MsgBox.Show(this, "Velocity not set");
         return;
       }
       if(_active_servo.ServoSlave.Acceleration == 0)
       {
-        MsgBox.Show(this, "Max acceleration not set");
+        MsgBox.Show(this, "Acceleration not set");
         return;
       }
 
