@@ -51,13 +51,13 @@ namespace viTestApp
       this.btnRand = new System.Windows.Forms.Button();
       this.gbZero = new System.Windows.Forms.GroupBox();
       this.btnSetEncZero = new System.Windows.Forms.Button();
-      this.gbxSleep = new System.Windows.Forms.GroupBox();
+      this.gbSleep = new System.Windows.Forms.GroupBox();
       this.rbIRQWakeup = new System.Windows.Forms.RadioButton();
       this.rbCommWakeUp = new System.Windows.Forms.RadioButton();
       this.btnSleep = new System.Windows.Forms.Button();
-      this.gbxGroup = new System.Windows.Forms.GroupBox();
+      this.gbGroup = new System.Windows.Forms.GroupBox();
       this.cbxGroup = new System.Windows.Forms.CheckBox();
-      this.gbxCfg = new System.Windows.Forms.GroupBox();
+      this.gbCfg = new System.Windows.Forms.GroupBox();
       this.cbxEeErr = new System.Windows.Forms.CheckBox();
       this.tbxEeErr = new System.Windows.Forms.TextBox();
       this.btnRebuildFs = new System.Windows.Forms.Button();
@@ -270,9 +270,9 @@ namespace viTestApp
       this.tabPageSetupControl.SuspendLayout();
       this.gbRand.SuspendLayout();
       this.gbZero.SuspendLayout();
-      this.gbxSleep.SuspendLayout();
-      this.gbxGroup.SuspendLayout();
-      this.gbxCfg.SuspendLayout();
+      this.gbSleep.SuspendLayout();
+      this.gbGroup.SuspendLayout();
+      this.gbCfg.SuspendLayout();
       this.gbTestMotionStop.SuspendLayout();
       this.gbSetupStatus.SuspendLayout();
       this.gbStatErrFlag.SuspendLayout();
@@ -496,9 +496,9 @@ namespace viTestApp
       // 
       this.tabPageSetupControl.Controls.Add(this.gbRand);
       this.tabPageSetupControl.Controls.Add(this.gbZero);
-      this.tabPageSetupControl.Controls.Add(this.gbxSleep);
-      this.tabPageSetupControl.Controls.Add(this.gbxGroup);
-      this.tabPageSetupControl.Controls.Add(this.gbxCfg);
+      this.tabPageSetupControl.Controls.Add(this.gbSleep);
+      this.tabPageSetupControl.Controls.Add(this.gbGroup);
+      this.tabPageSetupControl.Controls.Add(this.gbCfg);
       this.tabPageSetupControl.Controls.Add(this.gbTestMotionStop);
       this.tabPageSetupControl.Controls.Add(this.gbSetupStatus);
       this.tabPageSetupControl.Controls.Add(this.gbTestMotionStart);
@@ -553,17 +553,17 @@ namespace viTestApp
       this.btnSetEncZero.UseVisualStyleBackColor = true;
       this.btnSetEncZero.Click += new System.EventHandler(this.btnSetEncZero_Click);
       // 
-      // gbxSleep
+      // gbSleep
       // 
-      this.gbxSleep.Controls.Add(this.rbIRQWakeup);
-      this.gbxSleep.Controls.Add(this.rbCommWakeUp);
-      this.gbxSleep.Controls.Add(this.btnSleep);
-      this.gbxSleep.Location = new System.Drawing.Point(460, 435);
-      this.gbxSleep.Name = "gbxSleep";
-      this.gbxSleep.Size = new System.Drawing.Size(226, 52);
-      this.gbxSleep.TabIndex = 21;
-      this.gbxSleep.TabStop = false;
-      this.gbxSleep.Text = "Network Suspend";
+      this.gbSleep.Controls.Add(this.rbIRQWakeup);
+      this.gbSleep.Controls.Add(this.rbCommWakeUp);
+      this.gbSleep.Controls.Add(this.btnSleep);
+      this.gbSleep.Location = new System.Drawing.Point(460, 435);
+      this.gbSleep.Name = "gbSleep";
+      this.gbSleep.Size = new System.Drawing.Size(226, 52);
+      this.gbSleep.TabIndex = 21;
+      this.gbSleep.TabStop = false;
+      this.gbSleep.Text = "Network Suspend";
       // 
       // rbIRQWakeup
       // 
@@ -597,15 +597,15 @@ namespace viTestApp
       this.btnSleep.UseVisualStyleBackColor = true;
       this.btnSleep.Click += new System.EventHandler(this.btnSleep_Click);
       // 
-      // gbxGroup
+      // gbGroup
       // 
-      this.gbxGroup.Controls.Add(this.cbxGroup);
-      this.gbxGroup.Location = new System.Drawing.Point(394, 6);
-      this.gbxGroup.Name = "gbxGroup";
-      this.gbxGroup.Size = new System.Drawing.Size(60, 52);
-      this.gbxGroup.TabIndex = 20;
-      this.gbxGroup.TabStop = false;
-      this.gbxGroup.Text = "Group";
+      this.gbGroup.Controls.Add(this.cbxGroup);
+      this.gbGroup.Location = new System.Drawing.Point(394, 6);
+      this.gbGroup.Name = "gbGroup";
+      this.gbGroup.Size = new System.Drawing.Size(60, 52);
+      this.gbGroup.TabIndex = 20;
+      this.gbGroup.TabStop = false;
+      this.gbGroup.Text = "Group";
       // 
       // cbxGroup
       // 
@@ -616,19 +616,19 @@ namespace viTestApp
       this.cbxGroup.TabIndex = 18;
       this.cbxGroup.UseVisualStyleBackColor = true;
       // 
-      // gbxCfg
+      // gbCfg
       // 
-      this.gbxCfg.Controls.Add(this.cbxEeErr);
-      this.gbxCfg.Controls.Add(this.tbxEeErr);
-      this.gbxCfg.Controls.Add(this.btnRebuildFs);
-      this.gbxCfg.Controls.Add(this.btnLoadCfg);
-      this.gbxCfg.Controls.Add(this.btnStoreCfg);
-      this.gbxCfg.Location = new System.Drawing.Point(127, 357);
-      this.gbxCfg.Name = "gbxCfg";
-      this.gbxCfg.Size = new System.Drawing.Size(118, 130);
-      this.gbxCfg.TabIndex = 19;
-      this.gbxCfg.TabStop = false;
-      this.gbxCfg.Text = "Servo EEPROM Configuration";
+      this.gbCfg.Controls.Add(this.cbxEeErr);
+      this.gbCfg.Controls.Add(this.tbxEeErr);
+      this.gbCfg.Controls.Add(this.btnRebuildFs);
+      this.gbCfg.Controls.Add(this.btnLoadCfg);
+      this.gbCfg.Controls.Add(this.btnStoreCfg);
+      this.gbCfg.Location = new System.Drawing.Point(127, 357);
+      this.gbCfg.Name = "gbCfg";
+      this.gbCfg.Size = new System.Drawing.Size(118, 130);
+      this.gbCfg.TabIndex = 19;
+      this.gbCfg.TabStop = false;
+      this.gbCfg.Text = "Servo EEPROM Configuration";
       // 
       // cbxEeErr
       // 
@@ -2914,12 +2914,12 @@ namespace viTestApp
       this.tabPageSetupControl.ResumeLayout(false);
       this.gbRand.ResumeLayout(false);
       this.gbZero.ResumeLayout(false);
-      this.gbxSleep.ResumeLayout(false);
-      this.gbxSleep.PerformLayout();
-      this.gbxGroup.ResumeLayout(false);
-      this.gbxGroup.PerformLayout();
-      this.gbxCfg.ResumeLayout(false);
-      this.gbxCfg.PerformLayout();
+      this.gbSleep.ResumeLayout(false);
+      this.gbSleep.PerformLayout();
+      this.gbGroup.ResumeLayout(false);
+      this.gbGroup.PerformLayout();
+      this.gbCfg.ResumeLayout(false);
+      this.gbCfg.PerformLayout();
       this.gbTestMotionStop.ResumeLayout(false);
       this.gbTestMotionStop.PerformLayout();
       this.gbSetupStatus.ResumeLayout(false);
@@ -3157,7 +3157,7 @@ namespace viTestApp
     private System.Windows.Forms.CheckBox cbxStatIrqErr;
     private System.Windows.Forms.GroupBox gbxIRQEnable;
     private System.Windows.Forms.CheckBox cbxIRQEn;
-    private System.Windows.Forms.GroupBox gbxCfg;
+    private System.Windows.Forms.GroupBox gbCfg;
     private System.Windows.Forms.Button btnLoadCfg;
     private System.Windows.Forms.Button btnStoreCfg;
     private System.Windows.Forms.Panel pnlFuzzyRules;
@@ -3175,11 +3175,11 @@ namespace viTestApp
     private System.Windows.Forms.Label lblMemPos0;
     private System.Windows.Forms.CheckBox cbxMemFuncCtlPts;
     private System.Windows.Forms.Button btnMotionCtlDoublePos;
-    private System.Windows.Forms.GroupBox gbxGroup;
+    private System.Windows.Forms.GroupBox gbGroup;
     private System.Windows.Forms.CheckBox cbxGroup;
     private System.Windows.Forms.Button btnMotionCtlHalfPos;
     private System.Windows.Forms.CheckBox cbxGpioEnOut;
-    private System.Windows.Forms.GroupBox gbxSleep;
+    private System.Windows.Forms.GroupBox gbSleep;
     private System.Windows.Forms.RadioButton rbIRQWakeup;
     private System.Windows.Forms.RadioButton rbCommWakeUp;
     private System.Windows.Forms.Button btnSleep;

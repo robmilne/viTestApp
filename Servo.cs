@@ -18,7 +18,7 @@ namespace viTestApp
   /// <summary>
   /// Class to encapsulate viServoMaster.Slave object and tuning feedback
   /// </summary>
-  class Servo
+  public class Servo
   {
     #region Public Enumerations
     /******************************************************************************/

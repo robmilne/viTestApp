@@ -261,7 +261,7 @@ namespace viTestApp
 
       // Get Servo Rate Enums (first two correspond to 'NO_INIT')
       ClrComboBox(cboSetServoRate);
-      for(int i = 2; i < Strings.ServoRateStrings.Length; i++)
+      for(int i = 4; i < Strings.ServoRateStrings.Length; i++)
       {
         cboSetServoRate.Items.Add(Strings.ServoRateStrings[i]);
       }
@@ -511,7 +511,7 @@ namespace viTestApp
       try
       {
         string err_str;
-        Master.OpenCloseComPort(port, false, out err_str);
+        Master.OpenCloseComPort(port, false, out err_str, true);
       }
       catch(Exception ex)
       {

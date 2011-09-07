@@ -356,6 +356,7 @@ namespace viTestApp
             if(!_active_servo.ServoSlave.SetFuzzyRules(out err))
             {
               MsgBox.Show(this, err);
+              Log(LogMsgType.Error, err + "\n");
             }
           }
         }
@@ -388,6 +389,7 @@ namespace viTestApp
         else
         {
           MsgBox.Show(this, err);
+          Log(LogMsgType.Error, err + "\n");
         }
       }
     }
@@ -413,6 +415,7 @@ namespace viTestApp
         if(!_active_servo.ServoSlave.SetFuzzyMemFuncs(out err))
         {
           MsgBox.Show(this, err);
+          Log(LogMsgType.Error, err + "\n");
         }
       }
     }
@@ -431,6 +434,7 @@ namespace viTestApp
         if(!_active_servo.ServoSlave.GetFuzzyMemFuncs(out err))
         {
           MsgBox.Show(this, err);
+          Log(LogMsgType.Error, err + "\n");
           return;
         }
 
