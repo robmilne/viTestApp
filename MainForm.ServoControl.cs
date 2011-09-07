@@ -323,8 +323,8 @@ namespace viTestApp
 
         if((int)_active_servo.ServoSlave.ServoRate > 1)
         {
-          // Subtract 2 for non-init rates
-          SetComboBox(cboSetServoRate, (int)(_active_servo.ServoSlave.ServoRate - 2));
+          // Subtract 4 for non-init rates
+          SetComboBox(cboSetServoRate, (int)(_active_servo.ServoSlave.ServoRate - 4));
         }
         else
         {
