@@ -103,15 +103,16 @@ namespace viTestApp
       this.lblStatCurPos = new System.Windows.Forms.Label();
       this.tbxStatCurPos = new System.Windows.Forms.TextBox();
       this.gbTestMotionStart = new System.Windows.Forms.GroupBox();
+      this.rbMotionStartZero = new System.Windows.Forms.RadioButton();
       this.btnMotionCtlHalfPos = new System.Windows.Forms.Button();
       this.btnMotionCtlDoublePos = new System.Windows.Forms.Button();
       this.btnMotionCtlRevPos = new System.Windows.Forms.Button();
       this.btnTestMotionStart = new System.Windows.Forms.Button();
-      this.rbTestMotionStartPwm = new System.Windows.Forms.RadioButton();
-      this.rbTestMotionStartPwmLim = new System.Windows.Forms.RadioButton();
-      this.rbTestMotionStartTrapezoidal = new System.Windows.Forms.RadioButton();
-      this.rbTestMotionStartVel = new System.Windows.Forms.RadioButton();
-      this.rbTestMotionStartPos = new System.Windows.Forms.RadioButton();
+      this.rbMotionStartPwm = new System.Windows.Forms.RadioButton();
+      this.rbMotionStartPwmLim = new System.Windows.Forms.RadioButton();
+      this.rbMotionStartTrapezoidal = new System.Windows.Forms.RadioButton();
+      this.rbMotionStartVel = new System.Windows.Forms.RadioButton();
+      this.rbMotionStartPos = new System.Windows.Forms.RadioButton();
       this.gbSetLimit = new System.Windows.Forms.GroupBox();
       this.gbxIRQEnable = new System.Windows.Forms.GroupBox();
       this.rbIRQsoft = new System.Windows.Forms.RadioButton();
@@ -1133,21 +1134,32 @@ namespace viTestApp
       // 
       // gbTestMotionStart
       // 
+      this.gbTestMotionStart.Controls.Add(this.rbMotionStartZero);
       this.gbTestMotionStart.Controls.Add(this.btnMotionCtlHalfPos);
       this.gbTestMotionStart.Controls.Add(this.btnMotionCtlDoublePos);
       this.gbTestMotionStart.Controls.Add(this.btnMotionCtlRevPos);
       this.gbTestMotionStart.Controls.Add(this.btnTestMotionStart);
-      this.gbTestMotionStart.Controls.Add(this.rbTestMotionStartPwm);
-      this.gbTestMotionStart.Controls.Add(this.rbTestMotionStartPwmLim);
-      this.gbTestMotionStart.Controls.Add(this.rbTestMotionStartTrapezoidal);
-      this.gbTestMotionStart.Controls.Add(this.rbTestMotionStartVel);
-      this.gbTestMotionStart.Controls.Add(this.rbTestMotionStartPos);
+      this.gbTestMotionStart.Controls.Add(this.rbMotionStartPwm);
+      this.gbTestMotionStart.Controls.Add(this.rbMotionStartPwmLim);
+      this.gbTestMotionStart.Controls.Add(this.rbMotionStartTrapezoidal);
+      this.gbTestMotionStart.Controls.Add(this.rbMotionStartVel);
+      this.gbTestMotionStart.Controls.Add(this.rbMotionStartPos);
       this.gbTestMotionStart.Location = new System.Drawing.Point(251, 64);
       this.gbTestMotionStart.Name = "gbTestMotionStart";
       this.gbTestMotionStart.Size = new System.Drawing.Size(203, 96);
       this.gbTestMotionStart.TabIndex = 1;
       this.gbTestMotionStart.TabStop = false;
       this.gbTestMotionStart.Text = "Start Motion";
+      // 
+      // rbMotionStartZero
+      // 
+      this.rbMotionStartZero.AutoSize = true;
+      this.rbMotionStartZero.Location = new System.Drawing.Point(89, 75);
+      this.rbMotionStartZero.Name = "rbMotionStartZero";
+      this.rbMotionStartZero.Size = new System.Drawing.Size(105, 17);
+      this.rbMotionStartZero.TabIndex = 21;
+      this.rbMotionStartZero.Text = "Goto Zero (trpzd)";
+      this.rbMotionStartZero.UseVisualStyleBackColor = true;
       // 
       // btnMotionCtlHalfPos
       // 
@@ -1190,62 +1202,62 @@ namespace viTestApp
       this.btnTestMotionStart.UseVisualStyleBackColor = true;
       this.btnTestMotionStart.Click += new System.EventHandler(this.btnTestMotionStart_Click);
       // 
-      // rbTestMotionStartPwm
+      // rbMotionStartPwm
       // 
-      this.rbTestMotionStartPwm.AutoSize = true;
-      this.rbTestMotionStartPwm.Location = new System.Drawing.Point(89, 43);
-      this.rbTestMotionStartPwm.Name = "rbTestMotionStartPwm";
-      this.rbTestMotionStartPwm.Size = new System.Drawing.Size(52, 17);
-      this.rbTestMotionStartPwm.TabIndex = 4;
-      this.rbTestMotionStartPwm.Text = "PWM";
-      this.rbTestMotionStartPwm.UseVisualStyleBackColor = true;
-      this.rbTestMotionStartPwm.CheckedChanged += new System.EventHandler(this.rbMotionStart_CheckedChanged);
+      this.rbMotionStartPwm.AutoSize = true;
+      this.rbMotionStartPwm.Location = new System.Drawing.Point(89, 43);
+      this.rbMotionStartPwm.Name = "rbMotionStartPwm";
+      this.rbMotionStartPwm.Size = new System.Drawing.Size(52, 17);
+      this.rbMotionStartPwm.TabIndex = 4;
+      this.rbMotionStartPwm.Text = "PWM";
+      this.rbMotionStartPwm.UseVisualStyleBackColor = true;
+      this.rbMotionStartPwm.CheckedChanged += new System.EventHandler(this.rbMotionStart_CheckedChanged);
       // 
-      // rbTestMotionStartPwmLim
+      // rbMotionStartPwmLim
       // 
-      this.rbTestMotionStartPwmLim.AutoSize = true;
-      this.rbTestMotionStartPwmLim.Location = new System.Drawing.Point(89, 59);
-      this.rbTestMotionStartPwmLim.Name = "rbTestMotionStartPwmLim";
-      this.rbTestMotionStartPwmLim.Size = new System.Drawing.Size(110, 17);
-      this.rbTestMotionStartPwmLim.TabIndex = 3;
-      this.rbTestMotionStartPwmLim.Text = "PWM (pos limited)";
-      this.rbTestMotionStartPwmLim.UseVisualStyleBackColor = true;
-      this.rbTestMotionStartPwmLim.CheckedChanged += new System.EventHandler(this.rbMotionStart_CheckedChanged);
+      this.rbMotionStartPwmLim.AutoSize = true;
+      this.rbMotionStartPwmLim.Location = new System.Drawing.Point(89, 59);
+      this.rbMotionStartPwmLim.Name = "rbMotionStartPwmLim";
+      this.rbMotionStartPwmLim.Size = new System.Drawing.Size(110, 17);
+      this.rbMotionStartPwmLim.TabIndex = 3;
+      this.rbMotionStartPwmLim.Text = "PWM (pos limited)";
+      this.rbMotionStartPwmLim.UseVisualStyleBackColor = true;
+      this.rbMotionStartPwmLim.CheckedChanged += new System.EventHandler(this.rbMotionStart_CheckedChanged);
       // 
-      // rbTestMotionStartTrapezoidal
+      // rbMotionStartTrapezoidal
       // 
-      this.rbTestMotionStartTrapezoidal.AutoSize = true;
-      this.rbTestMotionStartTrapezoidal.Checked = true;
-      this.rbTestMotionStartTrapezoidal.Location = new System.Drawing.Point(7, 75);
-      this.rbTestMotionStartTrapezoidal.Name = "rbTestMotionStartTrapezoidal";
-      this.rbTestMotionStartTrapezoidal.Size = new System.Drawing.Size(80, 17);
-      this.rbTestMotionStartTrapezoidal.TabIndex = 2;
-      this.rbTestMotionStartTrapezoidal.TabStop = true;
-      this.rbTestMotionStartTrapezoidal.Text = "Trapezoidal";
-      this.rbTestMotionStartTrapezoidal.UseVisualStyleBackColor = true;
-      this.rbTestMotionStartTrapezoidal.CheckedChanged += new System.EventHandler(this.rbMotionStart_CheckedChanged);
+      this.rbMotionStartTrapezoidal.AutoSize = true;
+      this.rbMotionStartTrapezoidal.Checked = true;
+      this.rbMotionStartTrapezoidal.Location = new System.Drawing.Point(7, 75);
+      this.rbMotionStartTrapezoidal.Name = "rbMotionStartTrapezoidal";
+      this.rbMotionStartTrapezoidal.Size = new System.Drawing.Size(80, 17);
+      this.rbMotionStartTrapezoidal.TabIndex = 2;
+      this.rbMotionStartTrapezoidal.TabStop = true;
+      this.rbMotionStartTrapezoidal.Text = "Trapezoidal";
+      this.rbMotionStartTrapezoidal.UseVisualStyleBackColor = true;
+      this.rbMotionStartTrapezoidal.CheckedChanged += new System.EventHandler(this.rbMotionStart_CheckedChanged);
       // 
-      // rbTestMotionStartVel
+      // rbMotionStartVel
       // 
-      this.rbTestMotionStartVel.AutoSize = true;
-      this.rbTestMotionStartVel.Location = new System.Drawing.Point(7, 59);
-      this.rbTestMotionStartVel.Name = "rbTestMotionStartVel";
-      this.rbTestMotionStartVel.Size = new System.Drawing.Size(62, 17);
-      this.rbTestMotionStartVel.TabIndex = 1;
-      this.rbTestMotionStartVel.Text = "Velocity";
-      this.rbTestMotionStartVel.UseVisualStyleBackColor = true;
-      this.rbTestMotionStartVel.CheckedChanged += new System.EventHandler(this.rbMotionStart_CheckedChanged);
+      this.rbMotionStartVel.AutoSize = true;
+      this.rbMotionStartVel.Location = new System.Drawing.Point(7, 59);
+      this.rbMotionStartVel.Name = "rbMotionStartVel";
+      this.rbMotionStartVel.Size = new System.Drawing.Size(62, 17);
+      this.rbMotionStartVel.TabIndex = 1;
+      this.rbMotionStartVel.Text = "Velocity";
+      this.rbMotionStartVel.UseVisualStyleBackColor = true;
+      this.rbMotionStartVel.CheckedChanged += new System.EventHandler(this.rbMotionStart_CheckedChanged);
       // 
-      // rbTestMotionStartPos
+      // rbMotionStartPos
       // 
-      this.rbTestMotionStartPos.AutoSize = true;
-      this.rbTestMotionStartPos.Location = new System.Drawing.Point(7, 43);
-      this.rbTestMotionStartPos.Name = "rbTestMotionStartPos";
-      this.rbTestMotionStartPos.Size = new System.Drawing.Size(62, 17);
-      this.rbTestMotionStartPos.TabIndex = 0;
-      this.rbTestMotionStartPos.Text = "Position";
-      this.rbTestMotionStartPos.UseVisualStyleBackColor = true;
-      this.rbTestMotionStartPos.CheckedChanged += new System.EventHandler(this.rbMotionStart_CheckedChanged);
+      this.rbMotionStartPos.AutoSize = true;
+      this.rbMotionStartPos.Location = new System.Drawing.Point(7, 43);
+      this.rbMotionStartPos.Name = "rbMotionStartPos";
+      this.rbMotionStartPos.Size = new System.Drawing.Size(62, 17);
+      this.rbMotionStartPos.TabIndex = 0;
+      this.rbMotionStartPos.Text = "Position";
+      this.rbMotionStartPos.UseVisualStyleBackColor = true;
+      this.rbMotionStartPos.CheckedChanged += new System.EventHandler(this.rbMotionStart_CheckedChanged);
       // 
       // gbSetLimit
       // 
@@ -3084,12 +3096,12 @@ namespace viTestApp
     private System.Windows.Forms.Label lblPosOutCtlPtA;
     private System.Windows.Forms.TextBox tbxPosOutCtlPtA;
     private System.Windows.Forms.GroupBox gbTestMotionStart;
-    private System.Windows.Forms.RadioButton rbTestMotionStartPos;
+    private System.Windows.Forms.RadioButton rbMotionStartPos;
     private System.Windows.Forms.Button btnTestMotionStart;
-    private System.Windows.Forms.RadioButton rbTestMotionStartPwm;
-    private System.Windows.Forms.RadioButton rbTestMotionStartPwmLim;
-    private System.Windows.Forms.RadioButton rbTestMotionStartTrapezoidal;
-    private System.Windows.Forms.RadioButton rbTestMotionStartVel;
+    private System.Windows.Forms.RadioButton rbMotionStartPwm;
+    private System.Windows.Forms.RadioButton rbMotionStartPwmLim;
+    private System.Windows.Forms.RadioButton rbMotionStartTrapezoidal;
+    private System.Windows.Forms.RadioButton rbMotionStartVel;
     private System.Windows.Forms.Button btnLimitCtlLoad;
     private System.Windows.Forms.Button btnLimitCtlSave;
     private System.Windows.Forms.Button btnMotionCtlLoad;
@@ -3230,6 +3242,7 @@ namespace viTestApp
     private System.Windows.Forms.Button btnStatusRead;
     private System.Windows.Forms.GroupBox gbRand;
     private System.Windows.Forms.Button btnRand;
+    private System.Windows.Forms.RadioButton rbMotionStartZero;
   }
 }
 

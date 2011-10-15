@@ -36,16 +36,23 @@ namespace viTestApp
     /******************************************************************************/
     private Slave.MoveModes GetMotionMode()
     {
-      if(rbTestMotionStartPos.Checked)
+      if(rbMotionStartPos.Checked)
         return Slave.MoveModes.SRV_POSITION_MODE;
-      else if(rbTestMotionStartVel.Checked)
+      else if(rbMotionStartVel.Checked)
         return Slave.MoveModes.SRV_VELOCITY_MODE;
-      else if(rbTestMotionStartTrapezoidal.Checked)
+      else if(rbMotionStartTrapezoidal.Checked)
         return Slave.MoveModes.SRV_TRAPEZOIDAL_MODE;
-      else if(rbTestMotionStartPwm.Checked)
+      else if(rbMotionStartPwm.Checked)
         return Slave.MoveModes.SRV_PWM_MODE;
-      else
+      else if(rbMotionStartPwmLim.Checked)
         return Slave.MoveModes.SRV_PWM_POS_MODE;
+      //rbMotionStartZero.Checked)
+      else
+      {
+        // invalid move mode used to signal move to zero position (group OK)
+        // Slave will not move if zero not explicitly set
+        return Slave.MoveModes.SRV_NO_INIT_MODE;
+      }
     }
     public void StartGroupMotion()
     {
@@ -138,8 +145,8 @@ namespace viTestApp
 
       // Current servo velocity and stored peak velocity/acceleration
       SetText(tbxStatCurVel, _active_servo.ServoSlave.CurrentVelocity.ToString());
-      SetText(tbxStatPeakVel, _active_servo.ServoSlave.PeakVelocity.ToString());
-      SetText(tbxStatPeakAcc, _active_servo.ServoSlave.PeakAcceleration.ToString());
+      SetText(tbxStatPeakVel, _active_servo.ServoSlave.PeakChange.ToString());
+      SetText(tbxStatPeakAcc, _active_servo.ServoSlave.PeakChangeChange.ToString());
 
       // Limit pin states and values
       SetText(tbxStatLimAVal, (_active_servo.ServoSlave.IsLimitAPinSet ? "0" : "1"));
@@ -447,6 +454,11 @@ namespace viTestApp
         MsgBox.Show(this, "Select a Node");
         return;
       }
+      if(GetMotionMode() == Slave.MoveModes.SRV_NO_INIT_MODE)
+      {
+        MsgBox.Show(this, "\"Goto Zero\" cannot be selected for this command!");
+        return;
+      }
       Slave.PwmDir pwm_dir = Slave.PwmDir.OFF;
       if(rbSetPwmCW.Checked)
         pwm_dir = Slave.PwmDir.CW;
@@ -506,7 +518,7 @@ namespace viTestApp
         RadioButton rb = sender as RadioButton;
         if(rb.Checked)
         {
-          if(rb.Name.Equals("rbTestMotionStartPos") || rb.Name.Equals("rbTestMotionStartTrapezoidal"))
+          if(rb.Name.Equals("rbMotionStartPos") || rb.Name.Equals("rbMotionStartTrapezoidal"))
           {
             btnMotionCtlRevPos.Enabled = true;
             btnMotionCtlDoublePos.Enabled = true;
