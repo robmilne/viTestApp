@@ -187,7 +187,7 @@ namespace viTestApp
       Graphics g = picbxStats.CreateGraphics();
       try
       {
-        if(_active_servo.ServoSlave.GetStats(GetStatistics_callback))
+        if(_active_servo.ServoSlave.StatsRead(GetStatistics_callback))
         {       
           g.Clear(System.Drawing.Color.White);
           g.DrawString("Wait for Statistics", new Font("Verdana", 14),

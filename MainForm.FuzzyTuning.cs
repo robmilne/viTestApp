@@ -353,7 +353,7 @@ namespace viTestApp
           {
             _active_servo.ServoSlave.Rules = _fuzzy_rules_obj.FuzzyPositionRules;
             string err;
-            if(!_active_servo.ServoSlave.SetFuzzyRules(out err))
+            if(!_active_servo.ServoSlave.FuzzyCtlWriteRules(out err))
             {
               MsgBox.Show(this, err);
               Log(LogMsgType.Error, err + "\n");
@@ -378,7 +378,7 @@ namespace viTestApp
       if(_fuzzy_rules_obj != null) // Need this since IDisposable
       {
         string err;
-        if(_active_servo.ServoSlave.GetFuzzyRules(out err))
+        if(_active_servo.ServoSlave.FuzzyCtlReadRules(out err))
         {
           // Build rules
           {
@@ -412,7 +412,7 @@ namespace viTestApp
         _active_servo.ServoSlave.OutSingletonArray = _fuzzy_mem_funcs_obj.OutSingletonArray;
 
         string err;
-        if(!_active_servo.ServoSlave.SetFuzzyMemFuncs(out err))
+        if(!_active_servo.ServoSlave.FuzzyCtlWriteIO(out err))
         {
           MsgBox.Show(this, err);
           Log(LogMsgType.Error, err + "\n");
@@ -431,7 +431,7 @@ namespace viTestApp
         }
 
         string err;
-        if(!_active_servo.ServoSlave.GetFuzzyMemFuncs(out err))
+        if(!_active_servo.ServoSlave.FuzzyCtlReadIO(out err))
         {
           MsgBox.Show(this, err);
           Log(LogMsgType.Error, err + "\n");

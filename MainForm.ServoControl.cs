@@ -57,7 +57,7 @@ namespace viTestApp
     public void StartGroupMotion()
     {
       string err;
-      if(!_group.StartMotion(GetMotionMode(), out err))
+      if(!_group.MoveCtlStart(GetMotionMode(), out err))
       {
         MsgBox.Show(this, err);
         Log(LogMsgType.Error, err + "\n");
@@ -66,7 +66,7 @@ namespace viTestApp
     public void HaltGroup()
     {
       string err;
-      if(!_group.HaltMotion(rbTestMotionStopHard.Checked, out err))
+      if(!_group.MoveCtlStop(rbTestMotionStopHard.Checked, out err))
       {
         MsgBox.Show(this, err);
         Log(LogMsgType.Error, err + "\n");
@@ -83,7 +83,7 @@ namespace viTestApp
       }
 
       string err;
-      if(!slave.HaltMotion(hs, out err))
+      if(!slave.MoveCtlStop(hs, out err))
       {
         MsgBox.Show(this, err);
         Log(LogMsgType.Error, err + "\n");
@@ -106,7 +106,7 @@ namespace viTestApp
 
       // Execute StatusCommand object of this slave
       string err;
-      if(!_active_servo.ServoSlave.Status(write, out err))
+      if(!_active_servo.ServoSlave.StatusReadWriteAll(write, out err))
       {
         MsgBox.Show(this, err);
         Log(LogMsgType.Error, err + "\n");
@@ -127,16 +127,16 @@ namespace viTestApp
       // system error code (0 = SUCCESS)
       short err_code;
       string err_str;
-      if(_active_servo.ServoSlave.SysErrcode < 0)
+      if(_active_servo.ServoSlave.Errcode < 0)
       {
         err_str = "-0x";
-        err_code = (short)-_active_servo.ServoSlave.SysErrcode;
-        Log(LogMsgType.Error, "Read Status Sys Err: " + Strings.GetErrorString(_active_servo.ServoSlave.SysErrcode) + "\n");
+        err_code = (short)-_active_servo.ServoSlave.Errcode;
+        Log(LogMsgType.Error, "Read Status Sys Err: " + Strings.GetErrorString(_active_servo.ServoSlave.Errcode) + "\n");
       }
       else
       {
         err_str = "0x";
-        err_code = _active_servo.ServoSlave.SysErrcode;
+        err_code = _active_servo.ServoSlave.Errcode;
       }
       SetText(tbxStatErrCode, err_str + err_code.ToString("X4"));
 
@@ -205,7 +205,7 @@ namespace viTestApp
       }
 
       string err;
-      if(!_active_servo.ServoSlave.ZeroNode(out err))
+      if(!_active_servo.ServoSlave.ZeroSlave(out err))
       {
         MsgBox.Show(this, err);
         Log(LogMsgType.Error, err + "\n");
@@ -301,7 +301,7 @@ namespace viTestApp
       {
         // Execute Slave object of this slave
         string err_str;
-        if(!_active_servo.ServoSlave.SetServoCtl(rate, hbridge, hb_pwm, enc_div,
+        if(!_active_servo.ServoSlave.ServoCtlWrite(rate, hbridge, hb_pwm, enc_div,
                                                  rbSetKickOn.Checked, 
                                                  rbSetPowerOff.Checked,
                                                  gpio_state, out err_str))
@@ -323,7 +323,7 @@ namespace viTestApp
       }
 
       string err;
-      if(_active_servo.ServoSlave.GetServoCtl(out err))
+      if(_active_servo.ServoSlave.ServoCtlRead(out err))
       {
         StringBuilder err_sb = new StringBuilder("Servo Control Load Error\n");
         bool err_flag = false;
@@ -466,7 +466,7 @@ namespace viTestApp
         pwm_dir = Slave.PwmDir.CCW;
 
       string err;
-      if(!_active_servo.ServoSlave.SetPosVelAccPwm((int)nudSetPos.Value,
+      if(!_active_servo.ServoSlave.MoveCtlSetPosVelAccPwm((int)nudSetPos.Value,
                                         (int)nudSetVel.Value, 
                                         (uint)nudSetAcc.Value, 
                                         pwm_dir,(byte)nudSetPWM.Value,
@@ -490,7 +490,7 @@ namespace viTestApp
         return;
       }
       string err;
-      if(!_active_servo.ServoSlave.ReadMoveControl(out err))
+      if(!_active_servo.ServoSlave.MoveCtlGetAll(out err))
       {
         MsgBox.Show(this, err);
         Log(LogMsgType.Error, err + "\n");
@@ -551,7 +551,7 @@ namespace viTestApp
         return;
       }
       string err;
-      if(!_active_servo.ServoSlave.StartMotion(GetMotionMode(), out err))
+      if(!_active_servo.ServoSlave.MoveCtlStart(GetMotionMode(), out err))
       {
         MsgBox.Show(this, err);
         Log(LogMsgType.Error, err + "\n");
@@ -576,14 +576,14 @@ namespace viTestApp
           MsgBox.Show(this, "Select a Node");
           return;
         }
-        if(!_active_servo.ServoSlave.GetSetPos(out pos, out err))
+        if(!_active_servo.ServoSlave.MoveCtlGetPos(out pos, out err))
         {
           MsgBox.Show(this, err);
           Log(LogMsgType.Error, err + "\n");
           return;
         }
         // Negate position and write back
-        if(!_active_servo.ServoSlave.SetPos(-pos, mode, true, out err))
+        if(!_active_servo.ServoSlave.MoveCtlSetPos(-pos, mode, true, out err))
         {
           MsgBox.Show(this, err);
           Log(LogMsgType.Error, err + "\n");
@@ -599,14 +599,14 @@ namespace viTestApp
         SortedDictionary<byte, Servo>.ValueCollection slaves = _servo_ht.Values;
         foreach(Servo slave in slaves)
         {
-          if(!slave.ServoSlave.GetSetPos(out pos, out err))
+          if(!slave.ServoSlave.MoveCtlGetPos(out pos, out err))
           {
             MsgBox.Show(this, err);
             Log(LogMsgType.Error, err + "\n");
             continue;
           }
           // Negate position and write back
-          if(!slave.ServoSlave.SetPos(-pos, mode, false, out err))
+          if(!slave.ServoSlave.MoveCtlSetPos(-pos, mode, false, out err))
           {
             MsgBox.Show(this, err);
             Log(LogMsgType.Error, err + "\n");
@@ -635,14 +635,14 @@ namespace viTestApp
           MsgBox.Show(this, "Select a Node");
           return;
         }
-        if(!_active_servo.ServoSlave.GetSetPos(out pos, out err))
+        if(!_active_servo.ServoSlave.MoveCtlGetPos(out pos, out err))
         {
           MsgBox.Show(this, err);
           Log(LogMsgType.Error, err + "\n");
           return;
         }
         // Negate position and write back
-        if(!_active_servo.ServoSlave.SetPos(pos * 2, mode, true, out err))
+        if(!_active_servo.ServoSlave.MoveCtlSetPos(pos * 2, mode, true, out err))
         {
           MsgBox.Show(this, err);
           Log(LogMsgType.Error, err + "\n");
@@ -658,14 +658,14 @@ namespace viTestApp
         SortedDictionary<byte, Servo>.ValueCollection slaves = _servo_ht.Values;
         foreach(Servo slave in slaves)
         {
-          if(!slave.ServoSlave.GetSetPos(out pos, out err))
+          if(!slave.ServoSlave.MoveCtlGetPos(out pos, out err))
           {
             MsgBox.Show(this, err);
             Log(LogMsgType.Error, err + "\n");
             continue;
           }
           // Negate position and write back
-          if(!slave.ServoSlave.SetPos(pos * 2, mode, false, out err))
+          if(!slave.ServoSlave.MoveCtlSetPos(pos * 2, mode, false, out err))
           {
             MsgBox.Show(this, err);
             Log(LogMsgType.Error, err + "\n");
@@ -694,14 +694,14 @@ namespace viTestApp
           MsgBox.Show(this, "Select a Node");
           return;
         }
-        if(!_active_servo.ServoSlave.GetSetPos(out pos, out err))
+        if(!_active_servo.ServoSlave.MoveCtlGetPos(out pos, out err))
         {
           MsgBox.Show(this, err);
           Log(LogMsgType.Error, err + "\n");
           return;
         }
         // Negate position and write back
-        if(!_active_servo.ServoSlave.SetPos(pos / 2, mode, true, out err))
+        if(!_active_servo.ServoSlave.MoveCtlSetPos(pos / 2, mode, true, out err))
         {
           MsgBox.Show(this, err);
           Log(LogMsgType.Error, err + "\n");
@@ -717,14 +717,14 @@ namespace viTestApp
         SortedDictionary<byte, Servo>.ValueCollection slaves = _servo_ht.Values;
         foreach(Servo slave in slaves)
         {
-          if(!slave.ServoSlave.GetSetPos(out pos, out err))
+          if(!slave.ServoSlave.MoveCtlGetPos(out pos, out err))
           {
             MsgBox.Show(this, err);
             Log(LogMsgType.Error, err + "\n");
             continue;
           }
           // Negate position and write back
-          if(!slave.ServoSlave.SetPos(pos / 2, mode, false, out err))
+          if(!slave.ServoSlave.MoveCtlSetPos(pos / 2, mode, false, out err))
           {
             MsgBox.Show(this, err);
             Log(LogMsgType.Error, err + "\n");
@@ -752,10 +752,10 @@ namespace viTestApp
       }
 
       // Soft stop
-      _active_servo.ServoSlave.HaltMotion(false, out err);
+      _active_servo.ServoSlave.MoveCtlStop(false, out err);
 
       // Get current pos, vel, acc settings - use as envelope
-      if(!_active_servo.ServoSlave.ReadMoveControl(out err))
+      if(!_active_servo.ServoSlave.MoveCtlGetAll(out err))
       {
         MsgBox.Show(this, err);
         Log(LogMsgType.Error, err + "\n");
@@ -822,7 +822,7 @@ namespace viTestApp
       _active_servo.ServoSlave.ATDPeriod = (byte)Convert.ToByte(nudSetAtdLimDwell.Text);
 
       string err;
-      if(!_active_servo.ServoSlave.WriteLimitControls(out err))
+      if(!_active_servo.ServoSlave.LimitCtlWrite(out err))
       {
         MsgBox.Show(this, err);
         Log(LogMsgType.Error, err + "\n");
@@ -840,7 +840,7 @@ namespace viTestApp
         return;
       }
       string err;
-      if(!_active_servo.ServoSlave.ReadLimitControls(out err))
+      if(!_active_servo.ServoSlave.LimitCtlRead(out err))
       {
         MsgBox.Show(this, err);
         Log(LogMsgType.Error, err + "\n");
@@ -892,7 +892,7 @@ namespace viTestApp
       string err;
       if(cbxEeErr.Checked)
       {
-        if(!_active_servo.ServoSlave.ResetFileErr(out err))
+        if(!_active_servo.ServoSlave.FileCtlResetErr(out err))
         {
           ClrText(tbxEeErr);
           MsgBox.Show(this, err);
@@ -902,11 +902,11 @@ namespace viTestApp
         {
           short err_code;
           string err_str;
-          if(_active_servo.ServoSlave.SysErrcode < 0)
+          if(_active_servo.ServoSlave.Errcode < 0)
           {
             err_str = "-0x";
             err_code = (short)-_active_servo.ServoSlave.FileErrcode;
-            Log(LogMsgType.Error, "File Err: " + Strings.GetErrorString(_active_servo.ServoSlave.SysErrcode) + "\n");
+            Log(LogMsgType.Error, "File Err: " + Strings.GetErrorString(_active_servo.ServoSlave.Errcode) + "\n");
           }
           else
           {
@@ -918,9 +918,9 @@ namespace viTestApp
       }
       else
       {
-        if(!_active_servo.ServoSlave.StoreCfg(out err))
+        if(!_active_servo.ServoSlave.FileCtlStoreCfg(out err))
         // Example of single file write
-        //if(!_active_servo.ServoSlave.WriteFile(Slave.FileType.FILE_MEM_FUNCS_CTL, 1, out err))
+        //if(!_active_servo.ServoSlave.FileCtlStore(Slave.FileType.FILE_MEM_FUNCS_CTL, 1, out err))
         {
           MsgBox.Show(this, err);
           Log(LogMsgType.Error, err + "\n");
@@ -938,7 +938,7 @@ namespace viTestApp
       string err;
       if(cbxEeErr.Checked)
       {
-        if(!_active_servo.ServoSlave.ReadFileErr(out err))
+        if(!_active_servo.ServoSlave.FileCtlReadErr(out err))
         {
           ClrText(tbxEeErr);
           MsgBox.Show(this, err);
@@ -948,11 +948,11 @@ namespace viTestApp
         {
           short err_code;
           string err_str;
-          if(_active_servo.ServoSlave.SysErrcode < 0)
+          if(_active_servo.ServoSlave.Errcode < 0)
           {
             err_str = "-0x";
             err_code = (short)-_active_servo.ServoSlave.FileErrcode;
-            Log(LogMsgType.Error, "File Err: " + Strings.GetErrorString(_active_servo.ServoSlave.SysErrcode) + "\n");
+            Log(LogMsgType.Error, "File Err: " + Strings.GetErrorString(_active_servo.ServoSlave.Errcode) + "\n");
           }
           else
           {
@@ -964,9 +964,9 @@ namespace viTestApp
       }
       else
       {
-        if(!_active_servo.ServoSlave.LoadCfg(out err))
+        if(!_active_servo.ServoSlave.FileCtlLoadCfg(out err))
         // Example of single file read
-        //if(!_active_servo.ServoSlave.ReadFile(Slave.FileType.FILE_MEM_FUNCS_CTL, 1, out err))
+        //if(!_active_servo.ServoSlave.FileCtlLoad(Slave.FileType.FILE_MEM_FUNCS_CTL, 1, out err))
         {
           MsgBox.Show(this, err);
           Log(LogMsgType.Error, err + "\n");
@@ -984,7 +984,7 @@ namespace viTestApp
       string err;
       if(cbxEeErr.Checked)
       {
-        if(!_active_servo.ServoSlave.ResetFileErr(out err))
+        if(!_active_servo.ServoSlave.FileCtlResetErr(out err))
         {
           ClrText(tbxEeErr);
           MsgBox.Show(this, err);
@@ -994,11 +994,11 @@ namespace viTestApp
         {
           short err_code;
           string err_str;
-          if(_active_servo.ServoSlave.SysErrcode < 0)
+          if(_active_servo.ServoSlave.Errcode < 0)
           {
             err_str = "-0x";
             err_code = (short)-_active_servo.ServoSlave.FileErrcode;
-            Log(LogMsgType.Error, "File Err: " + Strings.GetErrorString(_active_servo.ServoSlave.SysErrcode) + "\n");
+            Log(LogMsgType.Error, "File Err: " + Strings.GetErrorString(_active_servo.ServoSlave.Errcode) + "\n");
           }
           else
           {
@@ -1010,7 +1010,7 @@ namespace viTestApp
       }
       else
       {
-        if(!_active_servo.ServoSlave.DeleteFs(out err))
+        if(!_active_servo.ServoSlave.FileCtlEraseAll(out err))
         {
           MsgBox.Show(this, err);
           Log(LogMsgType.Error, err + "\n");

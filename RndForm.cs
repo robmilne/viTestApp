@@ -104,7 +104,7 @@ namespace viTestApp
           new_acc = (uint)(rnd.Next(0, (int)acc_max));
         } while(new_acc == 0);
 
-        if(_servo.ServoSlave.SetPosVelAcc(new_pos, new_vel, new_acc, true, Slave.MoveModes.SRV_TRAPEZOIDAL_MODE, out err))
+        if(_servo.ServoSlave.MoveCtlSetPosVelAcc(new_pos, new_vel, new_acc, true, Slave.MoveModes.SRV_TRAPEZOIDAL_MODE, out err))
         {
           // Wait between .5 and _sec_delay seconds before next move
           tim = rnd.Next(500, _sec_delay * 1000);
@@ -125,7 +125,7 @@ namespace viTestApp
 
       while(_status_read)
       {
-        if(_servo.ServoSlave.Status(false, out err))
+        if(_servo.ServoSlave.StatusReadWriteAll(false, out err))
         {
           RndSetText(tbxRndPos, _servo.ServoSlave.CurrentPosition.ToString());
           // Kill process if limit detected
@@ -175,7 +175,7 @@ namespace viTestApp
       _status_read = false;
 
       // Soft stop
-      _servo.ServoSlave.HaltMotion(false, out err);
+      _servo.ServoSlave.MoveCtlStop(false, out err);
 
       while(!_done_move && !_done_status) { };
 
