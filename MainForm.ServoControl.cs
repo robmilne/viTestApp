@@ -149,9 +149,9 @@ namespace viTestApp
       SetText(tbxStatPeakAcc, _active_servo.ServoSlave.PeakChangeChange.ToString());
 
       // Limit pin states and values
-      SetText(tbxStatLimAVal, (_active_servo.ServoSlave.IsLimitAPinSet ? "0" : "1"));
-      SetText(tbxStatLimBVal, (_active_servo.ServoSlave.IsLimitBPinSet ? "0" : "1"));
-      SetText(tbxStatEncIdxVal, (_active_servo.ServoSlave.IsLimitEncPinSet ? "0" : "1"));
+      SetText(tbxStatLimAVal, (_active_servo.ServoSlave.IsLimitAPinSet ? "1" : "0"));
+      SetText(tbxStatLimBVal, (_active_servo.ServoSlave.IsLimitBPinSet ? "1" : "0"));
+      SetText(tbxStatEncIdxVal, (_active_servo.ServoSlave.IsLimitEncPinSet ? "1" : "0"));
       SetCheckbox(cbxStatLimA, _active_servo.ServoSlave.IsLimitASet);
       SetCheckbox(cbxStatLimB, _active_servo.ServoSlave.IsLimitBSet);
       SetCheckbox(cbxStatEncIdx, _active_servo.ServoSlave.IsLimitEncSet);
