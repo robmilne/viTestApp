@@ -79,7 +79,6 @@ namespace viTestApp
       this.btnStatusWrite = new System.Windows.Forms.Button();
       this.cbxStatIrqErr = new System.Windows.Forms.CheckBox();
       this.cbxStatATDErr = new System.Windows.Forms.CheckBox();
-      this.cbxStatFuzzyErr = new System.Windows.Forms.CheckBox();
       this.cbxStatPosErr = new System.Windows.Forms.CheckBox();
       this.cbxStatCANErr = new System.Windows.Forms.CheckBox();
       this.cbxStatSysErr = new System.Windows.Forms.CheckBox();
@@ -160,8 +159,8 @@ namespace viTestApp
       this.lblSetPwmDir = new System.Windows.Forms.Label();
       this.lblSetPwmDuty = new System.Windows.Forms.Label();
       this.nudSetPWM = new System.Windows.Forms.NumericUpDown();
-      this.rbSetPwmCCW = new System.Windows.Forms.RadioButton();
-      this.rbSetPwmCW = new System.Windows.Forms.RadioButton();
+      this.rbSetPwmDec = new System.Windows.Forms.RadioButton();
+      this.rbSetPwmInc = new System.Windows.Forms.RadioButton();
       this.rbSetPwmOff = new System.Windows.Forms.RadioButton();
       this.lblSetAcc = new System.Windows.Forms.Label();
       this.lblSetVel = new System.Windows.Forms.Label();
@@ -559,9 +558,9 @@ namespace viTestApp
       this.gbSleep.Controls.Add(this.rbIRQWakeup);
       this.gbSleep.Controls.Add(this.rbCommWakeUp);
       this.gbSleep.Controls.Add(this.btnSleep);
-      this.gbSleep.Location = new System.Drawing.Point(460, 435);
+      this.gbSleep.Location = new System.Drawing.Point(460, 430);
       this.gbSleep.Name = "gbSleep";
-      this.gbSleep.Size = new System.Drawing.Size(226, 52);
+      this.gbSleep.Size = new System.Drawing.Size(226, 57);
       this.gbSleep.TabIndex = 21;
       this.gbSleep.TabStop = false;
       this.gbSleep.Text = "Network Suspend";
@@ -570,7 +569,7 @@ namespace viTestApp
       // 
       this.rbIRQWakeup.AutoSize = true;
       this.rbIRQWakeup.Checked = true;
-      this.rbIRQWakeup.Location = new System.Drawing.Point(117, 9);
+      this.rbIRQWakeup.Location = new System.Drawing.Point(117, 13);
       this.rbIRQWakeup.Name = "rbIRQWakeup";
       this.rbIRQWakeup.Size = new System.Drawing.Size(88, 17);
       this.rbIRQWakeup.TabIndex = 5;
@@ -581,7 +580,7 @@ namespace viTestApp
       // rbCommWakeUp
       // 
       this.rbCommWakeUp.AutoSize = true;
-      this.rbCommWakeUp.Location = new System.Drawing.Point(117, 25);
+      this.rbCommWakeUp.Location = new System.Drawing.Point(117, 29);
       this.rbCommWakeUp.Name = "rbCommWakeUp";
       this.rbCommWakeUp.Size = new System.Drawing.Size(103, 17);
       this.rbCommWakeUp.TabIndex = 4;
@@ -590,7 +589,7 @@ namespace viTestApp
       // 
       // btnSleep
       // 
-      this.btnSleep.Location = new System.Drawing.Point(6, 19);
+      this.btnSleep.Location = new System.Drawing.Point(6, 23);
       this.btnSleep.Name = "btnSleep";
       this.btnSleep.Size = new System.Drawing.Size(100, 23);
       this.btnSleep.TabIndex = 0;
@@ -750,7 +749,7 @@ namespace viTestApp
       this.gbSetupStatus.Controls.Add(this.tbxStatCurPos);
       this.gbSetupStatus.Location = new System.Drawing.Point(461, 64);
       this.gbSetupStatus.Name = "gbSetupStatus";
-      this.gbSetupStatus.Size = new System.Drawing.Size(227, 365);
+      this.gbSetupStatus.Size = new System.Drawing.Size(227, 360);
       this.gbSetupStatus.TabIndex = 16;
       this.gbSetupStatus.TabStop = false;
       this.gbSetupStatus.Text = "Status";
@@ -827,21 +826,20 @@ namespace viTestApp
       this.gbStatErrFlag.Controls.Add(this.btnStatusWrite);
       this.gbStatErrFlag.Controls.Add(this.cbxStatIrqErr);
       this.gbStatErrFlag.Controls.Add(this.cbxStatATDErr);
-      this.gbStatErrFlag.Controls.Add(this.cbxStatFuzzyErr);
       this.gbStatErrFlag.Controls.Add(this.cbxStatPosErr);
       this.gbStatErrFlag.Controls.Add(this.cbxStatCANErr);
       this.gbStatErrFlag.Controls.Add(this.cbxStatSysErr);
       this.gbStatErrFlag.Controls.Add(this.cbxStatLimErr);
       this.gbStatErrFlag.Location = new System.Drawing.Point(6, 261);
       this.gbStatErrFlag.Name = "gbStatErrFlag";
-      this.gbStatErrFlag.Size = new System.Drawing.Size(215, 98);
+      this.gbStatErrFlag.Size = new System.Drawing.Size(215, 92);
       this.gbStatErrFlag.TabIndex = 24;
       this.gbStatErrFlag.TabStop = false;
       this.gbStatErrFlag.Text = "Sticky Error Flags";
       // 
       // btnStatusWrite
       // 
-      this.btnStatusWrite.Location = new System.Drawing.Point(111, 71);
+      this.btnStatusWrite.Location = new System.Drawing.Point(110, 65);
       this.btnStatusWrite.Name = "btnStatusWrite";
       this.btnStatusWrite.Size = new System.Drawing.Size(98, 21);
       this.btnStatusWrite.TabIndex = 35;
@@ -867,26 +865,13 @@ namespace viTestApp
       this.cbxStatATDErr.AutoSize = true;
       this.cbxStatATDErr.Enabled = false;
       this.cbxStatATDErr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.cbxStatATDErr.Location = new System.Drawing.Point(117, 51);
+      this.cbxStatATDErr.Location = new System.Drawing.Point(117, 35);
       this.cbxStatATDErr.Margin = new System.Windows.Forms.Padding(2);
       this.cbxStatATDErr.Name = "cbxStatATDErr";
       this.cbxStatATDErr.Size = new System.Drawing.Size(70, 17);
       this.cbxStatATDErr.TabIndex = 5;
       this.cbxStatATDErr.Text = "ATD Error";
       this.cbxStatATDErr.UseVisualStyleBackColor = true;
-      // 
-      // cbxStatFuzzyErr
-      // 
-      this.cbxStatFuzzyErr.AutoSize = true;
-      this.cbxStatFuzzyErr.Enabled = false;
-      this.cbxStatFuzzyErr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.cbxStatFuzzyErr.Location = new System.Drawing.Point(117, 34);
-      this.cbxStatFuzzyErr.Margin = new System.Windows.Forms.Padding(2);
-      this.cbxStatFuzzyErr.Name = "cbxStatFuzzyErr";
-      this.cbxStatFuzzyErr.Size = new System.Drawing.Size(91, 17);
-      this.cbxStatFuzzyErr.TabIndex = 4;
-      this.cbxStatFuzzyErr.Text = "Fuzzy ISR Ovf";
-      this.cbxStatFuzzyErr.UseVisualStyleBackColor = true;
       // 
       // cbxStatPosErr
       // 
@@ -984,7 +969,7 @@ namespace viTestApp
       this.cbxStatEncIdx.AutoSize = true;
       this.cbxStatEncIdx.Enabled = false;
       this.cbxStatEncIdx.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.cbxStatEncIdx.Location = new System.Drawing.Point(117, 61);
+      this.cbxStatEncIdx.Location = new System.Drawing.Point(117, 63);
       this.cbxStatEncIdx.Name = "cbxStatEncIdx";
       this.cbxStatEncIdx.Size = new System.Drawing.Size(87, 17);
       this.cbxStatEncIdx.TabIndex = 26;
@@ -1343,7 +1328,7 @@ namespace viTestApp
             0});
       this.nudSetAtdLimDwell.Location = new System.Drawing.Point(6, 39);
       this.nudSetAtdLimDwell.Maximum = new decimal(new int[] {
-            255,
+            65536,
             0,
             0,
             0});
@@ -1753,8 +1738,8 @@ namespace viTestApp
       this.gbSetPwmDir.Controls.Add(this.lblSetPwmDir);
       this.gbSetPwmDir.Controls.Add(this.lblSetPwmDuty);
       this.gbSetPwmDir.Controls.Add(this.nudSetPWM);
-      this.gbSetPwmDir.Controls.Add(this.rbSetPwmCCW);
-      this.gbSetPwmDir.Controls.Add(this.rbSetPwmCW);
+      this.gbSetPwmDir.Controls.Add(this.rbSetPwmDec);
+      this.gbSetPwmDir.Controls.Add(this.rbSetPwmInc);
       this.gbSetPwmDir.Controls.Add(this.rbSetPwmOff);
       this.gbSetPwmDir.Location = new System.Drawing.Point(6, 140);
       this.gbSetPwmDir.Name = "gbSetPwmDir";
@@ -1794,25 +1779,25 @@ namespace viTestApp
       this.nudSetPWM.Size = new System.Drawing.Size(45, 20);
       this.nudSetPWM.TabIndex = 13;
       // 
-      // rbSetPwmCCW
+      // rbSetPwmDec
       // 
-      this.rbSetPwmCCW.AutoSize = true;
-      this.rbSetPwmCCW.Location = new System.Drawing.Point(6, 62);
-      this.rbSetPwmCCW.Name = "rbSetPwmCCW";
-      this.rbSetPwmCCW.Size = new System.Drawing.Size(47, 17);
-      this.rbSetPwmCCW.TabIndex = 2;
-      this.rbSetPwmCCW.Text = "DEC";
-      this.rbSetPwmCCW.UseVisualStyleBackColor = true;
+      this.rbSetPwmDec.AutoSize = true;
+      this.rbSetPwmDec.Location = new System.Drawing.Point(6, 62);
+      this.rbSetPwmDec.Name = "rbSetPwmDec";
+      this.rbSetPwmDec.Size = new System.Drawing.Size(47, 17);
+      this.rbSetPwmDec.TabIndex = 2;
+      this.rbSetPwmDec.Text = "DEC";
+      this.rbSetPwmDec.UseVisualStyleBackColor = true;
       // 
-      // rbSetPwmCW
+      // rbSetPwmInc
       // 
-      this.rbSetPwmCW.AutoSize = true;
-      this.rbSetPwmCW.Location = new System.Drawing.Point(6, 46);
-      this.rbSetPwmCW.Name = "rbSetPwmCW";
-      this.rbSetPwmCW.Size = new System.Drawing.Size(43, 17);
-      this.rbSetPwmCW.TabIndex = 1;
-      this.rbSetPwmCW.Text = "INC";
-      this.rbSetPwmCW.UseVisualStyleBackColor = true;
+      this.rbSetPwmInc.AutoSize = true;
+      this.rbSetPwmInc.Location = new System.Drawing.Point(6, 46);
+      this.rbSetPwmInc.Name = "rbSetPwmInc";
+      this.rbSetPwmInc.Size = new System.Drawing.Size(43, 17);
+      this.rbSetPwmInc.TabIndex = 1;
+      this.rbSetPwmInc.Text = "INC";
+      this.rbSetPwmInc.UseVisualStyleBackColor = true;
       // 
       // rbSetPwmOff
       // 
@@ -3053,8 +3038,8 @@ namespace viTestApp
     private System.Windows.Forms.RadioButton rbSetLimAValHi;
     private System.Windows.Forms.GroupBox gbSetMotionControl;
     private System.Windows.Forms.GroupBox gbSetPwmDir;
-    private System.Windows.Forms.RadioButton rbSetPwmCCW;
-    private System.Windows.Forms.RadioButton rbSetPwmCW;
+    private System.Windows.Forms.RadioButton rbSetPwmDec;
+    private System.Windows.Forms.RadioButton rbSetPwmInc;
     private System.Windows.Forms.RadioButton rbSetPwmOff;
     private System.Windows.Forms.Label lblSetAcc;
     private System.Windows.Forms.Label lblSetVel;
@@ -3124,7 +3109,6 @@ namespace viTestApp
     private System.Windows.Forms.TextBox tbxStatCurVel;
     private System.Windows.Forms.GroupBox gbStatLim;
     private System.Windows.Forms.GroupBox gbStatErrFlag;
-    private System.Windows.Forms.CheckBox cbxStatFuzzyErr;
     private System.Windows.Forms.CheckBox cbxStatPosErr;
     private System.Windows.Forms.CheckBox cbxStatCANErr;
     private System.Windows.Forms.CheckBox cbxStatSysErr;
