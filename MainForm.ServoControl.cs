@@ -92,6 +92,8 @@ namespace viTestApp
 
     private void btnStatusCmd(bool write)
     {
+      string err = string.Empty;
+
       // Write according to UI checkboxes
       if(write)
       {
@@ -101,11 +103,16 @@ namespace viTestApp
         _active_servo.ServoSlave.FlagCANErr = cbxStatCANErr.Checked;
         _active_servo.ServoSlave.FlagPosErr = cbxStatPosErr.Checked;
         _active_servo.ServoSlave.FlagATDErr = cbxStatATDErr.Checked;
+        // Write StatusCommand object of this slave
+        if(!_active_servo.ServoSlave.StatusReadWriteAll(true, out err))
+        {
+          MsgBox.Show(this, err);
+          Log(LogMsgType.Error, err + "\n");
+        }
       }
 
-      // Execute StatusCommand object of this slave
-      string err;
-      if(!_active_servo.ServoSlave.StatusReadWriteAll(write, out err))
+      // Read StatusCommand object of this slave
+      if(!_active_servo.ServoSlave.StatusReadWriteAll(false, out err))
       {
         MsgBox.Show(this, err);
         Log(LogMsgType.Error, err + "\n");
@@ -121,6 +128,17 @@ namespace viTestApp
       SetCheckbox(cbxStatCANErr, _active_servo.ServoSlave.FlagCANErr);
       SetCheckbox(cbxStatPosErr, _active_servo.ServoSlave.FlagPosErr);
       SetCheckbox(cbxStatATDErr, _active_servo.ServoSlave.FlagATDErr);
+      if(_active_servo.ServoSlave.FlagLimErr)
+      {
+        lblLimitPos.Visible = true;
+        tbxLimitPos.Visible = true;
+        SetText(tbxLimitPos, _active_servo.ServoSlave.LimitPosition.ToString());
+      }
+      else
+      {
+        lblLimitPos.Visible = false;
+        tbxLimitPos.Visible = false;
+      }
 
       // system error code (0 = SUCCESS)
       short err_code;
@@ -465,12 +483,17 @@ namespace viTestApp
 
       string err;
       if(!_active_servo.ServoSlave.MoveCtlSetPosVelAccPwm((int)nudSetPos.Value,
-                                        (int)nudSetVel.Value, 
-                                        (uint)nudSetAcc.Value, 
-                                        pwm_dir,(byte)nudSetPWM.Value,
-                                        (cbxMoveCtlGo.Checked ? true : false),
-                                        GetMotionMode(),
-                                        out err))
+                                                          (int)nudSetVel.Value, 
+                                                          (uint)nudSetAcc.Value, 
+                                                          pwm_dir,(byte)nudSetPWM.Value,
+                                                          (cbxMoveCtlGo.Checked ? true : false),
+                                                          GetMotionMode(),
+                                                          out err))
+      {
+        MsgBox.Show(this, err);
+        Log(LogMsgType.Error, err + "\n");
+      }
+      if(!_active_servo.ServoSlave.MoveCtlSetHardStopDecel((uint)nudHardDecel.Value, out err))
       {
         MsgBox.Show(this, err);
         Log(LogMsgType.Error, err + "\n");
@@ -500,6 +523,7 @@ namespace viTestApp
         SetText(nudSetVel, _active_servo.ServoSlave.Velocity.ToString());
         SetText(nudSetAcc, _active_servo.ServoSlave.Acceleration.ToString());
         SetText(nudSetPWM, _active_servo.ServoSlave.PwmDuty.ToString());
+        SetText(nudHardDecel, _active_servo.ServoSlave.HardStopDeceleration.ToString());
         SetRadioButton(rbSetPwmOff, _active_servo.ServoSlave.PwmDirection.Equals(Slave.PwmDir.OFF));
         SetRadioButton(rbSetPwmInc, _active_servo.ServoSlave.PwmDirection.Equals(Slave.PwmDir.INC));
         SetRadioButton(rbSetPwmDec, _active_servo.ServoSlave.PwmDirection.Equals(Slave.PwmDir.DEC));
@@ -799,19 +823,19 @@ namespace viTestApp
                                  rbSetLimAValHi.Checked,
                                  rbSetLimAHaltHard.Checked,
                                  cbxSetLimAZero.Checked);
-      _active_servo.ServoSlave.LimitStructHT[Slave.LimitType.A] = ls;
+      _active_servo.ServoSlave.LimAStruct = ls;
 
       ls = new Slave.LimitStruct(cbxSetLimBEn.Checked,
                                  rbSetLimBValHi.Checked,
                                  rbSetLimBHaltHard.Checked,
                                  cbxSetLimBZero.Checked);
-      _active_servo.ServoSlave.LimitStructHT[Slave.LimitType.B] = ls;
+      _active_servo.ServoSlave.LimBStruct = ls;
 
       ls = new Slave.LimitStruct(cbxSetEncIdxEn.Checked,
                                  rbSetEncIdxValHi.Checked,
                                  rbSetEncIdxHaltHard.Checked,
                                  cbxSetEncIdxZero.Checked);
-      _active_servo.ServoSlave.LimitStructHT[Slave.LimitType.Z] = ls;
+      _active_servo.ServoSlave.LimZStruct = ls;
 
       _active_servo.ServoSlave.IRQEnable = cbxIRQEn.Checked;
       _active_servo.ServoSlave.IRQStopType = rbIRQhard.Checked;
@@ -838,44 +862,41 @@ namespace viTestApp
         return;
       }
       string err;
-      if(_active_servo.ServoSlave.LimitStructHT != null)
+      if(!_active_servo.ServoSlave.LimitCtlRead(out err))
       {
-        if(!_active_servo.ServoSlave.LimitCtlRead(out err))
-        {
-          MsgBox.Show(this, err);
-          Log(LogMsgType.Error, err + "\n");
-        }
-        else
-        {
-          SetCheckbox(cbxSetLimAEn, _active_servo.ServoSlave.LimitStructHT[Slave.LimitType.A].enable);
-          SetCheckbox(cbxSetLimBEn, _active_servo.ServoSlave.LimitStructHT[Slave.LimitType.B].enable);
-          SetCheckbox(cbxSetEncIdxEn, _active_servo.ServoSlave.LimitStructHT[Slave.LimitType.Z].enable);
-          SetCheckbox(cbxIRQEn, _active_servo.ServoSlave.IRQEnable);
+        MsgBox.Show(this, err);
+        Log(LogMsgType.Error, err + "\n");
+      }
+      else
+      {
+        SetCheckbox(cbxSetLimAEn, _active_servo.ServoSlave.LimAStruct.enable);
+        SetCheckbox(cbxSetLimBEn, _active_servo.ServoSlave.LimBStruct.enable);
+        SetCheckbox(cbxSetEncIdxEn, _active_servo.ServoSlave.LimZStruct.enable);
+        SetCheckbox(cbxIRQEn, _active_servo.ServoSlave.IRQEnable);
 
-          SetRadioButton(rbIRQhard, _active_servo.ServoSlave.IRQStopType);
-          SetRadioButton(rbIRQsoft, !_active_servo.ServoSlave.IRQStopType);
+        SetRadioButton(rbIRQhard, _active_servo.ServoSlave.IRQStopType);
+        SetRadioButton(rbIRQsoft, !_active_servo.ServoSlave.IRQStopType);
 
-          SetRadioButton(rbSetLimAValHi, _active_servo.ServoSlave.LimitStructHT[Slave.LimitType.A].pin_state);
-          SetRadioButton(rbSetLimAValLo, !_active_servo.ServoSlave.LimitStructHT[Slave.LimitType.A].pin_state);
-          SetRadioButton(rbSetLimBValHi, _active_servo.ServoSlave.LimitStructHT[Slave.LimitType.B].pin_state);
-          SetRadioButton(rbSetLimBValLo, !_active_servo.ServoSlave.LimitStructHT[Slave.LimitType.B].pin_state);
-          SetRadioButton(rbSetEncIdxValHi, _active_servo.ServoSlave.LimitStructHT[Slave.LimitType.Z].pin_state);
-          SetRadioButton(rbSetEncIdxValLo, !_active_servo.ServoSlave.LimitStructHT[Slave.LimitType.Z].pin_state);
+        SetRadioButton(rbSetLimAValHi, _active_servo.ServoSlave.LimAStruct.pin_state);
+        SetRadioButton(rbSetLimAValLo, !_active_servo.ServoSlave.LimAStruct.pin_state);
+        SetRadioButton(rbSetLimBValHi, _active_servo.ServoSlave.LimBStruct.pin_state);
+        SetRadioButton(rbSetLimBValLo, !_active_servo.ServoSlave.LimBStruct.pin_state);
+        SetRadioButton(rbSetEncIdxValHi, _active_servo.ServoSlave.LimZStruct.pin_state);
+        SetRadioButton(rbSetEncIdxValLo, !_active_servo.ServoSlave.LimZStruct.pin_state);
 
-          SetRadioButton(rbSetLimAHaltHard, _active_servo.ServoSlave.LimitStructHT[Slave.LimitType.A].hard_stop);
-          SetRadioButton(rbSetLimAHaltSoft, !_active_servo.ServoSlave.LimitStructHT[Slave.LimitType.A].hard_stop);
-          SetRadioButton(rbSetLimBHaltHard, _active_servo.ServoSlave.LimitStructHT[Slave.LimitType.B].hard_stop);
-          SetRadioButton(rbSetLimBHaltSoft, !_active_servo.ServoSlave.LimitStructHT[Slave.LimitType.B].hard_stop);
-          SetRadioButton(rbSetEncIdxHaltHard, _active_servo.ServoSlave.LimitStructHT[Slave.LimitType.Z].hard_stop);
-          SetRadioButton(rbSetEncIdxHaltSoft, !_active_servo.ServoSlave.LimitStructHT[Slave.LimitType.Z].hard_stop);
+        SetRadioButton(rbSetLimAHaltHard, _active_servo.ServoSlave.LimAStruct.hard_stop);
+        SetRadioButton(rbSetLimAHaltSoft, !_active_servo.ServoSlave.LimAStruct.hard_stop);
+        SetRadioButton(rbSetLimBHaltHard, _active_servo.ServoSlave.LimBStruct.hard_stop);
+        SetRadioButton(rbSetLimBHaltSoft, !_active_servo.ServoSlave.LimBStruct.hard_stop);
+        SetRadioButton(rbSetEncIdxHaltHard, _active_servo.ServoSlave.LimZStruct.hard_stop);
+        SetRadioButton(rbSetEncIdxHaltSoft, !_active_servo.ServoSlave.LimZStruct.hard_stop);
 
-          SetCheckbox(cbxSetLimAZero, _active_servo.ServoSlave.LimitStructHT[Slave.LimitType.A].zero);
-          SetCheckbox(cbxSetLimBZero, _active_servo.ServoSlave.LimitStructHT[Slave.LimitType.B].zero);
-          SetCheckbox(cbxSetEncIdxZero, _active_servo.ServoSlave.LimitStructHT[Slave.LimitType.Z].zero);
+        SetCheckbox(cbxSetLimAZero, _active_servo.ServoSlave.LimAStruct.zero);
+        SetCheckbox(cbxSetLimBZero, _active_servo.ServoSlave.LimBStruct.zero);
+        SetCheckbox(cbxSetEncIdxZero, _active_servo.ServoSlave.LimZStruct.zero);
 
-          SetText(nudSetAtdLimVal, _active_servo.ServoSlave.ATDValue.ToString());
-          SetText(nudSetAtdLimDwell, _active_servo.ServoSlave.ATDPeriod.ToString());
-        }
+        SetText(nudSetAtdLimVal, _active_servo.ServoSlave.ATDValue.ToString());
+        SetText(nudSetAtdLimDwell, _active_servo.ServoSlave.ATDPeriod.ToString());
       }
     }
     #endregion
