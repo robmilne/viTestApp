@@ -76,12 +76,19 @@ namespace viTestApp
     private List<slaveSelector> _slave_selector;
 
     private bool _update_flag = false;
+
+    Version _app_ver;
+    Version _dll_ver;
     #endregion
 
     #region Constructors
     /******************************************************************************/
     public MainForm()
     {
+      _app_ver = Assembly.GetExecutingAssembly().GetName().Version;
+      Assembly assembly = Assembly.LoadFrom("viServoMaster.dll");
+      _dll_ver = assembly.GetName().Version;
+
       InitializeComponent();
 
       // Hide settings menus and controls until servo network is detected
@@ -446,54 +453,63 @@ namespace viTestApp
     /// </summary>
     private void openMenuItem_Click(object sender, EventArgs e)
     {
-      // Build slave network (hashtable) in start form if
-      // selected comport opens and detects servo network
-      if(_port == string.Empty)
+      // app & dll versions must match
+      if(_app_ver != _dll_ver)
       {
-        // Port Dialog to select Serial Port
-        StartForm startForm = new StartForm();
+        MsgBox.Show(this, "Application and dll versions do not match!\nSee \"About\" menu item");
+      }
+      else
+      {
 
-        if(startForm.ShowDialog(Form.ActiveForm) == DialogResult.OK)
+        // Build slave network (hashtable) in start form if
+        // selected comport opens and detects servo network
+        if(_port == string.Empty)
         {
-          _port = startForm.Port;
+          // Port Dialog to select Serial Port
+          StartForm startForm = new StartForm();
 
-          if(GetGateway())
+          if(startForm.ShowDialog(Form.ActiveForm) == DialogResult.OK)
           {
-            tabControl1.Show();
-            tabControl1.DeselectTab(tabPageSetup);
-            tabPageSetup.Hide();
-            cboSlaveNode.Hide();
-            lblEnumNodes.Hide();
-            tabPageGateWay.BringToFront();
+            _port = startForm.Port;
 
-            // programmatically click gateway 'get status' button (enables bitrate cbo)
-            this.InvokeOnClick(btnGatewayGetStatus, EventArgs.Empty);
-
-            // Send ENUM command to servo network to discover nodes
-            if(GetServoNodes())
+            if(GetGateway())
             {
-              // Show settings selection menu item
-              Log(LogMsgType.Normal, _port + " opened\n");
-
-              tabPageSetup.Show();
-              tabServoSettings.Show();
-              cboSlaveNode.Show();
-              lblEnumNodes.Show();
               tabControl1.Show();
-              tabControl1.SelectedTab = tabPageSetup;
+              tabControl1.DeselectTab(tabPageSetup);
+              tabPageSetup.Hide();
+              cboSlaveNode.Hide();
+              lblEnumNodes.Hide();
+              tabPageGateWay.BringToFront();
 
-              openMenuItem.Enabled = false;
+              // programmatically click gateway 'get status' button (enables bitrate cbo)
+              this.InvokeOnClick(btnGatewayGetStatus, EventArgs.Empty);
+
+              // Send ENUM command to servo network to discover nodes
+              if(GetServoNodes())
+              {
+                // Show settings selection menu item
+                Log(LogMsgType.Normal, _port + " opened\n");
+
+                tabPageSetup.Show();
+                tabServoSettings.Show();
+                cboSlaveNode.Show();
+                lblEnumNodes.Show();
+                tabControl1.Show();
+                tabControl1.SelectedTab = tabPageSetup;
+
+                openMenuItem.Enabled = false;
+              }
+            }
+            else
+            {
+              CloseComPort(ref _port);
             }
           }
           else
           {
-            CloseComPort(ref _port);
+            _servo_ht.Clear();
+            _port = string.Empty;
           }
-        }
-        else
-        {
-          _servo_ht.Clear();
-          _port = string.Empty;
         }
       }
     }
@@ -503,7 +519,7 @@ namespace viTestApp
     /// </summary>
     private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      MsgBox.Show(this, String.Format("Created by Rob Milne\nVera Ikona Ltd\nhttp://vera-ikona.com\nVer: {0}\nCopyright © 2011", Assembly.GetExecutingAssembly().GetName().Version.ToString()), "About viTestApp", MessageBoxButtons.OK, MessageBoxIcon.Information);
+      MsgBox.Show(this, String.Format("Created by Rob Milne\nVera Ikona Ltd\nhttp://vera-ikona.com\nviTestApp Ver: {0}\nviServoMaster.dll Ver: {1}\nCopyright © 2011", Assembly.GetExecutingAssembly().GetName().Version.ToString(), _dll_ver.ToString()), "About viTestApp", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     private void CloseComPort(ref string port)
