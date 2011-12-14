@@ -63,6 +63,10 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="viServoMaster, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\viServoMaster.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CboSelector.cs" />
@@ -162,12 +166,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="vera-ikona.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\viServoMaster\viServoMaster\viServoMaster.csproj">
-      <Project>{2B657D3D-0942-4C6D-BA18-0C460F4B5BA4}</Project>
-      <Name>viServoMaster</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
