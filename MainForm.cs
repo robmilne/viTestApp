@@ -476,9 +476,11 @@ namespace viTestApp
             {
               tabControl1.Show();
               tabControl1.DeselectTab(tabPageSetup);
+              tabControl1.SelectedTab = tabPageGateWay;
               tabPageSetup.Hide();
               cboSlaveNode.Hide();
               lblEnumNodes.Hide();
+              tabPageLog.Hide();
               tabPageGateWay.BringToFront();
 
               // programmatically click gateway 'get status' button (enables bitrate cbo)
@@ -494,6 +496,7 @@ namespace viTestApp
                 tabServoSettings.Show();
                 cboSlaveNode.Show();
                 lblEnumNodes.Show();
+                tabPageLog.Show();
                 tabControl1.Show();
                 tabControl1.SelectedTab = tabPageSetup;
 
@@ -505,10 +508,25 @@ namespace viTestApp
               CloseComPort(ref _port);
             }
           }
-          else
+        }
+        else
+        {
+          Master.ReEnumerateNodes();
+          // Send ENUM command to servo network to discover nodes
+          if(GetServoNodes())
           {
-            _servo_ht.Clear();
-            _port = string.Empty;
+            // Show settings selection menu item
+            Log(LogMsgType.Normal, _port + " opened\n");
+
+            tabPageSetup.Show();
+            tabServoSettings.Show();
+            cboSlaveNode.Show();
+            lblEnumNodes.Show();
+            tabPageLog.Show();
+            tabControl1.Show();
+            tabControl1.SelectedTab = tabPageSetup;
+
+            openMenuItem.Enabled = false;
           }
         }
       }
@@ -527,7 +545,7 @@ namespace viTestApp
       try
       {
         string err_str;
-        Master.OpenCloseComPort(port, false, out err_str, true);
+        Master.OpenCloseComPort(port, out err_str, true);
       }
       catch(Exception ex)
       {
