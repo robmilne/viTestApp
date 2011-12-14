@@ -482,18 +482,14 @@ namespace viTestApp
         pwm_dir = Slave.PwmDir.DEC;
 
       string err;
-      if(!_active_servo.ServoSlave.MoveCtlSetPosVelAccPwm((int)nudSetPos.Value,
-                                                          (int)nudSetVel.Value, 
-                                                          (uint)nudSetAcc.Value, 
-                                                          pwm_dir,(byte)nudSetPWM.Value,
-                                                          (cbxMoveCtlGo.Checked ? true : false),
-                                                          GetMotionMode(),
-                                                          out err))
-      {
-        MsgBox.Show(this, err);
-        Log(LogMsgType.Error, err + "\n");
-      }
-      if(!_active_servo.ServoSlave.MoveCtlSetHardStopDecel((uint)nudHardDecel.Value, out err))
+      if(!_active_servo.ServoSlave.MoveCtlSetAll((int)nudSetPos.Value,
+                                                 (int)nudSetVel.Value, 
+                                                 (uint)nudSetAcc.Value, 
+                                                 pwm_dir,(byte)nudSetPWM.Value,
+                                                 (uint)nudHardDecel.Value,
+                                                 (cbxMoveCtlGo.Checked ? true : false),
+                                                 GetMotionMode(),
+                                                 out err))
       {
         MsgBox.Show(this, err);
         Log(LogMsgType.Error, err + "\n");
