@@ -64,7 +64,7 @@ namespace viTestApp
         try
         {
           string err_str;
-          Master.OpenCloseComPort(portName, false, out err_str, cbxStartSmallNetwork.Checked);
+          Master.OpenCloseComPort(portName, out err_str, cbxStartSmallNetwork.Checked);
         }
         catch(Exception ex)
         {
@@ -100,7 +100,7 @@ namespace viTestApp
         {
           string err_str;
 
-          if(Master.OpenCloseComPort(port, false, out err_str, cbxStartSmallNetwork.Checked))
+          if(Master.OpenCloseComPort(port, out err_str, cbxStartSmallNetwork.Checked))
           {
             // Get open COM port name - null if closed
             portName = (string)Master.PortName;
