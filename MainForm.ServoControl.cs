@@ -523,6 +523,31 @@ namespace viTestApp
         SetRadioButton(rbSetPwmOff, _active_servo.ServoSlave.PwmDirection.Equals(Slave.PwmDir.OFF));
         SetRadioButton(rbSetPwmInc, _active_servo.ServoSlave.PwmDirection.Equals(Slave.PwmDir.INC));
         SetRadioButton(rbSetPwmDec, _active_servo.ServoSlave.PwmDirection.Equals(Slave.PwmDir.DEC));
+
+        rbMotionStartTrapezoidal.Checked = false;
+        rbMotionStartVel.Checked = false;
+        rbMotionStartPwm.Checked = false;
+        rbMotionStartPos.Checked = false;
+        rbMotionStartPwmLim.Checked = false;
+        rbMotionStartZero.Checked = false;
+        switch(_active_servo.ServoSlave.MoveMode)
+        {
+          case Slave.MoveModes.SRV_TRAPEZOIDAL_MODE:
+            rbMotionStartTrapezoidal.Checked = true;
+            break;
+          case Slave.MoveModes.SRV_VELOCITY_MODE:
+            rbMotionStartVel.Checked = true;
+            break;
+          case Slave.MoveModes.SRV_PWM_MODE:
+            rbMotionStartPwm.Checked = true;
+            break;
+          case Slave.MoveModes.SRV_PWM_POS_MODE:
+            rbMotionStartPwmLim.Checked = true;
+            break;
+          case Slave.MoveModes.SRV_POSITION_MODE:
+            rbMotionStartPos.Checked = true;
+            break;
+        }
       }
     }
 
@@ -798,6 +823,12 @@ namespace viTestApp
 
       RndForm rndForm = new RndForm(_active_servo);
       rndForm.ShowDialog(Form.ActiveForm);
+    }
+
+    // Homing to zero is group command
+    private void cbxGroup_CheckedChanged(object sender, EventArgs e)
+    {
+      rbMotionStartZero.Enabled = cbxGroup.Checked;
     }
     #endregion
 

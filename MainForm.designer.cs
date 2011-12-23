@@ -68,6 +68,10 @@ namespace viTestApp
       this.rbTestMotionStartSoft = new System.Windows.Forms.RadioButton();
       this.rbTestMotionStopHard = new System.Windows.Forms.RadioButton();
       this.gbSetupStatus = new System.Windows.Forms.GroupBox();
+      this.lblLimitPos = new System.Windows.Forms.Label();
+      this.tbxLimitPos = new System.Windows.Forms.TextBox();
+      this.lblStatATDVal = new System.Windows.Forms.Label();
+      this.tbxStatATDVal = new System.Windows.Forms.TextBox();
       this.btnStatusRead = new System.Windows.Forms.Button();
       this.lblStatPeakAcc = new System.Windows.Forms.Label();
       this.tbxStatPeakAcc = new System.Windows.Forms.TextBox();
@@ -150,6 +154,8 @@ namespace viTestApp
       this.rbSetLimAValLo = new System.Windows.Forms.RadioButton();
       this.rbSetLimAValHi = new System.Windows.Forms.RadioButton();
       this.gbSetMotionControl = new System.Windows.Forms.GroupBox();
+      this.lblHardDecel = new System.Windows.Forms.Label();
+      this.nudHardDecel = new System.Windows.Forms.NumericUpDown();
       this.cbxMoveCtlGo = new System.Windows.Forms.CheckBox();
       this.btnMotionCtlLoad = new System.Windows.Forms.Button();
       this.btnMotionCtlSave = new System.Windows.Forms.Button();
@@ -258,12 +264,6 @@ namespace viTestApp
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
       this.openMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.lblHardDecel = new System.Windows.Forms.Label();
-      this.nudHardDecel = new System.Windows.Forms.NumericUpDown();
-      this.lblStatATDVal = new System.Windows.Forms.Label();
-      this.tbxStatATDVal = new System.Windows.Forms.TextBox();
-      this.lblLimitPos = new System.Windows.Forms.Label();
-      this.tbxLimitPos = new System.Windows.Forms.TextBox();
       this.tabControl1.SuspendLayout();
       this.tabPageGateWay.SuspendLayout();
       this.gbStatus.SuspendLayout();
@@ -297,6 +297,7 @@ namespace viTestApp
       this.gbSetLimAHalt.SuspendLayout();
       this.gbSetLimAVal.SuspendLayout();
       this.gbSetMotionControl.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.nudHardDecel)).BeginInit();
       this.gbSetPwmDir.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.nudSetPWM)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.nudSetVel)).BeginInit();
@@ -318,7 +319,6 @@ namespace viTestApp
       ((System.ComponentModel.ISupportInitialize)(this.picbxStats)).BeginInit();
       this.tabPageLog.SuspendLayout();
       this.menuStrip1.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.nudHardDecel)).BeginInit();
       this.SuspendLayout();
       // 
       // tabControl1
@@ -620,6 +620,7 @@ namespace viTestApp
       this.cbxGroup.Size = new System.Drawing.Size(15, 14);
       this.cbxGroup.TabIndex = 18;
       this.cbxGroup.UseVisualStyleBackColor = true;
+      this.cbxGroup.CheckedChanged += new System.EventHandler(this.cbxGroup_CheckedChanged);
       // 
       // gbCfg
       // 
@@ -762,6 +763,44 @@ namespace viTestApp
       this.gbSetupStatus.TabIndex = 16;
       this.gbSetupStatus.TabStop = false;
       this.gbSetupStatus.Text = "Status";
+      // 
+      // lblLimitPos
+      // 
+      this.lblLimitPos.AutoSize = true;
+      this.lblLimitPos.Location = new System.Drawing.Point(89, 123);
+      this.lblLimitPos.Name = "lblLimitPos";
+      this.lblLimitPos.Size = new System.Drawing.Size(80, 13);
+      this.lblLimitPos.TabIndex = 40;
+      this.lblLimitPos.Text = "Position at Limit";
+      // 
+      // tbxLimitPos
+      // 
+      this.tbxLimitPos.BackColor = System.Drawing.SystemColors.Info;
+      this.tbxLimitPos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.tbxLimitPos.Location = new System.Drawing.Point(6, 120);
+      this.tbxLimitPos.Name = "tbxLimitPos";
+      this.tbxLimitPos.ReadOnly = true;
+      this.tbxLimitPos.Size = new System.Drawing.Size(80, 20);
+      this.tbxLimitPos.TabIndex = 39;
+      // 
+      // lblStatATDVal
+      // 
+      this.lblStatATDVal.AutoSize = true;
+      this.lblStatATDVal.Location = new System.Drawing.Point(89, 103);
+      this.lblStatATDVal.Name = "lblStatATDVal";
+      this.lblStatATDVal.Size = new System.Drawing.Size(59, 13);
+      this.lblStatATDVal.TabIndex = 38;
+      this.lblStatATDVal.Text = "ATD Value";
+      // 
+      // tbxStatATDVal
+      // 
+      this.tbxStatATDVal.BackColor = System.Drawing.SystemColors.Info;
+      this.tbxStatATDVal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.tbxStatATDVal.Location = new System.Drawing.Point(6, 100);
+      this.tbxStatATDVal.Name = "tbxStatATDVal";
+      this.tbxStatATDVal.ReadOnly = true;
+      this.tbxStatATDVal.Size = new System.Drawing.Size(80, 20);
+      this.tbxStatATDVal.TabIndex = 37;
       // 
       // btnStatusRead
       // 
@@ -1127,6 +1166,7 @@ namespace viTestApp
       // rbMotionStartZero
       // 
       this.rbMotionStartZero.AutoSize = true;
+      this.rbMotionStartZero.Enabled = false;
       this.rbMotionStartZero.Location = new System.Drawing.Point(89, 75);
       this.rbMotionStartZero.Name = "rbMotionStartZero";
       this.rbMotionStartZero.Size = new System.Drawing.Size(105, 17);
@@ -1200,12 +1240,10 @@ namespace viTestApp
       // rbMotionStartTrapezoidal
       // 
       this.rbMotionStartTrapezoidal.AutoSize = true;
-      this.rbMotionStartTrapezoidal.Checked = true;
-      this.rbMotionStartTrapezoidal.Location = new System.Drawing.Point(7, 75);
+      this.rbMotionStartTrapezoidal.Location = new System.Drawing.Point(7, 43);
       this.rbMotionStartTrapezoidal.Name = "rbMotionStartTrapezoidal";
       this.rbMotionStartTrapezoidal.Size = new System.Drawing.Size(80, 17);
       this.rbMotionStartTrapezoidal.TabIndex = 2;
-      this.rbMotionStartTrapezoidal.TabStop = true;
       this.rbMotionStartTrapezoidal.Text = "Trapezoidal";
       this.rbMotionStartTrapezoidal.UseVisualStyleBackColor = true;
       this.rbMotionStartTrapezoidal.CheckedChanged += new System.EventHandler(this.rbMotionStart_CheckedChanged);
@@ -1224,7 +1262,7 @@ namespace viTestApp
       // rbMotionStartPos
       // 
       this.rbMotionStartPos.AutoSize = true;
-      this.rbMotionStartPos.Location = new System.Drawing.Point(7, 43);
+      this.rbMotionStartPos.Location = new System.Drawing.Point(7, 75);
       this.rbMotionStartPos.Name = "rbMotionStartPos";
       this.rbMotionStartPos.Size = new System.Drawing.Size(62, 17);
       this.rbMotionStartPos.TabIndex = 0;
@@ -1692,6 +1730,33 @@ namespace viTestApp
       this.gbSetMotionControl.TabIndex = 13;
       this.gbSetMotionControl.TabStop = false;
       this.gbSetMotionControl.Text = "Motion Control";
+      // 
+      // lblHardDecel
+      // 
+      this.lblHardDecel.AutoSize = true;
+      this.lblHardDecel.Location = new System.Drawing.Point(6, 230);
+      this.lblHardDecel.Name = "lblHardDecel";
+      this.lblHardDecel.Size = new System.Drawing.Size(82, 13);
+      this.lblHardDecel.TabIndex = 20;
+      this.lblHardDecel.Text = "Hard stop decel";
+      // 
+      // nudHardDecel
+      // 
+      this.nudHardDecel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.nudHardDecel.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+      this.nudHardDecel.Location = new System.Drawing.Point(8, 245);
+      this.nudHardDecel.Maximum = new decimal(new int[] {
+            16777216,
+            0,
+            0,
+            0});
+      this.nudHardDecel.Name = "nudHardDecel";
+      this.nudHardDecel.Size = new System.Drawing.Size(100, 20);
+      this.nudHardDecel.TabIndex = 19;
       // 
       // cbxMoveCtlGo
       // 
@@ -2875,71 +2940,6 @@ namespace viTestApp
       this.aboutToolStripMenuItem.Text = "About";
       this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
       // 
-      // lblHardDecel
-      // 
-      this.lblHardDecel.AutoSize = true;
-      this.lblHardDecel.Location = new System.Drawing.Point(6, 230);
-      this.lblHardDecel.Name = "lblHardDecel";
-      this.lblHardDecel.Size = new System.Drawing.Size(82, 13);
-      this.lblHardDecel.TabIndex = 20;
-      this.lblHardDecel.Text = "Hard stop decel";
-      // 
-      // nudHardDecel
-      // 
-      this.nudHardDecel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.nudHardDecel.Increment = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-      this.nudHardDecel.Location = new System.Drawing.Point(8, 245);
-      this.nudHardDecel.Maximum = new decimal(new int[] {
-            16777216,
-            0,
-            0,
-            0});
-      this.nudHardDecel.Name = "nudHardDecel";
-      this.nudHardDecel.Size = new System.Drawing.Size(100, 20);
-      this.nudHardDecel.TabIndex = 19;
-      // 
-      // lblStatATDVal
-      // 
-      this.lblStatATDVal.AutoSize = true;
-      this.lblStatATDVal.Location = new System.Drawing.Point(89, 103);
-      this.lblStatATDVal.Name = "lblStatATDVal";
-      this.lblStatATDVal.Size = new System.Drawing.Size(59, 13);
-      this.lblStatATDVal.TabIndex = 38;
-      this.lblStatATDVal.Text = "ATD Value";
-      // 
-      // tbxStatATDVal
-      // 
-      this.tbxStatATDVal.BackColor = System.Drawing.SystemColors.Info;
-      this.tbxStatATDVal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.tbxStatATDVal.Location = new System.Drawing.Point(6, 100);
-      this.tbxStatATDVal.Name = "tbxStatATDVal";
-      this.tbxStatATDVal.ReadOnly = true;
-      this.tbxStatATDVal.Size = new System.Drawing.Size(80, 20);
-      this.tbxStatATDVal.TabIndex = 37;
-      // 
-      // lblLimitPos
-      // 
-      this.lblLimitPos.AutoSize = true;
-      this.lblLimitPos.Location = new System.Drawing.Point(89, 123);
-      this.lblLimitPos.Name = "lblLimitPos";
-      this.lblLimitPos.Size = new System.Drawing.Size(80, 13);
-      this.lblLimitPos.TabIndex = 40;
-      this.lblLimitPos.Text = "Position at Limit";
-      // 
-      // tbxLimitPos
-      // 
-      this.tbxLimitPos.BackColor = System.Drawing.SystemColors.Info;
-      this.tbxLimitPos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.tbxLimitPos.Location = new System.Drawing.Point(6, 120);
-      this.tbxLimitPos.Name = "tbxLimitPos";
-      this.tbxLimitPos.ReadOnly = true;
-      this.tbxLimitPos.Size = new System.Drawing.Size(80, 20);
-      this.tbxLimitPos.TabIndex = 39;
-      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3009,6 +3009,7 @@ namespace viTestApp
       this.gbSetLimAVal.PerformLayout();
       this.gbSetMotionControl.ResumeLayout(false);
       this.gbSetMotionControl.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.nudHardDecel)).EndInit();
       this.gbSetPwmDir.ResumeLayout(false);
       this.gbSetPwmDir.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.nudSetPWM)).EndInit();
@@ -3044,7 +3045,6 @@ namespace viTestApp
       this.tabPageLog.ResumeLayout(false);
       this.menuStrip1.ResumeLayout(false);
       this.menuStrip1.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.nudHardDecel)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
