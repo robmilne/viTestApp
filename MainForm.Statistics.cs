@@ -29,6 +29,8 @@ namespace viTestApp
 
     private bool suppress_stored_plot_checkbox;
     private bool suppress_plot_event;
+
+    private Bitmap offScreenBitMap = null;
     #endregion
 
     #region Helper Methods
@@ -56,12 +58,17 @@ namespace viTestApp
         return;
       }
 
-      Graphics g;
       // Make height sizeof byte + 2 to see curves at satuaration
       picbxStats.Size = new Size(size, 257);
       int width = picbxStats.Size.Width > pnlStats.Size.Width ? picbxStats.Size.Width : pnlStats.Size.Width;
       pnlStats.AutoScrollMinSize = new Size(width, picbxStats.Size.Height);
-      g = picbxStats.CreateGraphics();
+
+      // Render graph as a bitmap - use paint event to paste into picbxStats
+      if(offScreenBitMap == null)
+      {
+        offScreenBitMap = new Bitmap(picbxStats.Width, picbxStats.Height);
+      }
+      Graphics g = Graphics.FromImage(offScreenBitMap);
       g.Clear(System.Drawing.Color.White);
 
       // draw a horizontal line at 0x80 (signed zero)
@@ -107,11 +114,11 @@ namespace viTestApp
       }
 
       g.TranslateTransform(pnlStats.AutoScrollPosition.X, pnlStats.AutoScrollPosition.Y);
-      picbxStats.Update();
-
       g.Dispose();
       p.Dispose();
       dashPen.Dispose();
+      // Raise paint event
+      picbxStats.Invalidate();
     }
 
     private void setCtlPts(List<byte> pts)
@@ -148,25 +155,20 @@ namespace viTestApp
     /// </summary>
     private void pnlStats_Paint(object sender, PaintEventArgs e)
     {
-      if(cboSlaveNode.SelectedValue == null || _servo_ht == null)
+      Panel panel = sender as Panel;
+      if(offScreenBitMap != null)
       {
-        return;
-      }
-      byte node = (byte)Convert.ToByte(cboSlaveNode.SelectedValue);
-      if(_servo_ht.ContainsKey(node))
-      {
-        Servo servo = _servo_ht[node];
-        plotData(servo);
-      }
+        e.Graphics.DrawImage(offScreenBitMap, new Point(panel.AutoScrollPosition.X, panel.AutoScrollPosition.Y));
+      } 
     }
-    private void StatsHandleScroll(object sender, ScrollEventArgs e)
+    private void pnlStats_Scroll(object sender, ScrollEventArgs e)
     {
-      if(sender is Panel)
+      Panel panel = sender as Panel;
+      if(offScreenBitMap != null)
       {
-        Panel panel = sender as Panel;
-        Graphics g = picbxStats.CreateGraphics();
+        Graphics g = Graphics.FromImage(offScreenBitMap);
         g.TranslateTransform(panel.AutoScrollPosition.X, panel.AutoScrollPosition.Y);
-        picbxStats.Update();
+        g.Dispose();
       }
     }
 
@@ -192,7 +194,7 @@ namespace viTestApp
           g.Clear(System.Drawing.Color.White);
           g.DrawString("Wait for Statistics", new Font("Verdana", 14),
           new SolidBrush(Color.Black), 10, 10);
-          if(_statistics_ev.WaitOne(30000, false) == false)
+          if(_statistics_ev.WaitOne(15000, false) == false)
           {
             MsgBox.Show(this, "Stats timeout\n");
             g.Clear(System.Drawing.Color.White);

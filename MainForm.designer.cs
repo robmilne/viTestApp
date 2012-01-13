@@ -2854,7 +2854,7 @@ namespace viTestApp
       this.pnlStats.Size = new System.Drawing.Size(599, 277);
       this.pnlStats.TabIndex = 2;
       this.pnlStats.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlStats_Paint);
-      this.pnlStats.Scroll += new System.Windows.Forms.ScrollEventHandler(this.StatsHandleScroll);
+      this.pnlStats.Scroll += new System.Windows.Forms.ScrollEventHandler(this.pnlStats_Scroll);
       // 
       // picbxStats
       // 

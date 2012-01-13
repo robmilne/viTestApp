@@ -251,18 +251,18 @@ namespace viTestApp
 
       StringBuilder err_sb = new StringBuilder("Servo Control Write Error\n");
       bool err = false;
-      if(cboSetServoRate.SelectedIndex == -1)
+      if(cboSetServoRate.SelectedIndex < 1)
       {
         err_sb.Append("\nSelect a Servo Rate");
         err = true;
       }
       else
       {
-        // Add 4 for uninitialized vals
-        rate = (Slave.ServoRates)cboSetServoRate.SelectedIndex + 4;
+        // Add 3 for uninitialized vals
+        rate = (Slave.ServoRates)cboSetServoRate.SelectedIndex + 3;
       }
 
-      if(cboSetHBridge.SelectedIndex == -1)
+      if(cboSetHBridge.SelectedIndex < 1)
       {
         err_sb.Append("\nSelect a h-bridge");
         err = true;
@@ -270,9 +270,9 @@ namespace viTestApp
       else
       {
         // Add 1 for first uninitialized val
-        hbridge = (Slave.HBridges)cboSetHBridge.SelectedIndex + 1;
+        hbridge = (Slave.HBridges)cboSetHBridge.SelectedIndex;
       }
-      if(cboSetPWMRate.SelectedIndex == -1)
+      if(cboSetPWMRate.SelectedIndex < 1)
       {
         err_sb.Append("\nSelect a h-bridge pwm");
         err = true;
@@ -280,16 +280,17 @@ namespace viTestApp
       else
       {
         // Add 1 for first uninitialized val
-        hb_pwm = (Slave.PWMRate)cboSetPWMRate.SelectedIndex + 1;
+        hb_pwm = (Slave.PWMRate)cboSetPWMRate.SelectedIndex;
       }
 
-      if(cboSetEncDiv.SelectedIndex == -1)
+      if(cboSetEncDiv.SelectedIndex < 0)
       {
         err_sb.Append("\nSelect an encoder divide value");
         err = true;
       }
       else
       {
+        // Index 1 is enum 0
         enc_div = (Slave.EncoderDivider)cboSetEncDiv.SelectedIndex;
       }
 
@@ -344,13 +345,14 @@ namespace viTestApp
         StringBuilder err_sb = new StringBuilder("Servo Control Load Error\n");
         bool err_flag = false;
 
-        if((int)_active_servo.ServoSlave.ServoRate > 1)
+        if((int)_active_servo.ServoSlave.ServoRate > 3)
         {
           // Subtract 4 for non-init rates
-          SetComboBox(cboSetServoRate, (int)(_active_servo.ServoSlave.ServoRate - 4));
+          SetComboBox(cboSetServoRate, (int)(_active_servo.ServoSlave.ServoRate - 3));
         }
         else
         {
+          SetComboBox(cboSetServoRate, 0);
           err_sb.Append("\nServo rate not initialized");
           err_flag = true;
         }
@@ -358,26 +360,28 @@ namespace viTestApp
         if((int)_active_servo.ServoSlave.HBridge > 0)
         {
           // Subtract 1 for non-init values
-          SetComboBox(cboSetHBridge, (int)(_active_servo.ServoSlave.HBridge - 1));
+          SetComboBox(cboSetHBridge, (int)(_active_servo.ServoSlave.HBridge));
         }
         else
         {
+          SetComboBox(cboSetHBridge, 0);
           err_sb.Append("\nH-Bridge rate not initialized");
           err_flag = true;
         }
 
         if((int)_active_servo.ServoSlave.HbPwmRate > 0)
         {
-          SetComboBox(cboSetPWMRate, (int)(_active_servo.ServoSlave.HbPwmRate - 1));
+          SetComboBox(cboSetPWMRate, (int)(_active_servo.ServoSlave.HbPwmRate));
         }
         else
         {
+          SetComboBox(cboSetPWMRate, 0);
           err_sb.Append("\nPWM rate not initialized");
           err_flag = true;
         }
 
         // Add one to returned EncDiv value since zero value is actually divide by 1 
-        SetComboBox(cboSetEncDiv, (int)(_active_servo.ServoSlave.EncDiv + 1));
+        SetComboBox(cboSetEncDiv, (int)(_active_servo.ServoSlave.EncDiv));
 
         SetRadioButton(rbSetKickOn, _active_servo.ServoSlave.KickEnable);
         SetRadioButton(rbSetKickOff, !_active_servo.ServoSlave.KickEnable);
@@ -470,11 +474,7 @@ namespace viTestApp
         MsgBox.Show(this, "Select a Node");
         return;
       }
-      if(GetMotionMode() == Slave.MoveModes.SRV_NO_INIT_MODE)
-      {
-        MsgBox.Show(this, "\"Goto Zero\" cannot be selected for this command!");
-        return;
-      }
+
       Slave.PwmDir pwm_dir = Slave.PwmDir.OFF;
       if(rbSetPwmInc.Checked)
         pwm_dir = Slave.PwmDir.INC;
@@ -491,8 +491,9 @@ namespace viTestApp
                                                  GetMotionMode(),
                                                  out err))
       {
+        err = err + "\nSelect a motion mode!\n";
         MsgBox.Show(this, err);
-        Log(LogMsgType.Error, err + "\n");
+        Log(LogMsgType.Error, err);
       }
     }
 
@@ -583,15 +584,25 @@ namespace viTestApp
     /// </summary>
     private void btnTestMotionStart_Click(object sender, EventArgs e)
     {
+      Slave.MoveModes move_mode = GetMotionMode();
+
       if(cbxGroup.Checked)
       {
         StartGroupMotion();
         return;
       }
-      else if(_active_servo == null)
+      else
       {
-        MsgBox.Show(this, "Select a Node");
-        return;
+        if(_active_servo == null)
+        {
+          MsgBox.Show(this, "Select a Node");
+          return;
+        }
+        if(move_mode == Slave.MoveModes.SRV_NO_INIT_MODE)
+        {
+          MsgBox.Show(this, "Select a Motion Type");
+          return;
+        }
       }
       string err;
       if(!_active_servo.ServoSlave.MoveCtlStart(GetMotionMode(), out err))

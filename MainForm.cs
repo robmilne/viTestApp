@@ -86,8 +86,7 @@ namespace viTestApp
     public MainForm()
     {
       _app_ver = Assembly.GetExecutingAssembly().GetName().Version;
-      Assembly assembly = Assembly.LoadFrom("viServoMaster.dll");
-      _dll_ver = assembly.GetName().Version;
+      _dll_ver = Master.Version;
 
       InitializeComponent();
 
@@ -266,9 +265,9 @@ namespace viTestApp
     {
       //NB: String arrays used to populate combobox selections MUST match the control enum
 
-      // Get Servo Rate Enums (first two correspond to 'NO_INIT')
+      // Get Servo Rate Enums (first three correspond to 'NO_INIT')
       ClrComboBox(cboSetServoRate);
-      for(int i = 4; i < Strings.ServoRateStrings.Length; i++)
+      for(int i = 3; i < Strings.ServoRateStrings.Length; i++)
       {
         cboSetServoRate.Items.Add(Strings.ServoRateStrings[i]);
       }
@@ -284,7 +283,7 @@ namespace viTestApp
 
       // Get H-Bridge Enums (first corresponds to 'NO_INIT')
       ClrComboBox(cboSetHBridge);
-      for(int i = 1; i < Strings.HBridgeStrings.Length; i++)
+      for(int i = 0; i < Strings.HBridgeStrings.Length; i++)
       {
         cboSetHBridge.Items.Add(Strings.HBridgeStrings[i]);
       }
@@ -292,7 +291,7 @@ namespace viTestApp
 
       // Get H-Bridge PWM Rate Enums (first corresponds to 'NO_INIT')
       ClrComboBox(cboSetPWMRate);
-      for(int i = 1; i < Strings.PWMRateStrings.Length; i++)
+      for(int i = 0; i < Strings.PWMRateStrings.Length; i++)
       {
         cboSetPWMRate.Items.Add(Strings.PWMRateStrings[i]);
       }
