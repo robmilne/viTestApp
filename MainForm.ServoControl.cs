@@ -319,9 +319,9 @@ namespace viTestApp
         // Execute Slave object of this slave
         string err_str;
         if(!_active_servo.ServoSlave.ServoCtlWrite(rate, hbridge, hb_pwm, enc_div,
-                                                 rbSetKickOn.Checked, 
-                                                 rbSetPowerOff.Checked,
-                                                 gpio_state, out err_str))
+                                                   rbSetKickOn.Checked, 
+                                                   rbSetPowerOff.Checked,
+                                                   gpio_state, out err_str))
         {
           MsgBox.Show(this, err_str);
         }

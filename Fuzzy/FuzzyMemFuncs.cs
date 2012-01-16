@@ -15,6 +15,7 @@ using System.Text.RegularExpressions;
 using System.Globalization;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Drawing.Imaging;
 using viServoMaster;
 #endregion
 
@@ -24,17 +25,23 @@ namespace viTestApp
   {
     #region Constants
     /******************************************************************************/
-    private const int LOC_POS_TOP = 36;
-    private const int LOC_SPD_TOP = 166;
-    private const int LOC_OUT_TOP = 296;
-    private const int LOC_LEFT = 56;
+    private const int LOC_POS_TOP = 35;
+    private const int LOC_SPD_TOP = 165;
+    private const int LOC_OUT_TOP = 295;
+    private const int LOC_LEFT = 120;
 
-    private const int LABEL_LEFT = 2;
+    private const int LABEL_LEFT = 65;
     private const int LABEL_WIDTH = 54;
     private const int LABEL_HEIGHT = 12;
 
     private const int TB_WIDTH = 20;
     private const int TB_HEIGHT = 20;
+
+    // 2 pixel padding + 2 pixel border
+    private const int BM_WIDTH = 132;
+    // 2 pixel border
+    private const int BM_HEIGHT = 66;
+    private const int BM_LEFT = 227;
     #endregion
 
     #region Struct
@@ -75,6 +82,10 @@ namespace viTestApp
     private List<TextBox> _output_text_box_list = null;
 
     private bool _enable_mem_funcs = true;
+
+    private PictureBox _picBxPosErr = null;
+    private PictureBox _picBxSpd = null;
+    private PictureBox _picBxOutput = null;
 
     // Track whether Dispose has been called.
     private bool disposed = false;
@@ -193,6 +204,8 @@ namespace viTestApp
         {
           _out_singleton_array[0] = (byte)val;
           _output_text_box_list[0].Text = val.ToString("X2");
+          //_picBxOutput.Image = DrawOutputGraph();
+          _picBxOutput.Image = ResizeImage(DrawOutputGraph(), BM_WIDTH, BM_HEIGHT);
           return;
         }
       }
@@ -218,6 +231,8 @@ namespace viTestApp
         {
           _out_singleton_array[1] = (byte)val;
           _output_text_box_list[1].Text = val.ToString("X2");
+          //_picBxOutput.Image = DrawOutputGraph();
+          _picBxOutput.Image = ResizeImage(DrawOutputGraph(), BM_WIDTH, BM_HEIGHT);
           return;
         }
       }
@@ -243,6 +258,8 @@ namespace viTestApp
         {
           _out_singleton_array[2] = (byte)val;
           _output_text_box_list[2].Text = val.ToString("X2");
+          //_picBxOutput.Image = DrawOutputGraph();
+          _picBxOutput.Image = ResizeImage(DrawOutputGraph(), BM_WIDTH, BM_HEIGHT);
           return;
         }
       }
@@ -268,6 +285,8 @@ namespace viTestApp
         {
           _out_singleton_array[3] = (byte)val;
           _output_text_box_list[3].Text = val.ToString("X2");
+          //_picBxOutput.Image = DrawOutputGraph();
+          _picBxOutput.Image = ResizeImage(DrawOutputGraph(), BM_WIDTH, BM_HEIGHT);
           return;
         }
       }
@@ -293,12 +312,15 @@ namespace viTestApp
         {
           _out_singleton_array[3] = (byte)val;
           _output_text_box_list[4].Text = val.ToString("X2");
+          //_picBxOutput.Image = DrawOutputGraph();
+          _picBxOutput.Image = ResizeImage(DrawOutputGraph(), BM_WIDTH, BM_HEIGHT);
           return;
         }
       }
       // Restore original value;
       _output_text_box_list[4].Text = _out_singleton_array[4].ToString("X2");
     }
+
     #endregion
 
     #region Public Methods
@@ -326,6 +348,18 @@ namespace viTestApp
           TrapezoidalFunc pos_trap_func = new TrapezoidalFunc(_pos_mf_array, 4 * i);
           pos_mem_func.TrapezoidalFunc = pos_trap_func;
         }
+        if(_picBxPosErr == null)
+        {
+          _picBxPosErr = new PictureBox();
+          _picBxPosErr.Size = new Size(BM_WIDTH, BM_HEIGHT);
+          _picBxPosErr.Location = new Point(BM_LEFT, LOC_POS_TOP);
+          _picBxPosErr.BorderStyle = BorderStyle.FixedSingle;
+          _container.Controls.Add(_picBxPosErr);
+        }
+        // Resize the graph width by .5 to fit in UI
+        //_picBxPosErr.Image = DrawPosGraph();
+        _picBxPosErr.Image = ResizeImage(DrawPosGraph(), BM_WIDTH, BM_HEIGHT);
+
         // spd has 5 trapezoidal functions consisting of 4 bytes
         for(int i = 0; i < (_spd_mf_array.Length / 4); i++)
         {
@@ -346,6 +380,16 @@ namespace viTestApp
           TrapezoidalFunc spd_trap_func = new TrapezoidalFunc(_spd_mf_array, 4 * i);
           spd_mem_func.TrapezoidalFunc = spd_trap_func;
         }
+        if(_picBxSpd == null)
+        {
+          _picBxSpd = new PictureBox();
+          _picBxSpd.Size = new Size(BM_WIDTH, BM_HEIGHT);
+          _picBxSpd.Location = new Point(BM_LEFT, LOC_SPD_TOP);
+          _picBxSpd.BorderStyle = BorderStyle.FixedSingle;
+          _container.Controls.Add(_picBxSpd);
+        }
+        //_picBxSpd.Image = DrawSpdGraph();
+        _picBxSpd.Image = ResizeImage(DrawSpdGraph(), BM_WIDTH, BM_HEIGHT);
 
         // Programmatically build controls to hold output singleton values
         Font f_reg = new Font("Microsoft Sans Serif", 7);
@@ -366,12 +410,23 @@ namespace viTestApp
             tb.Font = f_reg;
             tb.Size = new Size(TB_WIDTH, TB_HEIGHT);
             tb.Location = new Point(LOC_LEFT, LOC_OUT_TOP + (TB_HEIGHT * i));
-            //tb.Text = _out_singleton_array[i].ToString("X2");
             _container.Controls.Add(tb);
             _output_text_box_list.Add(tb);
           }
         }
-        SetOutputText();
+        if(_picBxOutput == null)
+        {
+          _picBxOutput = new PictureBox();
+          _picBxOutput.Size = new Size(BM_WIDTH, BM_HEIGHT);
+          _picBxOutput.Location = new Point(BM_LEFT, LOC_OUT_TOP);
+          _picBxOutput.BorderStyle = BorderStyle.FixedSingle;
+          _container.Controls.Add(_picBxOutput);
+        }
+        if(SetOutputText())
+        {
+          //_picBxOutput.Image = DrawOutputGraph();
+          _picBxOutput.Image = ResizeImage(DrawOutputGraph(), BM_WIDTH, BM_HEIGHT);
+        }
 
         this.Enable(_enable_mem_funcs);
       }
@@ -491,6 +546,11 @@ namespace viTestApp
       _pos_mf_array[1 + (index * 4)] = func.p1;
       _pos_mf_array[2 + (index * 4)] = func.s0;
       _pos_mf_array[3 + (index * 4)] = func.s1;
+      if(_picBxPosErr != null)
+      {
+        //_picBxPosErr.Image = DrawPosGraph();
+        _picBxPosErr.Image = ResizeImage(DrawPosGraph(), BM_WIDTH, BM_HEIGHT);
+      }
     }
     /// <summary>
     /// Callback function to update _spd_mf_array from speed FuzzyMemFunc
@@ -501,9 +561,119 @@ namespace viTestApp
       _spd_mf_array[1 + (index * 4)] = func.p1;
       _spd_mf_array[2 + (index * 4)] = func.s0;
       _spd_mf_array[3 + (index * 4)] = func.s1;
+      if(_picBxSpd != null)
+      {
+        //_picBxSpd.Image = DrawSpdGraph();
+        _picBxSpd.Image = ResizeImage(DrawSpdGraph(), BM_WIDTH, BM_HEIGHT);
+      }
     }
 
-    private void SetOutputText()
+    private Bitmap DrawPosGraph()
+    {
+      return DrawMemFuncGraph(_pos_mf_array, LOC_POS_TOP);
+    }
+    private Bitmap DrawSpdGraph()
+    {
+      return DrawMemFuncGraph(_spd_mf_array, LOC_SPD_TOP);
+    }
+    private Bitmap DrawMemFuncGraph(byte[] mf_array, int top)
+    {
+      Graphics g;
+      Pen p;
+      Bitmap bitmap = new Bitmap(BM_WIDTH * 2, BM_HEIGHT);
+      g = Graphics.FromImage(bitmap);
+      g.Clear(System.Drawing.Color.White);
+      p = new Pen(Color.LightGray);
+      //g.DrawLine(p, 130, 1, 130, BM_HEIGHT - 1);
+      g.DrawLine(p, BM_WIDTH, 1, BM_WIDTH, BM_HEIGHT - 1);
+      p.Color = Color.Red;
+
+      // pos has 5 trapezoidal functions consisting of 4 bytes
+      TrapezoidalFunc trap_func;
+      for(int i = 0; i < (mf_array.Length / 4); i++)
+      {
+        // TrapezoidalFunc struct uses 4 consecutive elements from byte array
+        trap_func = new TrapezoidalFunc(mf_array, 4 * i);
+        
+        // Draw trapezoid
+        DrawTrapezoid(g, p, i, trap_func);
+      }
+
+      g.Dispose();
+      p.Dispose();
+
+      return bitmap;
+    }
+    private void DrawTrapezoid(Graphics g, Pen p, int index, TrapezoidalFunc trap_func)
+    {
+      int tmp0, tmp1;
+
+      // Add 2 for border + padding
+      if(index == 0)
+      {
+        tmp1 = (int)trap_func.p1 - (0xFF / (int)trap_func.s1);
+        g.DrawLine(p, tmp1 + 2, 1, (int)trap_func.p1 + 2, BM_HEIGHT - 1);
+        g.DrawLine(p, 1, 1, tmp1 + 2, 1);
+      }
+      else if(index == 4)
+      {
+        tmp1 = (int)trap_func.p0 + (0xFF / (int)trap_func.s0);
+        g.DrawLine(p, tmp1 + 2, 1, (int)trap_func.p0 + 2, BM_HEIGHT - 1);
+        g.DrawLine(p, tmp1 + 2, 1, 0xFF + 1, 1);
+      }
+      else
+      {
+        tmp0 = (int)trap_func.p0 + (0xFF / (int)trap_func.s0);
+        g.DrawLine(p, tmp0 + 2, 1, (int)trap_func.p0 + 2, BM_HEIGHT - 1);
+        tmp1 = (int)trap_func.p1 - (0xFF / (int)trap_func.s1);
+        g.DrawLine(p, tmp1 + 2, 1, (int)trap_func.p1 + 2, BM_HEIGHT - 1);
+        g.DrawLine(p, tmp0 + 2, 1, tmp1 + 2, 1);
+      }
+    }
+
+    private Bitmap DrawOutputGraph()
+    {
+      Graphics g;
+      Pen p;
+      Bitmap bitmap = new Bitmap(BM_WIDTH * 2, BM_HEIGHT);
+      g = Graphics.FromImage(bitmap);
+      g.Clear(System.Drawing.Color.White);
+      p = new Pen(Color.LightGray);
+      g.DrawLine(p, BM_WIDTH, 1, BM_WIDTH, 65);
+      p.Color = Color.Red;
+
+      // Add 2 for border + padding
+      for(int i = 0; i < _out_singleton_array.Length; i++)
+      {
+        g.DrawLine(p, _out_singleton_array[i] + 2, 1, _out_singleton_array[i] + 2, 65);
+      }
+
+      g.Dispose();
+      p.Dispose();
+
+      return bitmap;
+    }
+
+    private Bitmap ResizeImage(Image image, int width, int height)
+    {
+      Bitmap bitmap = new Bitmap(width, height);
+
+      //use a graphics object to draw the resized image into the bitmap
+      using(Graphics g = Graphics.FromImage(bitmap))
+      {
+        //set the resize quality modes to high quality
+        g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+        //draw the image into the target bitmap
+        g.DrawImage(image, 0, 0, bitmap.Width, bitmap.Height);
+      }
+
+      //return the resulting bitmap
+      return bitmap;
+    } 
+
+    private bool SetOutputText()
     {
       if(_output_text_box_list.Count == 5 &&
          (int)_out_singleton_array[0] <= (int)_out_singleton_array[1] &&
@@ -536,10 +706,13 @@ namespace viTestApp
         _output_text_box_list[4].Text = _out_singleton_array[4].ToString("X2");
         _output_text_box_list[4].TextChanged += new EventHandler(out4_TextChanged);
         _output_text_box_list[4].LostFocus += new EventHandler(out4_LostFocus);
+
+        return true;
       }
       else
       {
         MsgBox.Show("Output singleton array is invalid");
+        return false;
       }
     }
 

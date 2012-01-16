@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using System.Threading;
 using viServoMaster;
 using System.Text;
+using System.Drawing;
 using System.Text.RegularExpressions;
 #endregion
 

@@ -29,12 +29,17 @@ namespace viTestApp
 
     #region Constants
     /******************************************************************************/
-    private const int LABEL_LEFT = 2;
+    private const int LABEL_LEFT = 65;
     private const int LABEL_WIDTH = 54;
     private const int LABEL_HEIGHT = 12;
 
     private const int TB_WIDTH = 20;
     private const int TB_HEIGHT = 20;
+
+    // Give 1 pixel padding around 255/2 and 127/2 range
+    private const int BM_WIDTH = 132;
+    private const int BM_HEIGHT = 66;
+    private const int BM_LEFT = 227;
     #endregion
 
     #region Public Enumerations
@@ -203,7 +208,7 @@ namespace viTestApp
       if(!IsHexByte(_text_box_list[2].Text))
       {
         _text_box_list[2].Text = _trapezoidal_func.s0.ToString("X2");
-      }        
+      } 
     }
     public void s0_LostFocus(object sender, EventArgs e)
     {

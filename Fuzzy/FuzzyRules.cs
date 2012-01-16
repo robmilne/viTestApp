@@ -23,7 +23,7 @@ namespace viTestApp
     #region Private Variables
     /******************************************************************************/
     // Container object that FuzzyRule objects are dynamically created inside
-    private Panel _container = null;
+    private GroupBox _container = null;
 
     // Control that allows unfocus of combobox after selection
     private Label _unfocus = null;
@@ -55,7 +55,7 @@ namespace viTestApp
 
     #region Constructors
     /******************************************************************************/
-    public FuzzyRules(Panel container, Label unfocus)
+    public FuzzyRules(GroupBox container, Label unfocus)
     {
       _container = container;
       _unfocus = unfocus;

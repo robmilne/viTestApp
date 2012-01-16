@@ -27,30 +27,30 @@ namespace viTestApp
 
     #region Constants
     /******************************************************************************/
-    private const int LABEL_TOP = 19;
+    private const int LABEL_TOP = 34;
     private const int LABEL_HEIGHT = 12;
 
-    private const int LABEL_IF_LEFT = 10;
+    private const int LABEL_IF_LEFT = 6;
     private const int LABEL_IF_WIDTH = 14;
     private const string LABEL_IF_STR = "IF";
 
-    private const int LABEL_AND_LEFT = 115;
+    private const int LABEL_AND_LEFT = 86;
     private const int LABEL_AND_TOP = 18;
     private const int LABEL_AND_WIDTH = 26;
     private const string LABEL_AND_STR = "AND";
 
-    private const int LABEL_THEN_LEFT = 233;
+    private const int LABEL_THEN_LEFT = 176;
     private const int LABEL_THEN_TOP = 18;
     private const int LABEL_THEN_WIDTH = 30;
     private const string LABEL_THEN_STR = "THEN";
 
-    private const int CBO_WIDTH = 80;
+    private const int CBO_WIDTH = 60;
     private const int CBO_HEIGHT = 17;
-    private const int CBO_TOP = 16;
+    private const int CBO_TOP = 30;
 
-    private const int CBO_POS_LEFT = 29;
-    private const int CBO_SPD_LEFT = 147;
-    private const int CBO_OUT_LEFT = 269;
+    private const int CBO_POS_LEFT = 24;
+    private const int CBO_SPD_LEFT = 114;
+    private const int CBO_OUT_LEFT = 208;
     #endregion
 
     #region Private Variables

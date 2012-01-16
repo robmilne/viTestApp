@@ -196,7 +196,6 @@ namespace viTestApp
       this.cboSetServoRate = new System.Windows.Forms.ComboBox();
       this.tabPageSetupFuzzy = new System.Windows.Forms.TabPage();
       this.gbSetFuzzyRules = new System.Windows.Forms.GroupBox();
-      this.pnlFuzzyRules = new System.Windows.Forms.Panel();
       this.lblRulesOutHeader = new System.Windows.Forms.Label();
       this.lblRulesSpdHeader = new System.Windows.Forms.Label();
       this.lblRulesPosHeader = new System.Windows.Forms.Label();
@@ -219,17 +218,11 @@ namespace viTestApp
       this.btnSetMF = new System.Windows.Forms.Button();
       this.lblPosOutSing = new System.Windows.Forms.Label();
       this.gbPosCtlPts = new System.Windows.Forms.GroupBox();
-      this.lblPosOutCtlPtB = new System.Windows.Forms.Label();
       this.tbxPosOutCtlPtB = new System.Windows.Forms.TextBox();
-      this.lblPosOutCtlPtA = new System.Windows.Forms.Label();
       this.tbxPosOutCtlPtA = new System.Windows.Forms.TextBox();
-      this.lblSpdCtlPtB = new System.Windows.Forms.Label();
       this.tbxSpdCtlPtB = new System.Windows.Forms.TextBox();
-      this.lblSpdCtlPtA = new System.Windows.Forms.Label();
       this.tbxSpdCtlPtA = new System.Windows.Forms.TextBox();
-      this.lblPosErrCtlPtB = new System.Windows.Forms.Label();
       this.tbxPosErrCtlPtB = new System.Windows.Forms.TextBox();
-      this.lblPosErrCtlPtA = new System.Windows.Forms.Label();
       this.tbxPosErrCtlPtA = new System.Windows.Forms.TextBox();
       this.tabPageServoStats = new System.Windows.Forms.TabPage();
       this.gbStatCtlPts = new System.Windows.Forms.GroupBox();
@@ -264,6 +257,13 @@ namespace viTestApp
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
       this.openMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.lblPosOutCtlPtB = new System.Windows.Forms.Label();
+      this.lblPosOutCtlPtA = new System.Windows.Forms.Label();
+      this.lblSpdCtlPtB = new System.Windows.Forms.Label();
+      this.lblSpdCtlPtA = new System.Windows.Forms.Label();
+      this.lblPosErrCtlPtB = new System.Windows.Forms.Label();
+      this.lblPosErrCtlPtA = new System.Windows.Forms.Label();
+      this.picBxPosErrFunc = new System.Windows.Forms.PictureBox();
       this.tabControl1.SuspendLayout();
       this.tabPageGateWay.SuspendLayout();
       this.gbStatus.SuspendLayout();
@@ -309,7 +309,6 @@ namespace viTestApp
       this.gbSetKick.SuspendLayout();
       this.tabPageSetupFuzzy.SuspendLayout();
       this.gbSetFuzzyRules.SuspendLayout();
-      this.pnlFuzzyRules.SuspendLayout();
       this.gbSetFuzzyMF.SuspendLayout();
       this.gbPosCtlPts.SuspendLayout();
       this.tabPageServoStats.SuspendLayout();
@@ -319,6 +318,7 @@ namespace viTestApp
       ((System.ComponentModel.ISupportInitialize)(this.picbxStats)).BeginInit();
       this.tabPageLog.SuspendLayout();
       this.menuStrip1.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.picBxPosErrFunc)).BeginInit();
       this.SuspendLayout();
       // 
       // tabControl1
@@ -2208,78 +2208,68 @@ namespace viTestApp
       // 
       // gbSetFuzzyRules
       // 
-      this.gbSetFuzzyRules.Controls.Add(this.pnlFuzzyRules);
+      this.gbSetFuzzyRules.Controls.Add(this.lblRulesOutHeader);
+      this.gbSetFuzzyRules.Controls.Add(this.lblRulesSpdHeader);
+      this.gbSetFuzzyRules.Controls.Add(this.lblRulesPosHeader);
+      this.gbSetFuzzyRules.Controls.Add(this.lblFuzzyRule2);
+      this.gbSetFuzzyRules.Controls.Add(this.lblFuzzyRule1);
+      this.gbSetFuzzyRules.Controls.Add(this.lblFuzzyRule0);
+      this.gbSetFuzzyRules.Controls.Add(this.cbxFuzzyRule2);
+      this.gbSetFuzzyRules.Controls.Add(this.cbxFuzzyRule1);
+      this.gbSetFuzzyRules.Controls.Add(this.cbxFuzzyRule0);
       this.gbSetFuzzyRules.Controls.Add(this.btnGetRules);
       this.gbSetFuzzyRules.Controls.Add(this.btnSetRules);
       this.gbSetFuzzyRules.Controls.Add(this.lblUnfocus);
-      this.gbSetFuzzyRules.Location = new System.Drawing.Point(226, 3);
+      this.gbSetFuzzyRules.Location = new System.Drawing.Point(402, 3);
       this.gbSetFuzzyRules.Margin = new System.Windows.Forms.Padding(0);
       this.gbSetFuzzyRules.Name = "gbSetFuzzyRules";
       this.gbSetFuzzyRules.Padding = new System.Windows.Forms.Padding(0);
-      this.gbSetFuzzyRules.Size = new System.Drawing.Size(461, 487);
+      this.gbSetFuzzyRules.Size = new System.Drawing.Size(280, 487);
       this.gbSetFuzzyRules.TabIndex = 16;
       this.gbSetFuzzyRules.TabStop = false;
       this.gbSetFuzzyRules.Text = "Fuzzy Rules";
-      // 
-      // pnlFuzzyRules
-      // 
-      this.pnlFuzzyRules.AutoScroll = true;
-      this.pnlFuzzyRules.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.pnlFuzzyRules.Controls.Add(this.lblRulesOutHeader);
-      this.pnlFuzzyRules.Controls.Add(this.lblRulesSpdHeader);
-      this.pnlFuzzyRules.Controls.Add(this.lblRulesPosHeader);
-      this.pnlFuzzyRules.Controls.Add(this.lblFuzzyRule2);
-      this.pnlFuzzyRules.Controls.Add(this.lblFuzzyRule1);
-      this.pnlFuzzyRules.Controls.Add(this.lblFuzzyRule0);
-      this.pnlFuzzyRules.Controls.Add(this.cbxFuzzyRule2);
-      this.pnlFuzzyRules.Controls.Add(this.cbxFuzzyRule1);
-      this.pnlFuzzyRules.Controls.Add(this.cbxFuzzyRule0);
-      this.pnlFuzzyRules.Location = new System.Drawing.Point(6, 20);
-      this.pnlFuzzyRules.Name = "pnlFuzzyRules";
-      this.pnlFuzzyRules.Size = new System.Drawing.Size(380, 460);
-      this.pnlFuzzyRules.TabIndex = 19;
       // 
       // lblRulesOutHeader
       // 
       this.lblRulesOutHeader.AutoSize = true;
       this.lblRulesOutHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblRulesOutHeader.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-      this.lblRulesOutHeader.Location = new System.Drawing.Point(267, 3);
+      this.lblRulesOutHeader.Location = new System.Drawing.Point(206, 16);
       this.lblRulesOutHeader.Name = "lblRulesOutHeader";
-      this.lblRulesOutHeader.Size = new System.Drawing.Size(102, 12);
-      this.lblRulesOutHeader.TabIndex = 27;
-      this.lblRulesOutHeader.Text = "OUTPUT  (PWM DUTY)";
+      this.lblRulesOutHeader.Size = new System.Drawing.Size(42, 12);
+      this.lblRulesOutHeader.TabIndex = 36;
+      this.lblRulesOutHeader.Text = "OUTPUT";
       // 
       // lblRulesSpdHeader
       // 
       this.lblRulesSpdHeader.AutoSize = true;
       this.lblRulesSpdHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblRulesSpdHeader.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-      this.lblRulesSpdHeader.Location = new System.Drawing.Point(145, 3);
+      this.lblRulesSpdHeader.Location = new System.Drawing.Point(112, 16);
       this.lblRulesSpdHeader.Name = "lblRulesSpdHeader";
-      this.lblRulesSpdHeader.Size = new System.Drawing.Size(87, 12);
-      this.lblRulesSpdHeader.TabIndex = 26;
-      this.lblRulesSpdHeader.Text = "SPEED  (CHANGE)";
+      this.lblRulesSpdHeader.Size = new System.Drawing.Size(36, 12);
+      this.lblRulesSpdHeader.TabIndex = 35;
+      this.lblRulesSpdHeader.Text = "SPEED";
       // 
       // lblRulesPosHeader
       // 
       this.lblRulesPosHeader.AutoSize = true;
       this.lblRulesPosHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblRulesPosHeader.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-      this.lblRulesPosHeader.Location = new System.Drawing.Point(27, 3);
+      this.lblRulesPosHeader.Location = new System.Drawing.Point(6, 16);
       this.lblRulesPosHeader.Name = "lblRulesPosHeader";
-      this.lblRulesPosHeader.Size = new System.Drawing.Size(93, 12);
-      this.lblRulesPosHeader.TabIndex = 25;
-      this.lblRulesPosHeader.Text = "POSITION  (ERROR)";
+      this.lblRulesPosHeader.Size = new System.Drawing.Size(85, 12);
+      this.lblRulesPosHeader.TabIndex = 34;
+      this.lblRulesPosHeader.Text = "POSITION ERROR";
       // 
       // lblFuzzyRule2
       // 
       this.lblFuzzyRule2.AutoSize = true;
       this.lblFuzzyRule2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblFuzzyRule2.Location = new System.Drawing.Point(233, 18);
+      this.lblFuzzyRule2.Location = new System.Drawing.Point(176, 32);
       this.lblFuzzyRule2.Name = "lblFuzzyRule2";
       this.lblFuzzyRule2.Size = new System.Drawing.Size(30, 12);
-      this.lblFuzzyRule2.TabIndex = 24;
+      this.lblFuzzyRule2.TabIndex = 33;
       this.lblFuzzyRule2.Text = "THEN";
       this.lblFuzzyRule2.Visible = false;
       // 
@@ -2287,10 +2277,10 @@ namespace viTestApp
       // 
       this.lblFuzzyRule1.AutoSize = true;
       this.lblFuzzyRule1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblFuzzyRule1.Location = new System.Drawing.Point(115, 18);
+      this.lblFuzzyRule1.Location = new System.Drawing.Point(86, 32);
       this.lblFuzzyRule1.Name = "lblFuzzyRule1";
       this.lblFuzzyRule1.Size = new System.Drawing.Size(26, 12);
-      this.lblFuzzyRule1.TabIndex = 23;
+      this.lblFuzzyRule1.TabIndex = 32;
       this.lblFuzzyRule1.Text = "AND";
       this.lblFuzzyRule1.Visible = false;
       // 
@@ -2298,10 +2288,10 @@ namespace viTestApp
       // 
       this.lblFuzzyRule0.AutoSize = true;
       this.lblFuzzyRule0.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblFuzzyRule0.Location = new System.Drawing.Point(10, 19);
+      this.lblFuzzyRule0.Location = new System.Drawing.Point(6, 32);
       this.lblFuzzyRule0.Name = "lblFuzzyRule0";
       this.lblFuzzyRule0.Size = new System.Drawing.Size(14, 12);
-      this.lblFuzzyRule0.TabIndex = 22;
+      this.lblFuzzyRule0.TabIndex = 31;
       this.lblFuzzyRule0.Text = "IF";
       this.lblFuzzyRule0.Visible = false;
       // 
@@ -2309,56 +2299,56 @@ namespace viTestApp
       // 
       this.cbxFuzzyRule2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.cbxFuzzyRule2.FormattingEnabled = true;
-      this.cbxFuzzyRule2.Location = new System.Drawing.Point(269, 15);
+      this.cbxFuzzyRule2.Location = new System.Drawing.Point(208, 30);
       this.cbxFuzzyRule2.Name = "cbxFuzzyRule2";
-      this.cbxFuzzyRule2.Size = new System.Drawing.Size(80, 17);
-      this.cbxFuzzyRule2.TabIndex = 21;
+      this.cbxFuzzyRule2.Size = new System.Drawing.Size(60, 17);
+      this.cbxFuzzyRule2.TabIndex = 30;
       this.cbxFuzzyRule2.Visible = false;
       // 
       // cbxFuzzyRule1
       // 
       this.cbxFuzzyRule1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.cbxFuzzyRule1.FormattingEnabled = true;
-      this.cbxFuzzyRule1.Location = new System.Drawing.Point(147, 15);
+      this.cbxFuzzyRule1.Location = new System.Drawing.Point(114, 30);
       this.cbxFuzzyRule1.Name = "cbxFuzzyRule1";
-      this.cbxFuzzyRule1.Size = new System.Drawing.Size(80, 17);
-      this.cbxFuzzyRule1.TabIndex = 20;
+      this.cbxFuzzyRule1.Size = new System.Drawing.Size(60, 17);
+      this.cbxFuzzyRule1.TabIndex = 29;
       this.cbxFuzzyRule1.Visible = false;
       // 
       // cbxFuzzyRule0
       // 
       this.cbxFuzzyRule0.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.cbxFuzzyRule0.FormattingEnabled = true;
-      this.cbxFuzzyRule0.Location = new System.Drawing.Point(29, 16);
+      this.cbxFuzzyRule0.Location = new System.Drawing.Point(24, 30);
       this.cbxFuzzyRule0.Name = "cbxFuzzyRule0";
-      this.cbxFuzzyRule0.Size = new System.Drawing.Size(80, 17);
-      this.cbxFuzzyRule0.TabIndex = 19;
+      this.cbxFuzzyRule0.Size = new System.Drawing.Size(60, 17);
+      this.cbxFuzzyRule0.TabIndex = 28;
       this.cbxFuzzyRule0.Visible = false;
       // 
       // btnGetRules
       // 
-      this.btnGetRules.Location = new System.Drawing.Point(392, 98);
+      this.btnGetRules.Location = new System.Drawing.Point(204, 462);
       this.btnGetRules.Name = "btnGetRules";
-      this.btnGetRules.Size = new System.Drawing.Size(62, 70);
+      this.btnGetRules.Size = new System.Drawing.Size(60, 21);
       this.btnGetRules.TabIndex = 2;
-      this.btnGetRules.Text = "Load Rules from Target";
+      this.btnGetRules.Text = "Get";
       this.btnGetRules.UseVisualStyleBackColor = true;
       this.btnGetRules.Click += new System.EventHandler(this.btnGetRules_Click);
       // 
       // btnSetRules
       // 
-      this.btnSetRules.Location = new System.Drawing.Point(392, 20);
+      this.btnSetRules.Location = new System.Drawing.Point(20, 462);
       this.btnSetRules.Name = "btnSetRules";
-      this.btnSetRules.Size = new System.Drawing.Size(62, 70);
+      this.btnSetRules.Size = new System.Drawing.Size(60, 21);
       this.btnSetRules.TabIndex = 1;
-      this.btnSetRules.Text = "Store Rules to Target";
+      this.btnSetRules.Text = "Set";
       this.btnSetRules.UseVisualStyleBackColor = true;
       this.btnSetRules.Click += new System.EventHandler(this.btnSetRules_Click);
       // 
       // lblUnfocus
       // 
       this.lblUnfocus.AutoSize = true;
-      this.lblUnfocus.Location = new System.Drawing.Point(400, 25);
+      this.lblUnfocus.Location = new System.Drawing.Point(30, 466);
       this.lblUnfocus.Name = "lblUnfocus";
       this.lblUnfocus.Size = new System.Drawing.Size(47, 13);
       this.lblUnfocus.TabIndex = 25;
@@ -2366,6 +2356,7 @@ namespace viTestApp
       // 
       // gbSetFuzzyMF
       // 
+      this.gbSetFuzzyMF.Controls.Add(this.picBxPosErrFunc);
       this.gbSetFuzzyMF.Controls.Add(this.cbxMemFuncCtlPts);
       this.gbSetFuzzyMF.Controls.Add(this.lblMemPos0);
       this.gbSetFuzzyMF.Controls.Add(this.tbxPosMem_0_0);
@@ -2375,9 +2366,9 @@ namespace viTestApp
       this.gbSetFuzzyMF.Controls.Add(this.btnSetMF);
       this.gbSetFuzzyMF.Controls.Add(this.lblPosOutSing);
       this.gbSetFuzzyMF.Controls.Add(this.gbPosCtlPts);
-      this.gbSetFuzzyMF.Location = new System.Drawing.Point(6, 3);
+      this.gbSetFuzzyMF.Location = new System.Drawing.Point(8, 3);
       this.gbSetFuzzyMF.Name = "gbSetFuzzyMF";
-      this.gbSetFuzzyMF.Size = new System.Drawing.Size(217, 484);
+      this.gbSetFuzzyMF.Size = new System.Drawing.Size(380, 487);
       this.gbSetFuzzyMF.TabIndex = 15;
       this.gbSetFuzzyMF.TabStop = false;
       this.gbSetFuzzyMF.Text = "Fuzzy Membership Functions";
@@ -2385,7 +2376,7 @@ namespace viTestApp
       // cbxMemFuncCtlPts
       // 
       this.cbxMemFuncCtlPts.AutoSize = true;
-      this.cbxMemFuncCtlPts.Location = new System.Drawing.Point(9, 403);
+      this.cbxMemFuncCtlPts.Location = new System.Drawing.Point(6, 430);
       this.cbxMemFuncCtlPts.Name = "cbxMemFuncCtlPts";
       this.cbxMemFuncCtlPts.Size = new System.Drawing.Size(107, 17);
       this.cbxMemFuncCtlPts.TabIndex = 36;
@@ -2396,7 +2387,7 @@ namespace viTestApp
       // lblMemPos0
       // 
       this.lblMemPos0.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.lblMemPos0.Location = new System.Drawing.Point(2, 40);
+      this.lblMemPos0.Location = new System.Drawing.Point(65, 40);
       this.lblMemPos0.Name = "lblMemPos0";
       this.lblMemPos0.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
       this.lblMemPos0.Size = new System.Drawing.Size(54, 12);
@@ -2406,7 +2397,7 @@ namespace viTestApp
       // 
       // tbxPosMem_0_0
       // 
-      this.tbxPosMem_0_0.Location = new System.Drawing.Point(56, 36);
+      this.tbxPosMem_0_0.Location = new System.Drawing.Point(120, 35);
       this.tbxPosMem_0_0.Name = "tbxPosMem_0_0";
       this.tbxPosMem_0_0.Size = new System.Drawing.Size(20, 20);
       this.tbxPosMem_0_0.TabIndex = 13;
@@ -2416,182 +2407,131 @@ namespace viTestApp
       // lblPosErrMF
       // 
       this.lblPosErrMF.AutoSize = true;
+      this.lblPosErrMF.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblPosErrMF.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-      this.lblPosErrMF.Location = new System.Drawing.Point(12, 18);
+      this.lblPosErrMF.Location = new System.Drawing.Point(75, 16);
       this.lblPosErrMF.Name = "lblPosErrMF";
-      this.lblPosErrMF.Size = new System.Drawing.Size(123, 13);
+      this.lblPosErrMF.Size = new System.Drawing.Size(146, 12);
       this.lblPosErrMF.TabIndex = 3;
-      this.lblPosErrMF.Text = "POSITION FUNCTIONS";
+      this.lblPosErrMF.Text = "POSITION  ERROR  FUNCTIONS";
       // 
       // btnGetMF
       // 
-      this.btnGetMF.Location = new System.Drawing.Point(5, 454);
+      this.btnGetMF.Location = new System.Drawing.Point(158, 462);
       this.btnGetMF.Name = "btnGetMF";
-      this.btnGetMF.Size = new System.Drawing.Size(206, 22);
+      this.btnGetMF.Size = new System.Drawing.Size(130, 21);
       this.btnGetMF.TabIndex = 8;
-      this.btnGetMF.Text = "Load Functions from Target";
+      this.btnGetMF.Text = "Get";
       this.btnGetMF.UseVisualStyleBackColor = true;
       this.btnGetMF.Click += new System.EventHandler(this.btnGetMF_Click);
       // 
       // lblSpdMF
       // 
       this.lblSpdMF.AutoSize = true;
+      this.lblSpdMF.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblSpdMF.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-      this.lblSpdMF.Location = new System.Drawing.Point(12, 150);
+      this.lblSpdMF.Location = new System.Drawing.Point(75, 148);
       this.lblSpdMF.Name = "lblSpdMF";
-      this.lblSpdMF.Size = new System.Drawing.Size(108, 13);
+      this.lblSpdMF.Size = new System.Drawing.Size(95, 12);
       this.lblSpdMF.TabIndex = 4;
-      this.lblSpdMF.Text = "SPEED FUNCTIONS";
+      this.lblSpdMF.Text = "SPEED  FUNCTIONS";
       // 
       // btnSetMF
       // 
-      this.btnSetMF.Location = new System.Drawing.Point(6, 426);
+      this.btnSetMF.Location = new System.Drawing.Point(6, 462);
       this.btnSetMF.Name = "btnSetMF";
-      this.btnSetMF.Size = new System.Drawing.Size(205, 22);
+      this.btnSetMF.Size = new System.Drawing.Size(130, 21);
       this.btnSetMF.TabIndex = 7;
-      this.btnSetMF.Text = "Store Functions to Target ";
+      this.btnSetMF.Text = "Set";
       this.btnSetMF.UseVisualStyleBackColor = true;
       this.btnSetMF.Click += new System.EventHandler(this.btnSetMF_Click);
       // 
       // lblPosOutSing
       // 
       this.lblPosOutSing.AutoSize = true;
+      this.lblPosOutSing.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblPosOutSing.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-      this.lblPosOutSing.Location = new System.Drawing.Point(12, 280);
+      this.lblPosOutSing.Location = new System.Drawing.Point(75, 278);
       this.lblPosOutSing.Name = "lblPosOutSing";
-      this.lblPosOutSing.Size = new System.Drawing.Size(117, 13);
+      this.lblPosOutSing.Size = new System.Drawing.Size(99, 12);
       this.lblPosOutSing.TabIndex = 5;
-      this.lblPosOutSing.Text = "OUTPUT SINGLETON";
+      this.lblPosOutSing.Text = "OUTPUT  SINGLETON";
       // 
       // gbPosCtlPts
       // 
       this.gbPosCtlPts.Controls.Add(this.lblPosOutCtlPtB);
-      this.gbPosCtlPts.Controls.Add(this.tbxPosOutCtlPtB);
       this.gbPosCtlPts.Controls.Add(this.lblPosOutCtlPtA);
-      this.gbPosCtlPts.Controls.Add(this.tbxPosOutCtlPtA);
       this.gbPosCtlPts.Controls.Add(this.lblSpdCtlPtB);
-      this.gbPosCtlPts.Controls.Add(this.tbxSpdCtlPtB);
       this.gbPosCtlPts.Controls.Add(this.lblSpdCtlPtA);
-      this.gbPosCtlPts.Controls.Add(this.tbxSpdCtlPtA);
       this.gbPosCtlPts.Controls.Add(this.lblPosErrCtlPtB);
-      this.gbPosCtlPts.Controls.Add(this.tbxPosErrCtlPtB);
       this.gbPosCtlPts.Controls.Add(this.lblPosErrCtlPtA);
+      this.gbPosCtlPts.Controls.Add(this.tbxPosOutCtlPtB);
+      this.gbPosCtlPts.Controls.Add(this.tbxPosOutCtlPtA);
+      this.gbPosCtlPts.Controls.Add(this.tbxSpdCtlPtB);
+      this.gbPosCtlPts.Controls.Add(this.tbxSpdCtlPtA);
+      this.gbPosCtlPts.Controls.Add(this.tbxPosErrCtlPtB);
       this.gbPosCtlPts.Controls.Add(this.tbxPosErrCtlPtA);
-      this.gbPosCtlPts.Location = new System.Drawing.Point(158, 14);
+      this.gbPosCtlPts.Location = new System.Drawing.Point(10, 16);
       this.gbPosCtlPts.Name = "gbPosCtlPts";
-      this.gbPosCtlPts.Size = new System.Drawing.Size(53, 406);
+      this.gbPosCtlPts.Size = new System.Drawing.Size(54, 406);
       this.gbPosCtlPts.TabIndex = 6;
       this.gbPosCtlPts.TabStop = false;
       this.gbPosCtlPts.Text = "Ctl Pts";
       // 
-      // lblPosOutCtlPtB
-      // 
-      this.lblPosOutCtlPtB.AutoSize = true;
-      this.lblPosOutCtlPtB.Location = new System.Drawing.Point(32, 306);
-      this.lblPosOutCtlPtB.Name = "lblPosOutCtlPtB";
-      this.lblPosOutCtlPtB.Size = new System.Drawing.Size(14, 13);
-      this.lblPosOutCtlPtB.TabIndex = 11;
-      this.lblPosOutCtlPtB.Text = "B";
-      // 
       // tbxPosOutCtlPtB
       // 
       this.tbxPosOutCtlPtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbxPosOutCtlPtB.Location = new System.Drawing.Point(6, 304);
+      this.tbxPosOutCtlPtB.Location = new System.Drawing.Point(22, 303);
       this.tbxPosOutCtlPtB.Name = "tbxPosOutCtlPtB";
       this.tbxPosOutCtlPtB.Size = new System.Drawing.Size(20, 18);
       this.tbxPosOutCtlPtB.TabIndex = 8;
       this.tbxPosOutCtlPtB.TextChanged += new System.EventHandler(this.tbxPosOutCtlPtB_TextChanged);
       this.tbxPosOutCtlPtB.LostFocus += new System.EventHandler(this.OutCtlPoint_LostFocus);
       // 
-      // lblPosOutCtlPtA
-      // 
-      this.lblPosOutCtlPtA.AutoSize = true;
-      this.lblPosOutCtlPtA.Location = new System.Drawing.Point(32, 284);
-      this.lblPosOutCtlPtA.Name = "lblPosOutCtlPtA";
-      this.lblPosOutCtlPtA.Size = new System.Drawing.Size(14, 13);
-      this.lblPosOutCtlPtA.TabIndex = 9;
-      this.lblPosOutCtlPtA.Text = "A";
-      // 
       // tbxPosOutCtlPtA
       // 
       this.tbxPosOutCtlPtA.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbxPosOutCtlPtA.Location = new System.Drawing.Point(6, 280);
+      this.tbxPosOutCtlPtA.Location = new System.Drawing.Point(22, 279);
       this.tbxPosOutCtlPtA.Name = "tbxPosOutCtlPtA";
       this.tbxPosOutCtlPtA.Size = new System.Drawing.Size(20, 18);
       this.tbxPosOutCtlPtA.TabIndex = 8;
       this.tbxPosOutCtlPtA.TextChanged += new System.EventHandler(this.tbxPosOutCtlPtA_TextChanged);
       this.tbxPosOutCtlPtA.LostFocus += new System.EventHandler(this.OutCtlPoint_LostFocus);
       // 
-      // lblSpdCtlPtB
-      // 
-      this.lblSpdCtlPtB.AutoSize = true;
-      this.lblSpdCtlPtB.Location = new System.Drawing.Point(32, 176);
-      this.lblSpdCtlPtB.Name = "lblSpdCtlPtB";
-      this.lblSpdCtlPtB.Size = new System.Drawing.Size(14, 13);
-      this.lblSpdCtlPtB.TabIndex = 7;
-      this.lblSpdCtlPtB.Text = "B";
-      // 
       // tbxSpdCtlPtB
       // 
       this.tbxSpdCtlPtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbxSpdCtlPtB.Location = new System.Drawing.Point(6, 174);
+      this.tbxSpdCtlPtB.Location = new System.Drawing.Point(22, 173);
       this.tbxSpdCtlPtB.Name = "tbxSpdCtlPtB";
       this.tbxSpdCtlPtB.Size = new System.Drawing.Size(20, 18);
       this.tbxSpdCtlPtB.TabIndex = 6;
       this.tbxSpdCtlPtB.TextChanged += new System.EventHandler(this.tbxSpdCtlPtB_TextChanged);
       this.tbxSpdCtlPtB.LostFocus += new System.EventHandler(this.SpdCtlPoint_LostFocus);
       // 
-      // lblSpdCtlPtA
-      // 
-      this.lblSpdCtlPtA.AutoSize = true;
-      this.lblSpdCtlPtA.Location = new System.Drawing.Point(32, 153);
-      this.lblSpdCtlPtA.Name = "lblSpdCtlPtA";
-      this.lblSpdCtlPtA.Size = new System.Drawing.Size(14, 13);
-      this.lblSpdCtlPtA.TabIndex = 5;
-      this.lblSpdCtlPtA.Text = "A";
-      // 
       // tbxSpdCtlPtA
       // 
       this.tbxSpdCtlPtA.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbxSpdCtlPtA.Location = new System.Drawing.Point(6, 150);
+      this.tbxSpdCtlPtA.Location = new System.Drawing.Point(22, 149);
       this.tbxSpdCtlPtA.Name = "tbxSpdCtlPtA";
       this.tbxSpdCtlPtA.Size = new System.Drawing.Size(20, 18);
       this.tbxSpdCtlPtA.TabIndex = 4;
       this.tbxSpdCtlPtA.TextChanged += new System.EventHandler(this.tbxSpdCtlPtA_TextChanged);
       this.tbxSpdCtlPtA.LostFocus += new System.EventHandler(this.SpdCtlPoint_LostFocus);
       // 
-      // lblPosErrCtlPtB
-      // 
-      this.lblPosErrCtlPtB.AutoSize = true;
-      this.lblPosErrCtlPtB.Location = new System.Drawing.Point(32, 46);
-      this.lblPosErrCtlPtB.Name = "lblPosErrCtlPtB";
-      this.lblPosErrCtlPtB.Size = new System.Drawing.Size(14, 13);
-      this.lblPosErrCtlPtB.TabIndex = 3;
-      this.lblPosErrCtlPtB.Text = "B";
-      // 
       // tbxPosErrCtlPtB
       // 
       this.tbxPosErrCtlPtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbxPosErrCtlPtB.Location = new System.Drawing.Point(6, 44);
+      this.tbxPosErrCtlPtB.Location = new System.Drawing.Point(22, 43);
       this.tbxPosErrCtlPtB.Name = "tbxPosErrCtlPtB";
       this.tbxPosErrCtlPtB.Size = new System.Drawing.Size(20, 18);
       this.tbxPosErrCtlPtB.TabIndex = 2;
       this.tbxPosErrCtlPtB.TextChanged += new System.EventHandler(this.tbxPosErrCtlPtB_TextChanged);
       this.tbxPosErrCtlPtB.LostFocus += new System.EventHandler(this.PosCtlPoint_LostFocus);
       // 
-      // lblPosErrCtlPtA
-      // 
-      this.lblPosErrCtlPtA.AutoSize = true;
-      this.lblPosErrCtlPtA.Location = new System.Drawing.Point(32, 24);
-      this.lblPosErrCtlPtA.Name = "lblPosErrCtlPtA";
-      this.lblPosErrCtlPtA.Size = new System.Drawing.Size(14, 13);
-      this.lblPosErrCtlPtA.TabIndex = 1;
-      this.lblPosErrCtlPtA.Text = "A";
-      // 
       // tbxPosErrCtlPtA
       // 
       this.tbxPosErrCtlPtA.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.tbxPosErrCtlPtA.Location = new System.Drawing.Point(6, 20);
+      this.tbxPosErrCtlPtA.Location = new System.Drawing.Point(22, 19);
       this.tbxPosErrCtlPtA.Name = "tbxPosErrCtlPtA";
       this.tbxPosErrCtlPtA.Size = new System.Drawing.Size(20, 18);
       this.tbxPosErrCtlPtA.TabIndex = 0;
@@ -2851,7 +2791,7 @@ namespace viTestApp
       this.pnlStats.Controls.Add(this.picbxStats);
       this.pnlStats.Location = new System.Drawing.Point(92, 6);
       this.pnlStats.Name = "pnlStats";
-      this.pnlStats.Size = new System.Drawing.Size(599, 277);
+      this.pnlStats.Size = new System.Drawing.Size(599, 281);
       this.pnlStats.TabIndex = 2;
       this.pnlStats.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlStats_Paint);
       this.pnlStats.Scroll += new System.Windows.Forms.ScrollEventHandler(this.pnlStats_Scroll);
@@ -2860,7 +2800,7 @@ namespace viTestApp
       // 
       this.picbxStats.Location = new System.Drawing.Point(-1, 0);
       this.picbxStats.Name = "picbxStats";
-      this.picbxStats.Size = new System.Drawing.Size(598, 257);
+      this.picbxStats.Size = new System.Drawing.Size(598, 261);
       this.picbxStats.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.picbxStats.TabIndex = 0;
       this.picbxStats.TabStop = false;
@@ -2939,6 +2879,70 @@ namespace viTestApp
       this.aboutToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
       this.aboutToolStripMenuItem.Text = "About";
       this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+      // 
+      // lblPosOutCtlPtB
+      // 
+      this.lblPosOutCtlPtB.AutoSize = true;
+      this.lblPosOutCtlPtB.Location = new System.Drawing.Point(6, 305);
+      this.lblPosOutCtlPtB.Name = "lblPosOutCtlPtB";
+      this.lblPosOutCtlPtB.Size = new System.Drawing.Size(14, 13);
+      this.lblPosOutCtlPtB.TabIndex = 48;
+      this.lblPosOutCtlPtB.Text = "B";
+      // 
+      // lblPosOutCtlPtA
+      // 
+      this.lblPosOutCtlPtA.AutoSize = true;
+      this.lblPosOutCtlPtA.Location = new System.Drawing.Point(6, 283);
+      this.lblPosOutCtlPtA.Name = "lblPosOutCtlPtA";
+      this.lblPosOutCtlPtA.Size = new System.Drawing.Size(14, 13);
+      this.lblPosOutCtlPtA.TabIndex = 47;
+      this.lblPosOutCtlPtA.Text = "A";
+      // 
+      // lblSpdCtlPtB
+      // 
+      this.lblSpdCtlPtB.AutoSize = true;
+      this.lblSpdCtlPtB.Location = new System.Drawing.Point(6, 175);
+      this.lblSpdCtlPtB.Name = "lblSpdCtlPtB";
+      this.lblSpdCtlPtB.Size = new System.Drawing.Size(14, 13);
+      this.lblSpdCtlPtB.TabIndex = 46;
+      this.lblSpdCtlPtB.Text = "B";
+      // 
+      // lblSpdCtlPtA
+      // 
+      this.lblSpdCtlPtA.AutoSize = true;
+      this.lblSpdCtlPtA.Location = new System.Drawing.Point(6, 152);
+      this.lblSpdCtlPtA.Name = "lblSpdCtlPtA";
+      this.lblSpdCtlPtA.Size = new System.Drawing.Size(14, 13);
+      this.lblSpdCtlPtA.TabIndex = 45;
+      this.lblSpdCtlPtA.Text = "A";
+      // 
+      // lblPosErrCtlPtB
+      // 
+      this.lblPosErrCtlPtB.AutoSize = true;
+      this.lblPosErrCtlPtB.Location = new System.Drawing.Point(6, 45);
+      this.lblPosErrCtlPtB.Name = "lblPosErrCtlPtB";
+      this.lblPosErrCtlPtB.Size = new System.Drawing.Size(14, 13);
+      this.lblPosErrCtlPtB.TabIndex = 44;
+      this.lblPosErrCtlPtB.Text = "B";
+      // 
+      // lblPosErrCtlPtA
+      // 
+      this.lblPosErrCtlPtA.AutoSize = true;
+      this.lblPosErrCtlPtA.Location = new System.Drawing.Point(6, 23);
+      this.lblPosErrCtlPtA.Name = "lblPosErrCtlPtA";
+      this.lblPosErrCtlPtA.Size = new System.Drawing.Size(14, 13);
+      this.lblPosErrCtlPtA.TabIndex = 43;
+      this.lblPosErrCtlPtA.Text = "A";
+      // 
+      // picBxPosErrFunc
+      // 
+      this.picBxPosErrFunc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.picBxPosErrFunc.Location = new System.Drawing.Point(227, 35);
+      this.picBxPosErrFunc.Name = "picBxPosErrFunc";
+      this.picBxPosErrFunc.Size = new System.Drawing.Size(128, 66);
+      this.picBxPosErrFunc.TabIndex = 37;
+      this.picBxPosErrFunc.TabStop = false;
+      this.picBxPosErrFunc.Visible = false;
       // 
       // MainForm
       // 
@@ -3027,8 +3031,6 @@ namespace viTestApp
       this.tabPageSetupFuzzy.ResumeLayout(false);
       this.gbSetFuzzyRules.ResumeLayout(false);
       this.gbSetFuzzyRules.PerformLayout();
-      this.pnlFuzzyRules.ResumeLayout(false);
-      this.pnlFuzzyRules.PerformLayout();
       this.gbSetFuzzyMF.ResumeLayout(false);
       this.gbSetFuzzyMF.PerformLayout();
       this.gbPosCtlPts.ResumeLayout(false);
@@ -3045,6 +3047,7 @@ namespace viTestApp
       this.tabPageLog.ResumeLayout(false);
       this.menuStrip1.ResumeLayout(false);
       this.menuStrip1.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.picBxPosErrFunc)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -3124,17 +3127,11 @@ namespace viTestApp
     private System.Windows.Forms.Label lblPosErrMF;
     private System.Windows.Forms.GroupBox gbPosCtlPts;
     private System.Windows.Forms.Label lblPosOutSing;
-    private System.Windows.Forms.Label lblSpdCtlPtB;
     private System.Windows.Forms.TextBox tbxSpdCtlPtB;
-    private System.Windows.Forms.Label lblSpdCtlPtA;
     private System.Windows.Forms.TextBox tbxSpdCtlPtA;
-    private System.Windows.Forms.Label lblPosErrCtlPtB;
     private System.Windows.Forms.TextBox tbxPosErrCtlPtB;
-    private System.Windows.Forms.Label lblPosErrCtlPtA;
     private System.Windows.Forms.TextBox tbxPosErrCtlPtA;
-    private System.Windows.Forms.Label lblPosOutCtlPtB;
     private System.Windows.Forms.TextBox tbxPosOutCtlPtB;
-    private System.Windows.Forms.Label lblPosOutCtlPtA;
     private System.Windows.Forms.TextBox tbxPosOutCtlPtA;
     private System.Windows.Forms.GroupBox gbTestMotionStart;
     private System.Windows.Forms.RadioButton rbMotionStartPos;
@@ -3210,17 +3207,7 @@ namespace viTestApp
     private System.Windows.Forms.GroupBox gbCfg;
     private System.Windows.Forms.Button btnLoadCfg;
     private System.Windows.Forms.Button btnStoreCfg;
-    private System.Windows.Forms.Panel pnlFuzzyRules;
-    private System.Windows.Forms.Label lblFuzzyRule2;
-    private System.Windows.Forms.Label lblFuzzyRule1;
-    private System.Windows.Forms.Label lblFuzzyRule0;
-    private System.Windows.Forms.ComboBox cbxFuzzyRule2;
-    private System.Windows.Forms.ComboBox cbxFuzzyRule1;
-    private System.Windows.Forms.ComboBox cbxFuzzyRule0;
     private System.Windows.Forms.Label lblUnfocus;
-    private System.Windows.Forms.Label lblRulesPosHeader;
-    private System.Windows.Forms.Label lblRulesOutHeader;
-    private System.Windows.Forms.Label lblRulesSpdHeader;
     private System.Windows.Forms.TextBox tbxPosMem_0_0;
     private System.Windows.Forms.Label lblMemPos0;
     private System.Windows.Forms.CheckBox cbxMemFuncCtlPts;
@@ -3287,6 +3274,22 @@ namespace viTestApp
     private System.Windows.Forms.TextBox tbxStatATDVal;
     private System.Windows.Forms.Label lblLimitPos;
     private System.Windows.Forms.TextBox tbxLimitPos;
+    private System.Windows.Forms.Label lblRulesOutHeader;
+    private System.Windows.Forms.Label lblRulesSpdHeader;
+    private System.Windows.Forms.Label lblRulesPosHeader;
+    private System.Windows.Forms.Label lblFuzzyRule2;
+    private System.Windows.Forms.Label lblFuzzyRule1;
+    private System.Windows.Forms.Label lblFuzzyRule0;
+    private System.Windows.Forms.ComboBox cbxFuzzyRule2;
+    private System.Windows.Forms.ComboBox cbxFuzzyRule1;
+    private System.Windows.Forms.ComboBox cbxFuzzyRule0;
+    private System.Windows.Forms.Label lblPosOutCtlPtB;
+    private System.Windows.Forms.Label lblPosOutCtlPtA;
+    private System.Windows.Forms.Label lblSpdCtlPtB;
+    private System.Windows.Forms.Label lblSpdCtlPtA;
+    private System.Windows.Forms.Label lblPosErrCtlPtB;
+    private System.Windows.Forms.Label lblPosErrCtlPtA;
+    private System.Windows.Forms.PictureBox picBxPosErrFunc;
   }
 }
 

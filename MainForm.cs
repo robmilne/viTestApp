@@ -98,7 +98,7 @@ namespace viTestApp
       _active_servo = null;
 
       // Drill down to locate containers where programatically constructed elements located (yuck!)
-      Panel _rules_container = null;
+      GroupBox _rules_container = null;
       // Unfocus label required to remove focus from rules comboboxes after selection - hide under another control (yuck!)
       Label _unfocus_lbl = null;
       foreach(Control c_0 in this.Controls)
@@ -126,7 +126,15 @@ namespace viTestApp
                         if(c_4.Name == "gbSetFuzzyRules")
                         {
                           GroupBox gbx = (GroupBox)c_4;
+                          _rules_container = gbx;
                           foreach(Control c_5 in gbx.Controls)
+                          {
+                            if(c_5.Name == "lblUnfocus")
+                            {
+                              _unfocus_lbl = (Label)c_5;
+                            }
+                          }
+                          /*foreach(Control c_5 in gbx.Controls)
                           {
                             if(c_5.Name == "pnlFuzzyRules")
                             {
@@ -136,7 +144,7 @@ namespace viTestApp
                             {
                               _unfocus_lbl = (Label)c_5;
                             }
-                          }
+                          }*/
                         }
                         if(c_4.Name == "gbSetFuzzyMF")
                         {
