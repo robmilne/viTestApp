@@ -42,80 +42,102 @@ namespace viTestApp
     {
       if(cbxShowStatsPrev.Checked)
       {
-        plot(servo.StatsPrev, Slave.STATS_SIZE);
+        plot(servo.StatsPrev);
         setCtlPts(servo.CtlPtsPrev);
       }
       else
       {
-        plot(servo.StatsCur, Slave.STATS_SIZE);
+        plot(servo.StatsCur);
         setCtlPts(servo.CtlPtsCur);
       }
     }
-    private void plot(List<StatStruct> stats, int size)
+    private Color getStateColour(byte state)
+    {
+      if(state < (byte)Slave.ServoStates.SERVO_MAX_STATE)
+      {
+        Slave.ServoStates servo_state = (Slave.ServoStates)state;
+        switch(servo_state)
+        {
+          case Slave.ServoStates.SRV_ACCEL_STATE:
+            return Color.Red;
+          case Slave.ServoStates.SRV_SLEW_STATE:
+            return Color.Yellow;
+          case Slave.ServoStates.SRV_DECEL_STATE:
+            return Color.LimeGreen;
+          case Slave.ServoStates.SRV_READY_STATE:
+            return Color.Cyan;
+          case Slave.ServoStates.SRV_REVERSE_STATE:
+            return Color.Purple;
+        }
+      }
+      // Slave.ServoStates.SRV_NO_INIT_STATE
+      return Color.Black;
+    }
+    private void plot(List<StatStruct> stats)
     {
       if(stats.Count == 0)
       {
         return;
       }
-
+      int size = stats.Count;
       // Make height sizeof byte + 2 to see curves at satuaration
-      picbxStats.Size = new Size(size, 257);
-      int width = picbxStats.Size.Width > pnlStats.Size.Width ? picbxStats.Size.Width : pnlStats.Size.Width;
+      picbxStats.Size = new Size(size, 257 + 5);
+      int width = size > pnlStats.Size.Width ? size : pnlStats.Size.Width;
       pnlStats.AutoScrollMinSize = new Size(width, picbxStats.Size.Height);
 
       // Render graph as a bitmap - use paint event to paste into picbxStats
-      if(offScreenBitMap == null)
-      {
-        offScreenBitMap = new Bitmap(picbxStats.Width, picbxStats.Height);
-      }
+      offScreenBitMap = new Bitmap(size, picbxStats.Height);
       Graphics g = Graphics.FromImage(offScreenBitMap);
       g.Clear(System.Drawing.Color.White);
 
       // draw a horizontal line at 0x80 (signed zero)
       Pen p = new Pen(Color.LightGray);
-      g.DrawLine(p, 0, 128, size, 128);
+      g.DrawLine(p, 0, 128 + 5, size, 128 + 5);
       // dashed lines at 0xC0 and 0x40
       float[] dashValues = { 5, 5 };
       Pen dashPen = new Pen(Color.LightGray, 1);
       dashPen.DashPattern = dashValues;
-      g.DrawLine(dashPen, 0, 64, size, 64);
-      g.DrawLine(dashPen, 0, 192, size, 192);
+      g.DrawLine(dashPen, 0, 64 + 5, size, 64 + 5);
+      g.DrawLine(dashPen, 0, 192 + 5, size, 192 + 5);
 
       int pt1, pt2;
-      if(cbxStatInfoDuty.Checked)
+      Pen p_duty = new Pen(Color.DimGray);
+      Pen p_change = new Pen(Color.Blue);
+      Pen p_err = new Pen(Color.Red);
+      p = new Pen(getStateColour(stats[0].state));
+      g.DrawLine(p, 0, 0, 0, 4);
+      for(int i = 1; i < stats.Count; i++)
       {
-        for(int i = 0; i < stats.Count - 1; i++)
+        p.Color = getStateColour(stats[i].state);
+        g.DrawLine(p, i, 0, i, 4);
+        if(cbxStatInfoErr.Checked)
         {
-          p = new Pen(Color.DimGray);
-          pt1 = Convert.ToInt32(stats[i].duty);
-          pt2 = Convert.ToInt32(stats[i + 1].duty);
-          g.DrawLine(p, i, pt1, i + 1, pt2);
+          pt1 = Convert.ToInt32(stats[i - 1].err);
+          pt2 = Convert.ToInt32(stats[i].err);
+          // Invert y-axis of graph since 0 is at the top
+          // DrawLine has only end points since single pixel length in x
+          g.DrawLine(p_err, i, 261 - pt1, i + 1, 261 - pt2);
         }
-      }
-      if(cbxStatInfoChange.Checked)
-      {
-        for(int i = 0; i < stats.Count - 1; i++)
+        if(cbxStatInfoChange.Checked)
         {
-          p = new Pen(Color.Blue);
-          pt1 = Convert.ToInt32(stats[i].change);
-          pt2 = Convert.ToInt32(stats[i + 1].change);
-          g.DrawLine(p, i, pt1, i + 1, pt2);
+          pt1 = Convert.ToInt32(stats[i -1 ].change);
+          pt2 = Convert.ToInt32(stats[i].change);
+          g.DrawLine(p_change, i, 261 - pt1, i + 1, 261 - pt2);
         }
-      }
-      if(cbxStatInfoErr.Checked)
-      {
-        for(int i = 0; i < stats.Count - 1; i++)
+        if(cbxStatInfoDuty.Checked)
         {
-          p = new Pen(Color.Red);
-          pt1 = Convert.ToInt32(stats[i].err);
-          pt2 = Convert.ToInt32(stats[i + 1].err);
-          g.DrawLine(p, i, pt1, i + 1, pt2);
+          pt1 = Convert.ToInt32(stats[i - 1].duty);
+          pt2 = Convert.ToInt32(stats[i].duty);
+          g.DrawLine(p_duty, i, 261 - pt1, i + 1, 261 - pt2);
         }
       }
 
       g.TranslateTransform(pnlStats.AutoScrollPosition.X, pnlStats.AutoScrollPosition.Y);
       g.Dispose();
       p.Dispose();
+      p_duty.Dispose();
+      p_change.Dispose();
+      p_err.Dispose();
       dashPen.Dispose();
       // Raise paint event
       picbxStats.Invalidate();
