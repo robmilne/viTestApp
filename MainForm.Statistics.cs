@@ -30,7 +30,7 @@ namespace viTestApp
     private bool suppress_stored_plot_checkbox;
     private bool suppress_plot_event;
 
-    private Bitmap offScreenBitMap = null;
+    private Bitmap statisticsBitMap = null;
     #endregion
 
     #region Helper Methods
@@ -61,11 +61,11 @@ namespace viTestApp
           case Slave.ServoStates.SRV_ACCEL_STATE:
             return Color.Red;
           case Slave.ServoStates.SRV_SLEW_STATE:
-            return Color.Yellow;
+            return Color.Lime;
           case Slave.ServoStates.SRV_DECEL_STATE:
-            return Color.LimeGreen;
+            return Color.MediumBlue;
           case Slave.ServoStates.SRV_READY_STATE:
-            return Color.Cyan;
+            return Color.Black;
           case Slave.ServoStates.SRV_REVERSE_STATE:
             return Color.Purple;
         }
@@ -86,8 +86,8 @@ namespace viTestApp
       pnlStats.AutoScrollMinSize = new Size(width, picbxStats.Size.Height);
 
       // Render graph as a bitmap - use paint event to paste into picbxStats
-      offScreenBitMap = new Bitmap(size, picbxStats.Height);
-      Graphics g = Graphics.FromImage(offScreenBitMap);
+      statisticsBitMap = new Bitmap(size, picbxStats.Height);
+      Graphics g = Graphics.FromImage(statisticsBitMap);
       g.Clear(System.Drawing.Color.White);
 
       // draw a horizontal line at 0x80 (signed zero)
@@ -101,10 +101,6 @@ namespace viTestApp
       g.DrawLine(dashPen, 0, 192 + 5, size, 192 + 5);
 
       int pt1, pt2;
-      Pen p_duty = new Pen(Color.DimGray);
-      Pen p_change = new Pen(Color.Blue);
-      Pen p_err = new Pen(Color.Red);
-      p = new Pen(getStateColour(stats[0].state));
       g.DrawLine(p, 0, 0, 0, 4);
       for(int i = 1; i < stats.Count; i++)
       {
@@ -116,30 +112,31 @@ namespace viTestApp
           pt2 = Convert.ToInt32(stats[i].err);
           // Invert y-axis of graph since 0 is at the top
           // DrawLine has only end points since single pixel length in x
-          g.DrawLine(p_err, i, 261 - pt1, i + 1, 261 - pt2);
+          p.Color = Color.Red;
+          g.DrawLine(p, i, 261 - pt1, i + 1, 261 - pt2);
         }
         if(cbxStatInfoChange.Checked)
         {
           pt1 = Convert.ToInt32(stats[i -1 ].change);
           pt2 = Convert.ToInt32(stats[i].change);
-          g.DrawLine(p_change, i, 261 - pt1, i + 1, 261 - pt2);
+          p.Color = Color.Blue;
+          g.DrawLine(p, i, 261 - pt1, i + 1, 261 - pt2);
         }
         if(cbxStatInfoDuty.Checked)
         {
           pt1 = Convert.ToInt32(stats[i - 1].duty);
           pt2 = Convert.ToInt32(stats[i].duty);
-          g.DrawLine(p_duty, i, 261 - pt1, i + 1, 261 - pt2);
+          p.Color = Color.DimGray;
+          g.DrawLine(p, i, 261 - pt1, i + 1, 261 - pt2);
         }
       }
+      // Copy bitmap into panel according to scroll position
+      //g.TranslateTransform(pnlStats.AutoScrollPosition.X, 0);
 
-      g.TranslateTransform(pnlStats.AutoScrollPosition.X, pnlStats.AutoScrollPosition.Y);
       g.Dispose();
       p.Dispose();
-      p_duty.Dispose();
-      p_change.Dispose();
-      p_err.Dispose();
       dashPen.Dispose();
-      // Raise paint event
+      // Raise paint event that copies bitmap to panel
       picbxStats.Invalidate();
     }
 
@@ -175,21 +172,20 @@ namespace viTestApp
     /// <summary>
     /// pnlStats_Paint - Paint stats if available
     /// </summary>
-    private void pnlStats_Paint(object sender, PaintEventArgs e)
+    private void picbxStats_Paint(object sender, PaintEventArgs e)
     {
-      Panel panel = sender as Panel;
-      if(offScreenBitMap != null)
+      if(statisticsBitMap != null)
       {
-        e.Graphics.DrawImage(offScreenBitMap, new Point(panel.AutoScrollPosition.X, panel.AutoScrollPosition.Y));
+        e.Graphics.DrawImage(statisticsBitMap, pnlStats.AutoScrollPosition.X, 0);
       } 
     }
     private void pnlStats_Scroll(object sender, ScrollEventArgs e)
     {
       Panel panel = sender as Panel;
-      if(offScreenBitMap != null)
+      if(statisticsBitMap != null)
       {
-        Graphics g = Graphics.FromImage(offScreenBitMap);
-        g.TranslateTransform(panel.AutoScrollPosition.X, panel.AutoScrollPosition.Y);
+        Graphics g = Graphics.FromImage(statisticsBitMap);
+        g.TranslateTransform(panel.AutoScrollPosition.X, 0);
         g.Dispose();
       }
     }

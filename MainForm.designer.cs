@@ -209,6 +209,7 @@ namespace viTestApp
       this.btnSetRules = new System.Windows.Forms.Button();
       this.lblUnfocus = new System.Windows.Forms.Label();
       this.gbSetFuzzyMF = new System.Windows.Forms.GroupBox();
+      this.picBxPosErrFunc = new System.Windows.Forms.PictureBox();
       this.cbxMemFuncCtlPts = new System.Windows.Forms.CheckBox();
       this.lblMemPos0 = new System.Windows.Forms.Label();
       this.tbxPosMem_0_0 = new System.Windows.Forms.TextBox();
@@ -218,6 +219,12 @@ namespace viTestApp
       this.btnSetMF = new System.Windows.Forms.Button();
       this.lblPosOutSing = new System.Windows.Forms.Label();
       this.gbPosCtlPts = new System.Windows.Forms.GroupBox();
+      this.lblPosOutCtlPtB = new System.Windows.Forms.Label();
+      this.lblPosOutCtlPtA = new System.Windows.Forms.Label();
+      this.lblSpdCtlPtB = new System.Windows.Forms.Label();
+      this.lblSpdCtlPtA = new System.Windows.Forms.Label();
+      this.lblPosErrCtlPtB = new System.Windows.Forms.Label();
+      this.lblPosErrCtlPtA = new System.Windows.Forms.Label();
       this.tbxPosOutCtlPtB = new System.Windows.Forms.TextBox();
       this.tbxPosOutCtlPtA = new System.Windows.Forms.TextBox();
       this.tbxSpdCtlPtB = new System.Windows.Forms.TextBox();
@@ -257,13 +264,6 @@ namespace viTestApp
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
       this.openMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.lblPosOutCtlPtB = new System.Windows.Forms.Label();
-      this.lblPosOutCtlPtA = new System.Windows.Forms.Label();
-      this.lblSpdCtlPtB = new System.Windows.Forms.Label();
-      this.lblSpdCtlPtA = new System.Windows.Forms.Label();
-      this.lblPosErrCtlPtB = new System.Windows.Forms.Label();
-      this.lblPosErrCtlPtA = new System.Windows.Forms.Label();
-      this.picBxPosErrFunc = new System.Windows.Forms.PictureBox();
       this.tabControl1.SuspendLayout();
       this.tabPageGateWay.SuspendLayout();
       this.gbStatus.SuspendLayout();
@@ -310,6 +310,7 @@ namespace viTestApp
       this.tabPageSetupFuzzy.SuspendLayout();
       this.gbSetFuzzyRules.SuspendLayout();
       this.gbSetFuzzyMF.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.picBxPosErrFunc)).BeginInit();
       this.gbPosCtlPts.SuspendLayout();
       this.tabPageServoStats.SuspendLayout();
       this.gbStatCtlPts.SuspendLayout();
@@ -318,7 +319,6 @@ namespace viTestApp
       ((System.ComponentModel.ISupportInitialize)(this.picbxStats)).BeginInit();
       this.tabPageLog.SuspendLayout();
       this.menuStrip1.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.picBxPosErrFunc)).BeginInit();
       this.SuspendLayout();
       // 
       // tabControl1
@@ -2373,6 +2373,16 @@ namespace viTestApp
       this.gbSetFuzzyMF.TabStop = false;
       this.gbSetFuzzyMF.Text = "Fuzzy Membership Functions";
       // 
+      // picBxPosErrFunc
+      // 
+      this.picBxPosErrFunc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.picBxPosErrFunc.Location = new System.Drawing.Point(227, 35);
+      this.picBxPosErrFunc.Name = "picBxPosErrFunc";
+      this.picBxPosErrFunc.Size = new System.Drawing.Size(128, 66);
+      this.picBxPosErrFunc.TabIndex = 37;
+      this.picBxPosErrFunc.TabStop = false;
+      this.picBxPosErrFunc.Visible = false;
+      // 
       // cbxMemFuncCtlPts
       // 
       this.cbxMemFuncCtlPts.AutoSize = true;
@@ -2478,6 +2488,60 @@ namespace viTestApp
       this.gbPosCtlPts.TabStop = false;
       this.gbPosCtlPts.Text = "Ctl Pts";
       // 
+      // lblPosOutCtlPtB
+      // 
+      this.lblPosOutCtlPtB.AutoSize = true;
+      this.lblPosOutCtlPtB.Location = new System.Drawing.Point(6, 305);
+      this.lblPosOutCtlPtB.Name = "lblPosOutCtlPtB";
+      this.lblPosOutCtlPtB.Size = new System.Drawing.Size(14, 13);
+      this.lblPosOutCtlPtB.TabIndex = 48;
+      this.lblPosOutCtlPtB.Text = "B";
+      // 
+      // lblPosOutCtlPtA
+      // 
+      this.lblPosOutCtlPtA.AutoSize = true;
+      this.lblPosOutCtlPtA.Location = new System.Drawing.Point(6, 283);
+      this.lblPosOutCtlPtA.Name = "lblPosOutCtlPtA";
+      this.lblPosOutCtlPtA.Size = new System.Drawing.Size(14, 13);
+      this.lblPosOutCtlPtA.TabIndex = 47;
+      this.lblPosOutCtlPtA.Text = "A";
+      // 
+      // lblSpdCtlPtB
+      // 
+      this.lblSpdCtlPtB.AutoSize = true;
+      this.lblSpdCtlPtB.Location = new System.Drawing.Point(6, 175);
+      this.lblSpdCtlPtB.Name = "lblSpdCtlPtB";
+      this.lblSpdCtlPtB.Size = new System.Drawing.Size(14, 13);
+      this.lblSpdCtlPtB.TabIndex = 46;
+      this.lblSpdCtlPtB.Text = "B";
+      // 
+      // lblSpdCtlPtA
+      // 
+      this.lblSpdCtlPtA.AutoSize = true;
+      this.lblSpdCtlPtA.Location = new System.Drawing.Point(6, 152);
+      this.lblSpdCtlPtA.Name = "lblSpdCtlPtA";
+      this.lblSpdCtlPtA.Size = new System.Drawing.Size(14, 13);
+      this.lblSpdCtlPtA.TabIndex = 45;
+      this.lblSpdCtlPtA.Text = "A";
+      // 
+      // lblPosErrCtlPtB
+      // 
+      this.lblPosErrCtlPtB.AutoSize = true;
+      this.lblPosErrCtlPtB.Location = new System.Drawing.Point(6, 45);
+      this.lblPosErrCtlPtB.Name = "lblPosErrCtlPtB";
+      this.lblPosErrCtlPtB.Size = new System.Drawing.Size(14, 13);
+      this.lblPosErrCtlPtB.TabIndex = 44;
+      this.lblPosErrCtlPtB.Text = "B";
+      // 
+      // lblPosErrCtlPtA
+      // 
+      this.lblPosErrCtlPtA.AutoSize = true;
+      this.lblPosErrCtlPtA.Location = new System.Drawing.Point(6, 23);
+      this.lblPosErrCtlPtA.Name = "lblPosErrCtlPtA";
+      this.lblPosErrCtlPtA.Size = new System.Drawing.Size(14, 13);
+      this.lblPosErrCtlPtA.TabIndex = 43;
+      this.lblPosErrCtlPtA.Text = "A";
+      // 
       // tbxPosOutCtlPtB
       // 
       this.tbxPosOutCtlPtB.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2572,7 +2636,7 @@ namespace viTestApp
       this.gbStatCtlPts.Controls.Add(this.tbxStatPosCtlPtB);
       this.gbStatCtlPts.Controls.Add(this.label6);
       this.gbStatCtlPts.Controls.Add(this.tbxStatPosCtlPtA);
-      this.gbStatCtlPts.Location = new System.Drawing.Point(248, 328);
+      this.gbStatCtlPts.Location = new System.Drawing.Point(246, 328);
       this.gbStatCtlPts.Name = "gbStatCtlPts";
       this.gbStatCtlPts.Size = new System.Drawing.Size(107, 151);
       this.gbStatCtlPts.TabIndex = 8;
@@ -2720,7 +2784,7 @@ namespace viTestApp
       this.gbStatTypes.Controls.Add(this.cbxStatInfoDuty);
       this.gbStatTypes.Controls.Add(this.cbxStatInfoChange);
       this.gbStatTypes.Controls.Add(this.cbxStatInfoErr);
-      this.gbStatTypes.Location = new System.Drawing.Point(92, 328);
+      this.gbStatTypes.Location = new System.Drawing.Point(90, 328);
       this.gbStatTypes.Name = "gbStatTypes";
       this.gbStatTypes.Size = new System.Drawing.Size(150, 151);
       this.gbStatTypes.TabIndex = 7;
@@ -2730,6 +2794,8 @@ namespace viTestApp
       // cbxStatInfoDuty
       // 
       this.cbxStatInfoDuty.AutoSize = true;
+      this.cbxStatInfoDuty.Checked = true;
+      this.cbxStatInfoDuty.CheckState = System.Windows.Forms.CheckState.Checked;
       this.cbxStatInfoDuty.Location = new System.Drawing.Point(7, 104);
       this.cbxStatInfoDuty.Name = "cbxStatInfoDuty";
       this.cbxStatInfoDuty.Size = new System.Drawing.Size(93, 17);
@@ -2741,6 +2807,8 @@ namespace viTestApp
       // cbxStatInfoChange
       // 
       this.cbxStatInfoChange.AutoSize = true;
+      this.cbxStatInfoChange.Checked = true;
+      this.cbxStatInfoChange.CheckState = System.Windows.Forms.CheckState.Checked;
       this.cbxStatInfoChange.Location = new System.Drawing.Point(7, 62);
       this.cbxStatInfoChange.Name = "cbxStatInfoChange";
       this.cbxStatInfoChange.Size = new System.Drawing.Size(86, 17);
@@ -2765,7 +2833,7 @@ namespace viTestApp
       // cbxShowStatsPrev
       // 
       this.cbxShowStatsPrev.AutoSize = true;
-      this.cbxShowStatsPrev.Location = new System.Drawing.Point(340, 303);
+      this.cbxShowStatsPrev.Location = new System.Drawing.Point(338, 303);
       this.cbxShowStatsPrev.Name = "cbxShowStatsPrev";
       this.cbxShowStatsPrev.Size = new System.Drawing.Size(132, 17);
       this.cbxShowStatsPrev.TabIndex = 6;
@@ -2776,7 +2844,7 @@ namespace viTestApp
       // 
       // btnStoreStats
       // 
-      this.btnStoreStats.Location = new System.Drawing.Point(216, 299);
+      this.btnStoreStats.Location = new System.Drawing.Point(214, 299);
       this.btnStoreStats.Name = "btnStoreStats";
       this.btnStoreStats.Size = new System.Drawing.Size(118, 23);
       this.btnStoreStats.TabIndex = 5;
@@ -2789,11 +2857,10 @@ namespace viTestApp
       this.pnlStats.AutoScroll = true;
       this.pnlStats.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.pnlStats.Controls.Add(this.picbxStats);
-      this.pnlStats.Location = new System.Drawing.Point(92, 6);
+      this.pnlStats.Location = new System.Drawing.Point(90, 6);
       this.pnlStats.Name = "pnlStats";
       this.pnlStats.Size = new System.Drawing.Size(599, 281);
       this.pnlStats.TabIndex = 2;
-      this.pnlStats.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlStats_Paint);
       this.pnlStats.Scroll += new System.Windows.Forms.ScrollEventHandler(this.pnlStats_Scroll);
       // 
       // picbxStats
@@ -2804,10 +2871,11 @@ namespace viTestApp
       this.picbxStats.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.picbxStats.TabIndex = 0;
       this.picbxStats.TabStop = false;
+      this.picbxStats.Paint += new System.Windows.Forms.PaintEventHandler(this.picbxStats_Paint);
       // 
       // btnGetStats
       // 
-      this.btnGetStats.Location = new System.Drawing.Point(92, 299);
+      this.btnGetStats.Location = new System.Drawing.Point(90, 299);
       this.btnGetStats.Name = "btnGetStats";
       this.btnGetStats.Size = new System.Drawing.Size(118, 23);
       this.btnGetStats.TabIndex = 1;
@@ -2821,7 +2889,7 @@ namespace viTestApp
       this.tbxStats.Multiline = true;
       this.tbxStats.Name = "tbxStats";
       this.tbxStats.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-      this.tbxStats.Size = new System.Drawing.Size(80, 481);
+      this.tbxStats.Size = new System.Drawing.Size(76, 481);
       this.tbxStats.TabIndex = 0;
       this.tbxStats.Text = "tbxStats";
       // 
@@ -2879,70 +2947,6 @@ namespace viTestApp
       this.aboutToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
       this.aboutToolStripMenuItem.Text = "About";
       this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-      // 
-      // lblPosOutCtlPtB
-      // 
-      this.lblPosOutCtlPtB.AutoSize = true;
-      this.lblPosOutCtlPtB.Location = new System.Drawing.Point(6, 305);
-      this.lblPosOutCtlPtB.Name = "lblPosOutCtlPtB";
-      this.lblPosOutCtlPtB.Size = new System.Drawing.Size(14, 13);
-      this.lblPosOutCtlPtB.TabIndex = 48;
-      this.lblPosOutCtlPtB.Text = "B";
-      // 
-      // lblPosOutCtlPtA
-      // 
-      this.lblPosOutCtlPtA.AutoSize = true;
-      this.lblPosOutCtlPtA.Location = new System.Drawing.Point(6, 283);
-      this.lblPosOutCtlPtA.Name = "lblPosOutCtlPtA";
-      this.lblPosOutCtlPtA.Size = new System.Drawing.Size(14, 13);
-      this.lblPosOutCtlPtA.TabIndex = 47;
-      this.lblPosOutCtlPtA.Text = "A";
-      // 
-      // lblSpdCtlPtB
-      // 
-      this.lblSpdCtlPtB.AutoSize = true;
-      this.lblSpdCtlPtB.Location = new System.Drawing.Point(6, 175);
-      this.lblSpdCtlPtB.Name = "lblSpdCtlPtB";
-      this.lblSpdCtlPtB.Size = new System.Drawing.Size(14, 13);
-      this.lblSpdCtlPtB.TabIndex = 46;
-      this.lblSpdCtlPtB.Text = "B";
-      // 
-      // lblSpdCtlPtA
-      // 
-      this.lblSpdCtlPtA.AutoSize = true;
-      this.lblSpdCtlPtA.Location = new System.Drawing.Point(6, 152);
-      this.lblSpdCtlPtA.Name = "lblSpdCtlPtA";
-      this.lblSpdCtlPtA.Size = new System.Drawing.Size(14, 13);
-      this.lblSpdCtlPtA.TabIndex = 45;
-      this.lblSpdCtlPtA.Text = "A";
-      // 
-      // lblPosErrCtlPtB
-      // 
-      this.lblPosErrCtlPtB.AutoSize = true;
-      this.lblPosErrCtlPtB.Location = new System.Drawing.Point(6, 45);
-      this.lblPosErrCtlPtB.Name = "lblPosErrCtlPtB";
-      this.lblPosErrCtlPtB.Size = new System.Drawing.Size(14, 13);
-      this.lblPosErrCtlPtB.TabIndex = 44;
-      this.lblPosErrCtlPtB.Text = "B";
-      // 
-      // lblPosErrCtlPtA
-      // 
-      this.lblPosErrCtlPtA.AutoSize = true;
-      this.lblPosErrCtlPtA.Location = new System.Drawing.Point(6, 23);
-      this.lblPosErrCtlPtA.Name = "lblPosErrCtlPtA";
-      this.lblPosErrCtlPtA.Size = new System.Drawing.Size(14, 13);
-      this.lblPosErrCtlPtA.TabIndex = 43;
-      this.lblPosErrCtlPtA.Text = "A";
-      // 
-      // picBxPosErrFunc
-      // 
-      this.picBxPosErrFunc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.picBxPosErrFunc.Location = new System.Drawing.Point(227, 35);
-      this.picBxPosErrFunc.Name = "picBxPosErrFunc";
-      this.picBxPosErrFunc.Size = new System.Drawing.Size(128, 66);
-      this.picBxPosErrFunc.TabIndex = 37;
-      this.picBxPosErrFunc.TabStop = false;
-      this.picBxPosErrFunc.Visible = false;
       // 
       // MainForm
       // 
@@ -3033,6 +3037,7 @@ namespace viTestApp
       this.gbSetFuzzyRules.PerformLayout();
       this.gbSetFuzzyMF.ResumeLayout(false);
       this.gbSetFuzzyMF.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.picBxPosErrFunc)).EndInit();
       this.gbPosCtlPts.ResumeLayout(false);
       this.gbPosCtlPts.PerformLayout();
       this.tabPageServoStats.ResumeLayout(false);
@@ -3047,7 +3052,6 @@ namespace viTestApp
       this.tabPageLog.ResumeLayout(false);
       this.menuStrip1.ResumeLayout(false);
       this.menuStrip1.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.picBxPosErrFunc)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
