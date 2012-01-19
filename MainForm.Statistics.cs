@@ -232,34 +232,44 @@ namespace viTestApp
       _statistics_ev = null;
       ClrText(tbxStats);
 
-      if(_active_servo.ServoSlave.StatBuf != null && _active_servo.ServoSlave.StatBuf.Count > 0)
+      if(_active_servo.ServoSlave.StatBuf == null)
+      {
+        MsgBox.Show(this, "StatBuf is null!");
+        return;
+      }
+      if(_active_servo.ServoSlave.StatBuf.Count > 0)
       {
         // We've got valid stats data - copy stats buffer to StatsCur
         _active_servo.StatsCur = _active_servo.ServoSlave.StatBuf;
 
         // Build control points from mem funcs
         _active_servo.CtlPtsCur.Clear();
-        // Derive PosErr Ctl points from bytes 4 and 1 of PosMembershipFunctionArray
-        _active_servo.CtlPtsCur.Add(_active_servo.ServoSlave.PosMemFuncArray[4]);
-        _active_servo.CtlPtsCur.Add(_active_servo.ServoSlave.PosMemFuncArray[1]);
 
-        // Derive Change Ctl points from bytes 4 and 1 of SpdMembershipFunctionArray
-        _active_servo.CtlPtsCur.Add(_active_servo.ServoSlave.SpdMemFuncArray[4]);
-        _active_servo.CtlPtsCur.Add(_active_servo.ServoSlave.SpdMemFuncArray[1]);
+        if(cbxMemFuncCtlPts.Checked)
+        {
+          // Derive PosErr Ctl points from bytes 4 and 1 of PosMembershipFunctionArray
+          _active_servo.CtlPtsCur.Add(_active_servo.ServoSlave.PosMemFuncArray[4]);
+          _active_servo.CtlPtsCur.Add(_active_servo.ServoSlave.PosMemFuncArray[1]);
 
-        // Derive Output Ctl points from bytes 0 and 1 of OutSingletonArray
-        _active_servo.CtlPtsCur.Add(_active_servo.ServoSlave.OutSingletonArray[0]);
-        _active_servo.CtlPtsCur.Add(_active_servo.ServoSlave.OutSingletonArray[1]);
+          // Derive Change Ctl points from bytes 4 and 1 of SpdMembershipFunctionArray
+          _active_servo.CtlPtsCur.Add(_active_servo.ServoSlave.SpdMemFuncArray[4]);
+          _active_servo.CtlPtsCur.Add(_active_servo.ServoSlave.SpdMemFuncArray[1]);
+
+          // Derive Output Ctl points from bytes 0 and 1 of OutSingletonArray
+          _active_servo.CtlPtsCur.Add(_active_servo.ServoSlave.OutSingletonArray[0]);
+          _active_servo.CtlPtsCur.Add(_active_servo.ServoSlave.OutSingletonArray[1]);
+        }
+        else
+        {
+          _active_servo.CtlPtsCur.Clear();
+        }
       }
       else
       {
-        if(_active_servo.StatsCur.Count == 0)
-        {
-          g.Clear(System.Drawing.Color.White);
-          Log(LogMsgType.Warning, "Statistics Buffer empty - initiate a move to fill\n");
-          MsgBox.Show(this, "Statistics Buffer empty - initiate a move to fill");
-          return;
-        }
+        g.Clear(System.Drawing.Color.White);
+        Log(LogMsgType.Warning, "Statistics Buffer empty - initiate a move to fill\n");
+        MsgBox.Show(this, "Statistics Buffer empty - initiate a move to fill");
+        return;
       }
 
       // Build text box output     
@@ -288,7 +298,7 @@ namespace viTestApp
       }
       else
       {
-        Log(LogMsgType.Warning, "Stats disabled or buffer empty\n");
+        Log(LogMsgType.Warning, "timeout or buffer empty\n");
       }
     }
 
@@ -302,17 +312,29 @@ namespace viTestApp
 
       if(_active_servo.StatsCur.Count > 0)
       {
-        _active_servo.StatsPrev = _active_servo.StatsCur;
 
-        byte[] arr = _active_servo.CtlPtsCur.ToArray();
-        if(arr.Length == (int)Servo.ControlPoints.MAX_CTL_PTS)
+        // confirmation dialog
+        if(_active_servo.StatsPrev.Count > 0)
         {
-          _active_servo.CtlPtsPrev.Clear();
+          if(MsgBox.Show(this, "Overwrite previously stored statistics?", "Confirm Statistics Storage", MessageBoxButtons.YesNo) != DialogResult.Yes)
+          {
+            return;
+          }
+        }
+
+        _active_servo.StatsPrev = null;
+        _active_servo.StatsPrev = new List<StatStruct>(_active_servo.StatsCur);
+
+        _active_servo.CtlPtsPrev.Clear();
+        if(_active_servo.CtlPtsCur.Count > 0)
+        {
+          byte[] arr = _active_servo.CtlPtsCur.ToArray();
           for(int i = 0; i < (int)Servo.ControlPoints.MAX_CTL_PTS; i++)
           {
             _active_servo.CtlPtsPrev.Add(arr[i]);
           }
         }
+
         cbxShowStatsPrev.Visible = true;
       }
       else

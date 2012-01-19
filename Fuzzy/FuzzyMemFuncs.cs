@@ -305,12 +305,12 @@ namespace viTestApp
     public void out4_LostFocus(object sender, EventArgs e)
     {
       int val;
-      string s = _output_text_box_list[3].Text;
+      string s = _output_text_box_list[4].Text;
       if(Int32.TryParse(s, System.Globalization.NumberStyles.HexNumber, CultureInfo.InvariantCulture, out val))
       {
         if(val >= _out_singleton_array[3])
         {
-          _out_singleton_array[3] = (byte)val;
+          _out_singleton_array[4] = (byte)val;
           _output_text_box_list[4].Text = val.ToString("X2");
           //_picBxOutput.Image = DrawOutputGraph();
           _picBxOutput.Image = ResizeImage(DrawOutputGraph(), BM_WIDTH, BM_HEIGHT);
