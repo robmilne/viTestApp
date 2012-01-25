@@ -321,7 +321,9 @@ namespace viTestApp
         if(!_active_servo.ServoSlave.ServoCtlWrite(rate, hbridge, hb_pwm, enc_div,
                                                    rbSetKickOn.Checked, 
                                                    rbSetPowerOff.Checked,
-                                                   gpio_state, out err_str))
+                                                   gpio_state, 
+                                                   rbPolarityForward.Checked,
+                                                   out err_str))
         {
           MsgBox.Show(this, err_str);
         }
@@ -423,6 +425,9 @@ namespace viTestApp
             SetRadioButton(rbSetGPIOHi, true);
             break;
         }
+
+        SetRadioButton(rbPolarityForward, _active_servo.ServoSlave.MotorPolarity);
+        SetRadioButton(rbPolarityReverse, !_active_servo.ServoSlave.MotorPolarity);
 
         if(err_flag)
         {
@@ -605,7 +610,7 @@ namespace viTestApp
         }
       }
       string err;
-      if(!_active_servo.ServoSlave.MoveCtlStart(GetMotionMode(), out err))
+      if(!_active_servo.ServoSlave.MoveCtlStart(move_mode, out err))
       {
         MsgBox.Show(this, err);
         Log(LogMsgType.Error, err + "\n");

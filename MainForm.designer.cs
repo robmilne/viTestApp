@@ -173,6 +173,9 @@ namespace viTestApp
       this.nudSetPos = new System.Windows.Forms.NumericUpDown();
       this.nudSetAcc = new System.Windows.Forms.NumericUpDown();
       this.gbSetServoControl = new System.Windows.Forms.GroupBox();
+      this.gbMotorPolarity = new System.Windows.Forms.GroupBox();
+      this.rbPolarityReverse = new System.Windows.Forms.RadioButton();
+      this.rbPolarityForward = new System.Windows.Forms.RadioButton();
       this.lblEncDiv = new System.Windows.Forms.Label();
       this.cboSetEncDiv = new System.Windows.Forms.ComboBox();
       this.btnServoCtlLoad = new System.Windows.Forms.Button();
@@ -304,6 +307,7 @@ namespace viTestApp
       ((System.ComponentModel.ISupportInitialize)(this.nudSetPos)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.nudSetAcc)).BeginInit();
       this.gbSetServoControl.SuspendLayout();
+      this.gbMotorPolarity.SuspendLayout();
       this.gbSetMotorDone.SuspendLayout();
       this.gbSetGPIO.SuspendLayout();
       this.gbSetKick.SuspendLayout();
@@ -1734,7 +1738,7 @@ namespace viTestApp
       // lblHardDecel
       // 
       this.lblHardDecel.AutoSize = true;
-      this.lblHardDecel.Location = new System.Drawing.Point(6, 230);
+      this.lblHardDecel.Location = new System.Drawing.Point(6, 135);
       this.lblHardDecel.Name = "lblHardDecel";
       this.lblHardDecel.Size = new System.Drawing.Size(82, 13);
       this.lblHardDecel.TabIndex = 20;
@@ -1748,7 +1752,7 @@ namespace viTestApp
             0,
             0,
             0});
-      this.nudHardDecel.Location = new System.Drawing.Point(8, 245);
+      this.nudHardDecel.Location = new System.Drawing.Point(8, 150);
       this.nudHardDecel.Maximum = new decimal(new int[] {
             16777216,
             0,
@@ -1796,7 +1800,7 @@ namespace viTestApp
       this.gbSetPwmDir.Controls.Add(this.rbSetPwmDec);
       this.gbSetPwmDir.Controls.Add(this.rbSetPwmInc);
       this.gbSetPwmDir.Controls.Add(this.rbSetPwmOff);
-      this.gbSetPwmDir.Location = new System.Drawing.Point(6, 140);
+      this.gbSetPwmDir.Location = new System.Drawing.Point(6, 177);
       this.gbSetPwmDir.Name = "gbSetPwmDir";
       this.gbSetPwmDir.Size = new System.Drawing.Size(106, 85);
       this.gbSetPwmDir.TabIndex = 13;
@@ -1869,7 +1873,7 @@ namespace viTestApp
       // lblSetAcc
       // 
       this.lblSetAcc.AutoSize = true;
-      this.lblSetAcc.Location = new System.Drawing.Point(6, 100);
+      this.lblSetAcc.Location = new System.Drawing.Point(6, 95);
       this.lblSetAcc.Name = "lblSetAcc";
       this.lblSetAcc.Size = new System.Drawing.Size(92, 13);
       this.lblSetAcc.TabIndex = 11;
@@ -1878,7 +1882,7 @@ namespace viTestApp
       // lblSetVel
       // 
       this.lblSetVel.AutoSize = true;
-      this.lblSetVel.Location = new System.Drawing.Point(6, 60);
+      this.lblSetVel.Location = new System.Drawing.Point(6, 55);
       this.lblSetVel.Name = "lblSetVel";
       this.lblSetVel.Size = new System.Drawing.Size(71, 13);
       this.lblSetVel.TabIndex = 10;
@@ -1887,7 +1891,7 @@ namespace viTestApp
       // lblSetPos
       // 
       this.lblSetPos.AutoSize = true;
-      this.lblSetPos.Location = new System.Drawing.Point(6, 20);
+      this.lblSetPos.Location = new System.Drawing.Point(6, 16);
       this.lblSetPos.Name = "lblSetPos";
       this.lblSetPos.Size = new System.Drawing.Size(89, 13);
       this.lblSetPos.TabIndex = 9;
@@ -1901,7 +1905,7 @@ namespace viTestApp
             0,
             0,
             0});
-      this.nudSetVel.Location = new System.Drawing.Point(8, 75);
+      this.nudSetVel.Location = new System.Drawing.Point(8, 71);
       this.nudSetVel.Maximum = new decimal(new int[] {
             524287,
             0,
@@ -1924,7 +1928,7 @@ namespace viTestApp
             0,
             0,
             0});
-      this.nudSetPos.Location = new System.Drawing.Point(8, 35);
+      this.nudSetPos.Location = new System.Drawing.Point(8, 31);
       this.nudSetPos.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -1947,7 +1951,7 @@ namespace viTestApp
             0,
             0,
             0});
-      this.nudSetAcc.Location = new System.Drawing.Point(8, 115);
+      this.nudSetAcc.Location = new System.Drawing.Point(8, 111);
       this.nudSetAcc.Maximum = new decimal(new int[] {
             16777216,
             0,
@@ -1959,6 +1963,7 @@ namespace viTestApp
       // 
       // gbSetServoControl
       // 
+      this.gbSetServoControl.Controls.Add(this.gbMotorPolarity);
       this.gbSetServoControl.Controls.Add(this.lblEncDiv);
       this.gbSetServoControl.Controls.Add(this.cboSetEncDiv);
       this.gbSetServoControl.Controls.Add(this.btnServoCtlLoad);
@@ -1979,10 +1984,43 @@ namespace viTestApp
       this.gbSetServoControl.TabStop = false;
       this.gbSetServoControl.Text = "Servo Control";
       // 
+      // gbMotorPolarity
+      // 
+      this.gbMotorPolarity.Controls.Add(this.rbPolarityReverse);
+      this.gbMotorPolarity.Controls.Add(this.rbPolarityForward);
+      this.gbMotorPolarity.Location = new System.Drawing.Point(3, 392);
+      this.gbMotorPolarity.Name = "gbMotorPolarity";
+      this.gbMotorPolarity.Size = new System.Drawing.Size(106, 52);
+      this.gbMotorPolarity.TabIndex = 17;
+      this.gbMotorPolarity.TabStop = false;
+      this.gbMotorPolarity.Text = "Motor Polarity";
+      // 
+      // rbPolarityReverse
+      // 
+      this.rbPolarityReverse.AutoSize = true;
+      this.rbPolarityReverse.Location = new System.Drawing.Point(11, 32);
+      this.rbPolarityReverse.Name = "rbPolarityReverse";
+      this.rbPolarityReverse.Size = new System.Drawing.Size(65, 17);
+      this.rbPolarityReverse.TabIndex = 1;
+      this.rbPolarityReverse.Text = "Reverse";
+      this.rbPolarityReverse.UseVisualStyleBackColor = true;
+      // 
+      // rbPolarityForward
+      // 
+      this.rbPolarityForward.AutoSize = true;
+      this.rbPolarityForward.Checked = true;
+      this.rbPolarityForward.Location = new System.Drawing.Point(11, 16);
+      this.rbPolarityForward.Name = "rbPolarityForward";
+      this.rbPolarityForward.Size = new System.Drawing.Size(63, 17);
+      this.rbPolarityForward.TabIndex = 0;
+      this.rbPolarityForward.TabStop = true;
+      this.rbPolarityForward.Text = "Forward";
+      this.rbPolarityForward.UseVisualStyleBackColor = true;
+      // 
       // lblEncDiv
       // 
       this.lblEncDiv.AutoSize = true;
-      this.lblEncDiv.Location = new System.Drawing.Point(6, 139);
+      this.lblEncDiv.Location = new System.Drawing.Point(6, 135);
       this.lblEncDiv.Name = "lblEncDiv";
       this.lblEncDiv.Size = new System.Drawing.Size(83, 13);
       this.lblEncDiv.TabIndex = 16;
@@ -1991,7 +2029,7 @@ namespace viTestApp
       // cboSetEncDiv
       // 
       this.cboSetEncDiv.FormattingEnabled = true;
-      this.cboSetEncDiv.Location = new System.Drawing.Point(8, 154);
+      this.cboSetEncDiv.Location = new System.Drawing.Point(8, 150);
       this.cboSetEncDiv.Name = "cboSetEncDiv";
       this.cboSetEncDiv.Size = new System.Drawing.Size(100, 21);
       this.cboSetEncDiv.TabIndex = 15;
@@ -1999,9 +2037,9 @@ namespace viTestApp
       // 
       // btnServoCtlLoad
       // 
-      this.btnServoCtlLoad.Location = new System.Drawing.Point(6, 454);
+      this.btnServoCtlLoad.Location = new System.Drawing.Point(60, 453);
       this.btnServoCtlLoad.Name = "btnServoCtlLoad";
-      this.btnServoCtlLoad.Size = new System.Drawing.Size(106, 21);
+      this.btnServoCtlLoad.Size = new System.Drawing.Size(52, 21);
       this.btnServoCtlLoad.TabIndex = 10;
       this.btnServoCtlLoad.Text = "Get";
       this.btnServoCtlLoad.UseVisualStyleBackColor = true;
@@ -2011,18 +2049,18 @@ namespace viTestApp
       // 
       this.gbSetMotorDone.Controls.Add(this.rbSetPowerOff);
       this.gbSetMotorDone.Controls.Add(this.rbSetPowerOn);
-      this.gbSetMotorDone.Location = new System.Drawing.Point(6, 181);
+      this.gbSetMotorDone.Location = new System.Drawing.Point(6, 177);
       this.gbSetMotorDone.Name = "gbSetMotorDone";
-      this.gbSetMotorDone.Size = new System.Drawing.Size(106, 58);
+      this.gbSetMotorDone.Size = new System.Drawing.Size(106, 52);
       this.gbSetMotorDone.TabIndex = 14;
       this.gbSetMotorDone.TabStop = false;
-      this.gbSetMotorDone.Text = "\'Move Done\'";
+      this.gbSetMotorDone.Text = "Move Done";
       // 
       // rbSetPowerOff
       // 
       this.rbSetPowerOff.AutoSize = true;
       this.rbSetPowerOff.Checked = true;
-      this.rbSetPowerOff.Location = new System.Drawing.Point(19, 35);
+      this.rbSetPowerOff.Location = new System.Drawing.Point(11, 32);
       this.rbSetPowerOff.Name = "rbSetPowerOff";
       this.rbSetPowerOff.Size = new System.Drawing.Size(72, 17);
       this.rbSetPowerOff.TabIndex = 1;
@@ -2033,7 +2071,7 @@ namespace viTestApp
       // rbSetPowerOn
       // 
       this.rbSetPowerOn.AutoSize = true;
-      this.rbSetPowerOn.Location = new System.Drawing.Point(19, 19);
+      this.rbSetPowerOn.Location = new System.Drawing.Point(11, 16);
       this.rbSetPowerOn.Name = "rbSetPowerOn";
       this.rbSetPowerOn.Size = new System.Drawing.Size(72, 17);
       this.rbSetPowerOn.TabIndex = 0;
@@ -2042,9 +2080,9 @@ namespace viTestApp
       // 
       // btnServoCtlSave
       // 
-      this.btnServoCtlSave.Location = new System.Drawing.Point(6, 430);
+      this.btnServoCtlSave.Location = new System.Drawing.Point(3, 453);
       this.btnServoCtlSave.Name = "btnServoCtlSave";
-      this.btnServoCtlSave.Size = new System.Drawing.Size(106, 21);
+      this.btnServoCtlSave.Size = new System.Drawing.Size(52, 21);
       this.btnServoCtlSave.TabIndex = 11;
       this.btnServoCtlSave.Text = "Set";
       this.btnServoCtlSave.UseVisualStyleBackColor = true;
@@ -2056,9 +2094,9 @@ namespace viTestApp
       this.gbSetGPIO.Controls.Add(this.cbxGpioEnOut);
       this.gbSetGPIO.Controls.Add(this.rbSetGPIOLo);
       this.gbSetGPIO.Controls.Add(this.rbSetGPIOHi);
-      this.gbSetGPIO.Location = new System.Drawing.Point(6, 318);
+      this.gbSetGPIO.Location = new System.Drawing.Point(6, 293);
       this.gbSetGPIO.Name = "gbSetGPIO";
-      this.gbSetGPIO.Size = new System.Drawing.Size(106, 106);
+      this.gbSetGPIO.Size = new System.Drawing.Size(106, 94);
       this.gbSetGPIO.TabIndex = 13;
       this.gbSetGPIO.TabStop = false;
       this.gbSetGPIO.Text = "GPIO pin";
@@ -2066,7 +2104,7 @@ namespace viTestApp
       // cbxGpioSuspendToggle
       // 
       this.cbxGpioSuspendToggle.AutoSize = true;
-      this.cbxGpioSuspendToggle.Location = new System.Drawing.Point(6, 82);
+      this.cbxGpioSuspendToggle.Location = new System.Drawing.Point(3, 73);
       this.cbxGpioSuspendToggle.Name = "cbxGpioSuspendToggle";
       this.cbxGpioSuspendToggle.Size = new System.Drawing.Size(104, 17);
       this.cbxGpioSuspendToggle.TabIndex = 20;
@@ -2077,7 +2115,7 @@ namespace viTestApp
       // cbxGpioEnOut
       // 
       this.cbxGpioEnOut.AutoSize = true;
-      this.cbxGpioEnOut.Location = new System.Drawing.Point(19, 19);
+      this.cbxGpioEnOut.Location = new System.Drawing.Point(11, 16);
       this.cbxGpioEnOut.Name = "cbxGpioEnOut";
       this.cbxGpioEnOut.Size = new System.Drawing.Size(58, 17);
       this.cbxGpioEnOut.TabIndex = 19;
@@ -2089,7 +2127,7 @@ namespace viTestApp
       // 
       this.rbSetGPIOLo.AutoSize = true;
       this.rbSetGPIOLo.Checked = true;
-      this.rbSetGPIOLo.Location = new System.Drawing.Point(19, 59);
+      this.rbSetGPIOLo.Location = new System.Drawing.Point(11, 51);
       this.rbSetGPIOLo.Name = "rbSetGPIOLo";
       this.rbSetGPIOLo.Size = new System.Drawing.Size(45, 17);
       this.rbSetGPIOLo.TabIndex = 1;
@@ -2100,7 +2138,7 @@ namespace viTestApp
       // rbSetGPIOHi
       // 
       this.rbSetGPIOHi.AutoSize = true;
-      this.rbSetGPIOHi.Location = new System.Drawing.Point(19, 42);
+      this.rbSetGPIOHi.Location = new System.Drawing.Point(11, 35);
       this.rbSetGPIOHi.Name = "rbSetGPIOHi";
       this.rbSetGPIOHi.Size = new System.Drawing.Size(47, 17);
       this.rbSetGPIOHi.TabIndex = 0;
@@ -2111,18 +2149,18 @@ namespace viTestApp
       // 
       this.gbSetKick.Controls.Add(this.rbSetKickOff);
       this.gbSetKick.Controls.Add(this.rbSetKickOn);
-      this.gbSetKick.Location = new System.Drawing.Point(6, 245);
+      this.gbSetKick.Location = new System.Drawing.Point(6, 235);
       this.gbSetKick.Name = "gbSetKick";
-      this.gbSetKick.Size = new System.Drawing.Size(106, 68);
+      this.gbSetKick.Size = new System.Drawing.Size(106, 52);
       this.gbSetKick.TabIndex = 12;
       this.gbSetKick.TabStop = false;
-      this.gbSetKick.Text = "\'Move Done\' Kick (Trapezoidal only)";
+      this.gbSetKick.Text = "Move Done Kick";
       // 
       // rbSetKickOff
       // 
       this.rbSetKickOff.AutoSize = true;
       this.rbSetKickOff.Checked = true;
-      this.rbSetKickOff.Location = new System.Drawing.Point(19, 46);
+      this.rbSetKickOff.Location = new System.Drawing.Point(11, 32);
       this.rbSetKickOff.Name = "rbSetKickOff";
       this.rbSetKickOff.Size = new System.Drawing.Size(39, 17);
       this.rbSetKickOff.TabIndex = 1;
@@ -2133,7 +2171,7 @@ namespace viTestApp
       // rbSetKickOn
       // 
       this.rbSetKickOn.AutoSize = true;
-      this.rbSetKickOn.Location = new System.Drawing.Point(19, 29);
+      this.rbSetKickOn.Location = new System.Drawing.Point(11, 16);
       this.rbSetKickOn.Name = "rbSetKickOn";
       this.rbSetKickOn.Size = new System.Drawing.Size(39, 17);
       this.rbSetKickOn.TabIndex = 0;
@@ -2143,7 +2181,7 @@ namespace viTestApp
       // lblPWMRate
       // 
       this.lblPWMRate.AutoSize = true;
-      this.lblPWMRate.Location = new System.Drawing.Point(6, 99);
+      this.lblPWMRate.Location = new System.Drawing.Point(6, 95);
       this.lblPWMRate.Name = "lblPWMRate";
       this.lblPWMRate.Size = new System.Drawing.Size(100, 13);
       this.lblPWMRate.TabIndex = 11;
@@ -2152,7 +2190,7 @@ namespace viTestApp
       // lblHBridge
       // 
       this.lblHBridge.AutoSize = true;
-      this.lblHBridge.Location = new System.Drawing.Point(6, 59);
+      this.lblHBridge.Location = new System.Drawing.Point(6, 55);
       this.lblHBridge.Name = "lblHBridge";
       this.lblHBridge.Size = new System.Drawing.Size(45, 13);
       this.lblHBridge.TabIndex = 10;
@@ -2161,7 +2199,7 @@ namespace viTestApp
       // lblServoRate
       // 
       this.lblServoRate.AutoSize = true;
-      this.lblServoRate.Location = new System.Drawing.Point(6, 20);
+      this.lblServoRate.Location = new System.Drawing.Point(6, 16);
       this.lblServoRate.Name = "lblServoRate";
       this.lblServoRate.Size = new System.Drawing.Size(58, 13);
       this.lblServoRate.TabIndex = 8;
@@ -2170,7 +2208,7 @@ namespace viTestApp
       // cboSetPWMRate
       // 
       this.cboSetPWMRate.FormattingEnabled = true;
-      this.cboSetPWMRate.Location = new System.Drawing.Point(8, 115);
+      this.cboSetPWMRate.Location = new System.Drawing.Point(8, 111);
       this.cboSetPWMRate.Name = "cboSetPWMRate";
       this.cboSetPWMRate.Size = new System.Drawing.Size(100, 21);
       this.cboSetPWMRate.TabIndex = 7;
@@ -2179,7 +2217,7 @@ namespace viTestApp
       // cboSetHBridge
       // 
       this.cboSetHBridge.FormattingEnabled = true;
-      this.cboSetHBridge.Location = new System.Drawing.Point(8, 75);
+      this.cboSetHBridge.Location = new System.Drawing.Point(8, 71);
       this.cboSetHBridge.Name = "cboSetHBridge";
       this.cboSetHBridge.Size = new System.Drawing.Size(100, 21);
       this.cboSetHBridge.TabIndex = 6;
@@ -2188,7 +2226,7 @@ namespace viTestApp
       // cboSetServoRate
       // 
       this.cboSetServoRate.FormattingEnabled = true;
-      this.cboSetServoRate.Location = new System.Drawing.Point(8, 35);
+      this.cboSetServoRate.Location = new System.Drawing.Point(8, 31);
       this.cboSetServoRate.Name = "cboSetServoRate";
       this.cboSetServoRate.Size = new System.Drawing.Size(100, 21);
       this.cboSetServoRate.TabIndex = 4;
@@ -3026,6 +3064,8 @@ namespace viTestApp
       ((System.ComponentModel.ISupportInitialize)(this.nudSetAcc)).EndInit();
       this.gbSetServoControl.ResumeLayout(false);
       this.gbSetServoControl.PerformLayout();
+      this.gbMotorPolarity.ResumeLayout(false);
+      this.gbMotorPolarity.PerformLayout();
       this.gbSetMotorDone.ResumeLayout(false);
       this.gbSetMotorDone.PerformLayout();
       this.gbSetGPIO.ResumeLayout(false);
@@ -3294,6 +3334,9 @@ namespace viTestApp
     private System.Windows.Forms.Label lblPosErrCtlPtB;
     private System.Windows.Forms.Label lblPosErrCtlPtA;
     private System.Windows.Forms.PictureBox picBxPosErrFunc;
+    private System.Windows.Forms.GroupBox gbMotorPolarity;
+    private System.Windows.Forms.RadioButton rbPolarityReverse;
+    private System.Windows.Forms.RadioButton rbPolarityForward;
   }
 }
 
